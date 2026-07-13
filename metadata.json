@@ -1,0 +1,6 @@
+{
+  "name": "CineLux",
+  "description": "An elite, premium-grade AI-powered movie and series streaming platform featuring a custom spatial media engine, advanced real-time content filtering, and Gemini CineCortex smart film reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
