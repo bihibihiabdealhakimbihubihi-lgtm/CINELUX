@@ -141,7 +141,7 @@ function HeroSlider({
               referrerPolicy="no-referrer"
             />
             {/* Cinematic Overlay - Premium Vignette and Multi-layered Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/45 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/45 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/25 to-transparent" />
             <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
           </div>
@@ -233,7 +233,7 @@ function HeroSlider({
                     onClick={() => onToggleWatchlist(currentItem.id)}
                     className={`flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl border transition-all active:scale-90 ${
                       isInWatchlist
-                        ? 'bg-[#E50914] border-[#E50914] text-white hover:bg-[#E50914]/90'
+                        ? 'bg-[#22C55E] border-[#22C55E] text-white hover:bg-[#16A34A]'
                         : 'bg-black/40 border-white/20 text-white hover:bg-black/60 hover:border-white/30'
                     }`}
                     title={isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}

@@ -97,7 +97,7 @@ export default function InfoHub({
             <div className="flex flex-col gap-6">
               {/* Logo / Brand */}
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[#E50914] flex items-center justify-center font-bold text-white text-base">
+                <div className="w-8 h-8 rounded-lg bg-[#22C55E] flex items-center justify-center font-bold text-white text-base">
                   C
                 </div>
                 <span className="font-sans text-sm font-bold tracking-widest text-white uppercase">CineLux Portal</span>
@@ -114,7 +114,7 @@ export default function InfoHub({
                       onClick={() => setActiveSection(item.id)}
                       className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 whitespace-nowrap cursor-pointer ${
                         isActive
-                          ? 'text-[#E50914] bg-[#E50914]/10 border border-[#E50914]/20'
+                          ? 'text-[#22C55E] bg-[#22C55E]/10 border border-[#22C55E]/20'
                           : 'text-gray-400 hover:text-white hover:bg-white/5 border border-transparent'
                       }`}
                     >
@@ -129,7 +129,7 @@ export default function InfoHub({
             {/* Bottom active indicators */}
             <div className="hidden md:flex flex-col gap-1 text-[10px] text-gray-500 font-semibold uppercase tracking-wider">
               <span>Secure Transport Enforced</span>
-              <span className="text-[#E50914]">TLS 1.3 Active</span>
+              <span className="text-[#22C55E]">TLS 1.3 Active</span>
             </div>
           </div>
 
@@ -166,7 +166,7 @@ export default function InfoHub({
             {/* HELP & FAQ VIEW */}
             {activeSection === 'faq' && (
               <div className="flex flex-col gap-6">
-                <span className="text-[10px] text-[#E50914] font-bold uppercase tracking-widest">Support Core</span>
+                <span className="text-[10px] text-[#22C55E] font-bold uppercase tracking-widest">Support Core</span>
                 <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-sans">Frequently Inquired</h2>
                 
                 <div className="flex flex-col gap-4">
@@ -190,7 +190,7 @@ export default function InfoHub({
                   ].map((faq, idx) => (
                     <div key={idx} className="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
                       <h3 className="text-xs font-bold text-white mb-1.5 flex items-start gap-2">
-                        <span className="text-[#E50914] font-black">Q.</span>
+                        <span className="text-[#22C55E] font-black">Q.</span>
                         <span>{faq.q}</span>
                       </h3>
                       <p className="text-xs text-gray-400 leading-relaxed pl-5">{faq.a}</p>
@@ -347,7 +347,7 @@ export default function InfoHub({
                         value={contactForm.name}
                         onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                         placeholder="Adrian Vance"
-                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#E50914] transition-colors"
+                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#22C55E] transition-colors"
                       />
                     </div>
 
@@ -359,7 +359,7 @@ export default function InfoHub({
                         value={contactForm.email}
                         onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                         placeholder="adrian@cinelux.com"
-                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#E50914] transition-colors"
+                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#22C55E] transition-colors"
                       />
                     </div>
 
@@ -371,13 +371,13 @@ export default function InfoHub({
                         value={contactForm.message}
                         onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                         placeholder="Write your elite inquiries here..."
-                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#E50914] transition-colors resize-none leading-relaxed"
+                        className="bg-[#181818] border border-white/5 rounded-xl px-4 py-2.5 text-xs font-semibold outline-none text-white focus:border-[#22C55E] transition-colors resize-none leading-relaxed"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="mt-2 w-full py-3 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-xs font-bold uppercase tracking-wider text-white transition-all hover:shadow-lg hover:shadow-[#E50914]/15 cursor-pointer active:scale-98"
+                      className="mt-2 w-full py-3 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-xs font-bold uppercase tracking-wider text-white transition-all hover:shadow-lg hover:shadow-[#22C55E]/15 cursor-pointer active:scale-98"
                     >
                       Transmit Message
                     </button>

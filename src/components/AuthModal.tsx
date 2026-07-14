@@ -360,7 +360,7 @@ export default function AuthModal({
         <div className="w-full max-w-md bg-[#101010]/80 border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.8)] relative p-6 md:p-10 backdrop-saturate-150">
         
         {/* Glow ambient background elements */}
-        <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#E50914]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#22C55E]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
@@ -373,11 +373,11 @@ export default function AuthModal({
 
         {/* LOADING HANDSHAKE OVERLAY */}
         {isLoading && (
-          <div className="absolute inset-0 bg-[#070707]/98 z-50 flex flex-col items-center justify-center gap-4 p-8">
+          <div className="absolute inset-0 bg-[#0B1220]/98 z-50 flex flex-col items-center justify-center gap-4 p-8">
             <div className="relative flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full border-2 border-white/5 border-t-2 border-t-[#E50914] animate-spin" />
+              <div className="w-16 h-16 rounded-full border-2 border-white/5 border-t-2 border-t-[#22C55E] animate-spin" />
               <div className="w-10 h-10 rounded-full bg-[#101010] absolute flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-[#E50914] animate-pulse" />
+                <Sparkles className="w-4 h-4 text-[#22C55E] animate-pulse" />
               </div>
             </div>
             <p className="text-sm font-bold text-white tracking-wider mt-4">{loadingMsg}</p>
@@ -389,11 +389,11 @@ export default function AuthModal({
         {phase === 'login' && (
           <div>
             <div className="text-center mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#E50914] to-red-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#E50914]/25 mb-4 border border-white/10">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#22C55E]/25 mb-4 border border-white/10">
                 C
               </div>
               <h2 className="text-2xl font-black tracking-tight text-white font-sans">
-                Stream in Cine<span className="text-[#E50914]">Lux</span>
+                Stream in Cine<span className="text-[#22C55E]">Lux</span>
               </h2>
               <p className="text-xs text-gray-400 mt-1.5 font-medium">
                 Unlock peerless 4K HDR streams and director narratives.
@@ -411,7 +411,7 @@ export default function AuthModal({
                     placeholder="name@domain.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                   />
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function AuthModal({
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-12 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-12 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                   />
                   <button
                     type="button"
@@ -445,14 +445,14 @@ export default function AuthModal({
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    className="w-4.5 h-4.5 rounded bg-black border-white/10 accent-[#E50914] cursor-pointer"
+                    className="w-4.5 h-4.5 rounded bg-black border-white/10 accent-[#22C55E] cursor-pointer"
                   />
                   <span>Remember Session</span>
                 </label>
                 <button
                   type="button"
                   onClick={() => setPhase('forgot')}
-                  className="text-gray-400 hover:text-[#E50914] transition-colors"
+                  className="text-gray-400 hover:text-[#22C55E] transition-colors"
                 >
                   Forgot Password?
                 </button>
@@ -460,7 +460,7 @@ export default function AuthModal({
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-[#E50914] hover:bg-[#ff1622] text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 shadow-xl shadow-[#E50914]/20 mt-3 cursor-pointer"
+                className="w-full py-4 rounded-2xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 shadow-xl shadow-[#22C55E]/20 mt-3 cursor-pointer"
               >
                 <span>Authorize CineLux Engine</span>
                 <ArrowRight className="w-4 h-4" />
@@ -494,7 +494,7 @@ export default function AuthModal({
               New to CineLux catalog streaming?
               <button
                 onClick={() => setPhase('register')}
-                className="ml-1.5 text-white hover:text-[#E50914] font-black transition-colors"
+                className="ml-1.5 text-white hover:text-[#22C55E] font-black transition-colors"
               >
                 Begin Membership
               </button>
@@ -506,11 +506,11 @@ export default function AuthModal({
         {phase === 'register' && (
           <div>
             <div className="text-center mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#E50914] to-red-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#E50914]/25 mb-4 border border-white/10">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#22C55E]/25 mb-4 border border-white/10">
                 R
               </div>
               <h2 className="text-2xl font-black tracking-tight text-white font-sans">
-                Embark on Cine<span className="text-[#E50914]">Lux</span>
+                Embark on Cine<span className="text-[#22C55E]">Lux</span>
               </h2>
               <p className="text-xs text-gray-400 mt-1.5 font-medium">
                 Create your global cinema access credential.
@@ -528,7 +528,7 @@ export default function AuthModal({
                     placeholder="Adrian Vance"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                   />
                 </div>
               </div>
@@ -543,7 +543,7 @@ export default function AuthModal({
                     placeholder="name@domain.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                   />
                 </div>
               </div>
@@ -558,7 +558,7 @@ export default function AuthModal({
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-12 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                    className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-12 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                   />
                   <button
                     type="button"
@@ -576,7 +576,7 @@ export default function AuthModal({
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-[#E50914] hover:bg-[#ff1622] text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 shadow-xl shadow-[#E50914]/20 mt-2 cursor-pointer"
+                className="w-full py-4 rounded-2xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-1.5 shadow-xl shadow-[#22C55E]/20 mt-2 cursor-pointer"
               >
                 <span>Establish Access Key</span>
                 <ArrowRight className="w-4 h-4" />
@@ -587,7 +587,7 @@ export default function AuthModal({
               Already have an active credential?
               <button
                 onClick={() => setPhase('login')}
-                className="ml-1.5 text-white hover:text-[#E50914] font-black transition-colors"
+                className="ml-1.5 text-white hover:text-[#22C55E] font-black transition-colors"
               >
                 Sign In Instead
               </button>
@@ -638,7 +638,7 @@ export default function AuthModal({
                       placeholder="name@domain.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] transition-all"
+                      className="w-full bg-black border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] transition-all"
                     />
                   </div>
                 </div>
@@ -667,7 +667,7 @@ export default function AuthModal({
         {phase === 'verify' && (
           <div>
             <div className="text-center mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#E50914] to-red-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#E50914]/20 mb-4 border border-white/10">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-black text-white text-2xl mx-auto shadow-xl shadow-[#22C55E]/20 mb-4 border border-white/10">
                 <ShieldCheck className="w-6 h-6 text-white animate-pulse" />
               </div>
               <h2 className="text-2xl font-black tracking-tight text-white font-sans">
@@ -689,7 +689,7 @@ export default function AuthModal({
                     maxLength={1}
                     value={digit}
                     onChange={(e) => handleCodeChange(i, e.target.value)}
-                    className="aspect-square w-full bg-black border border-white/10 rounded-xl text-center text-lg font-black text-white focus:border-[#E50914] focus:ring-1 focus:ring-[#E50914] outline-none"
+                    className="aspect-square w-full bg-black border border-white/10 rounded-xl text-center text-lg font-black text-white focus:border-[#22C55E] focus:ring-1 focus:ring-[#22C55E] outline-none"
                   />
                 ))}
               </div>
@@ -702,7 +702,7 @@ export default function AuthModal({
                   <button
                     type="button"
                     onClick={() => setTimer(59)}
-                    className="text-[#E50914] hover:text-red-400 flex items-center gap-1.5 transition-colors"
+                    className="text-[#22C55E] hover:text-emerald-400 flex items-center gap-1.5 transition-colors"
                   >
                     <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Resend Encryption Key
                   </button>

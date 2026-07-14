@@ -426,7 +426,7 @@ export default function VideoPlayer({
                   {[...Array(12)].map((_, i) => (
                     <div 
                       key={i} 
-                      className="w-1.5 bg-[#E50914] rounded-full transition-all duration-300"
+                      className="w-1.5 bg-[#22C55E] rounded-full transition-all duration-300"
                       style={{ 
                         height: `${20 + Math.random() * 80}%`,
                         animation: `pulse 0.6s ease-in-out infinite alternate`,
@@ -438,7 +438,7 @@ export default function VideoPlayer({
               )}
               
               {/* Premium Sandbox Notice */}
-              <div className="mt-4 px-3 py-1 rounded-full bg-[#E50914]/10 border border-[#E50914]/30 text-[#E50914] text-[10px] font-bold tracking-widest uppercase flex items-center gap-1.5 backdrop-blur-sm">
+              <div className="mt-4 px-3 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#22C55E] text-[10px] font-bold tracking-widest uppercase flex items-center gap-1.5 backdrop-blur-sm">
                 <Sparkles className="w-3 h-3 animate-pulse" />
                 Cinematic Sandbox Preview Active
               </div>
@@ -460,9 +460,9 @@ export default function VideoPlayer({
       {showSkipIntroButton && (
         <button
           onClick={handleSkipIntro}
-          className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 hover:border-[#E50914] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
+          className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 hover:border-[#22C55E] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
         >
-          <SkipForward className="w-4 h-4 text-[#E50914]" />
+          <SkipForward className="w-4 h-4 text-[#22C55E]" />
           Skip Intro
         </button>
       )}
@@ -471,7 +471,7 @@ export default function VideoPlayer({
       {showSkipCreditsButton && (
         <button
           onClick={handleSkipCredits}
-          className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-[#E50914] hover:bg-[#ff1b27] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
+          className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
         >
           <SkipForward className="w-4 h-4 fill-white stroke-none" />
           {hasNextEpisode ? 'Next Episode' : 'Finish Stream'}
@@ -487,7 +487,7 @@ export default function VideoPlayer({
         {/* TOP HUD: Header & Close */}
         <div className="flex items-center justify-between w-full pointer-events-auto">
           <div className="flex flex-col text-left">
-            <span className="text-[10px] text-[#E50914] font-bold tracking-widest uppercase mb-0.5 flex items-center gap-1">
+            <span className="text-[10px] text-[#22C55E] font-bold tracking-widest uppercase mb-0.5 flex items-center gap-1">
               <Tv className="w-3 h-3" /> STREAMING IN {selectedQuality}
             </span>
             <h2 className="text-white text-sm md:text-base font-bold truncate max-w-xs sm:max-w-md md:max-w-xl">
@@ -532,10 +532,10 @@ export default function VideoPlayer({
                 step="0.1"
                 value={duration > 0 ? (currentTime / duration) * 100 : 0}
                 onChange={handleProgressChange}
-                className="w-full h-1 bg-white/25 rounded-full appearance-none cursor-pointer accent-[#E50914] group-hover/slider:h-1.5 transition-all outline-none"
+                className="w-full h-1 bg-white/25 rounded-full appearance-none cursor-pointer accent-[#22C55E] group-hover/slider:h-1.5 transition-all outline-none"
               />
               <div 
-                className="absolute left-0 top-[11px] h-1 group-hover/slider:h-1.5 bg-[#E50914] rounded-full pointer-events-none"
+                className="absolute left-0 top-[11px] h-1 group-hover/slider:h-1.5 bg-[#22C55E] rounded-full pointer-events-none"
                 style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
               />
             </div>
@@ -605,7 +605,7 @@ export default function VideoPlayer({
                 }}
                 className={`p-2.5 rounded-full border transition-colors ${
                   showSubtitles
-                    ? 'bg-[#E50914]/10 border-[#E50914]/30 text-[#E50914]'
+                    ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]'
                     : 'bg-transparent border-white/5 text-gray-400 hover:text-white'
                 }`}
                 title="Toggle Subtitles"
@@ -677,7 +677,7 @@ export default function VideoPlayer({
                   onClick={() => setSelectedQuality(q)}
                   className={`py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                     selectedQuality === q
-                      ? 'bg-[#E50914] border-[#E50914] text-white'
+                      ? 'bg-[#22C55E] border-[#22C55E] text-white'
                       : 'bg-white/5 border-white/5 text-gray-400 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -700,11 +700,11 @@ export default function VideoPlayer({
                   key={aud}
                   onClick={() => setSelectedAudio(aud)}
                   className={`w-full text-left px-3 py-2 text-xs font-medium rounded-lg transition-colors flex items-center justify-between ${
-                    selectedAudio === aud ? 'text-white bg-[#E50914]/20' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    selectedAudio === aud ? 'text-white bg-[#22C55E]/20' : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   <span>{aud}</span>
-                  {selectedAudio === aud && <div className="w-1.5 h-1.5 rounded-full bg-[#E50914]" />}
+                  {selectedAudio === aud && <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />}
                 </button>
               ))}
             </div>
@@ -744,7 +744,7 @@ export default function VideoPlayer({
                   onClick={() => setSubSize(sz)}
                   className={`py-1 text-xs font-semibold rounded border transition-colors capitalize ${
                     subSize === sz
-                      ? 'bg-[#E50914] border-[#E50914] text-white'
+                      ? 'bg-[#22C55E] border-[#22C55E] text-white'
                       : 'bg-white/5 border-white/5 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -782,7 +782,7 @@ export default function VideoPlayer({
                   onClick={() => setSubBgOpacity(op)}
                   className={`py-1 text-xs font-semibold rounded border transition-colors capitalize ${
                     subBgOpacity === op
-                      ? 'bg-[#E50914] border-[#E50914] text-white'
+                      ? 'bg-[#22C55E] border-[#22C55E] text-white'
                       : 'bg-white/5 border-white/5 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -805,7 +805,7 @@ export default function VideoPlayer({
               <X className="w-5 h-5" />
             </button>
             <h3 className="text-white text-lg font-bold mb-5 flex items-center gap-2">
-              <Keyboard className="w-5 h-5 text-[#E50914]" />
+              <Keyboard className="w-5 h-5 text-[#22C55E]" />
               Playback Keyboard Shortcuts
             </h3>
             <div className="flex flex-col gap-3.5 text-xs">

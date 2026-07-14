@@ -71,7 +71,7 @@ function MovieCard({
             }}
             className={`w-9 h-9 flex items-center justify-center rounded-full backdrop-blur-md border shadow-md transition-transform active:scale-90 ${
               isInWatchlist
-                ? 'bg-[#E50914] border-[#E50914] text-white'
+                ? 'bg-[#22C55E] border-[#22C55E] text-white hover:bg-[#16A34A]'
                 : 'bg-black/60 border-white/10 text-white hover:bg-black/80'
             }`}
             title={isInWatchlist ? 'Remove from List' : 'Add to List'}
@@ -111,7 +111,7 @@ function MovieCard({
               e.stopPropagation();
               onPlay(item);
             }}
-            className="w-12 h-12 rounded-full bg-[#E50914] text-white flex items-center justify-center shadow-lg shadow-[#E50914]/30 cursor-pointer"
+            className="w-12 h-12 rounded-full bg-[#22C55E] text-white flex items-center justify-center shadow-lg shadow-[#22C55E]/30 cursor-pointer"
           >
             <Play className="w-5 h-5 fill-white stroke-none ml-0.5" />
           </motion.button>
@@ -150,7 +150,7 @@ function MovieCard({
         {progress !== undefined && progress > 0 && progress < 100 && (
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
             <div
-              className="h-full bg-[#E50914] rounded-r-sm transition-all"
+              className="h-full bg-[#22C55E] rounded-r-sm transition-all"
               style={{ width: `${progress}%` }}
             />
           </div>

@@ -399,7 +399,7 @@ export default function App() {
   const activeHistory = currentUser ? currentUser.history.filter(h => contentList.some(c => c.id === h.itemId)) : [];
 
   return (
-    <div id="cinelux-master-application" className="min-h-screen bg-[#070707] text-white flex flex-col justify-between">
+    <div id="cinelux-master-application" className="min-h-screen bg-[#0B1220] text-white flex flex-col justify-between">
       
       {/* GLOBAL GLASSMORPHIC HEADER */}
       <Header
@@ -436,7 +436,7 @@ export default function App() {
 
         {/* VIEW B: PRIMARY DASHBOARD */}
         {activeView === 'home' && currentUser && (
-          <div className="pb-20 text-left bg-[#070707] overflow-x-hidden">
+          <div className="pb-20 text-left bg-[#0B1220] overflow-x-hidden">
             {/* Edge-to-edge Hero Slider at the top */}
             <HeroSlider
               featuredItems={featuredList}
@@ -522,7 +522,7 @@ export default function App() {
                 {/* Movies CTA Button immediately below the carousel */}
                 <div className="pt-4 flex justify-center">
                   <div className="relative group w-full max-w-xs sm:max-w-sm mx-4">
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#b8070f] via-[#7d040a] to-[#450205] translate-y-[5px] shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-300 group-hover:translate-y-[6px] group-hover:shadow-[0_15px_30px_rgba(229,9,20,0.3)]" />
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#16a34a] via-[#15803d] to-[#14532d] translate-y-[5px] shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-300 group-hover:translate-y-[6px] group-hover:shadow-[0_15px_30px_rgba(34,197,94,0.3)]" />
                     <button
                       onClick={() => {
                         scrollPositions.current['movies'] = 0;
@@ -531,7 +531,7 @@ export default function App() {
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                         }, 50);
                       }}
-                      className="relative w-full px-8 py-4 md:py-5 rounded-2xl bg-[#E50914] hover:bg-[#ff1f2d] text-white font-black uppercase tracking-widest text-xs md:text-sm transition-all duration-300 ease-out transform -translate-y-[1px] hover:-translate-y-[3px] active:translate-y-[4px] cursor-pointer flex items-center justify-center gap-3 overflow-hidden select-none"
+                      className="relative w-full px-8 py-4 md:py-5 rounded-2xl bg-[#22C55E] hover:bg-[#16A34A] text-white font-black uppercase tracking-widest text-xs md:text-sm transition-all duration-300 ease-out transform -translate-y-[1px] hover:-translate-y-[3px] active:translate-y-[4px] cursor-pointer flex items-center justify-center gap-3 overflow-hidden select-none"
                     >
                       <span className="text-sm md:text-base shrink-0 select-none">🎬</span>
                       <span>View All Movies</span>
@@ -552,14 +552,14 @@ export default function App() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="relative overflow-hidden rounded-3xl bg-[#111111]/30 border border-white/5 p-8 md:p-12 text-center shadow-2xl group hover:border-[#E50914]/30 transition-all duration-500"
+                    className="relative overflow-hidden rounded-3xl bg-[#111111]/30 border border-white/5 p-8 md:p-12 text-center shadow-2xl group hover:border-[#22C55E]/30 transition-all duration-500"
                   >
                     {/* Subtle brand glow behind the card */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#E50914]/5 blur-[60px] pointer-events-none" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#22C55E]/5 blur-[60px] pointer-events-none" />
 
                     <div className="relative z-10 flex flex-col items-center">
                       {/* Support Icon */}
-                      <div className="p-4 rounded-2xl bg-[#E50914]/10 border border-[#E50914]/20 text-[#E50914] mb-6 group-hover:scale-110 transition-transform duration-300 animate-pulse">
+                      <div className="p-4 rounded-2xl bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E] mb-6 group-hover:scale-110 transition-transform duration-300 animate-pulse">
                         <HelpCircle className="w-8 h-8" />
                       </div>
 
@@ -585,9 +585,9 @@ export default function App() {
                         </span>
                         <a
                           href="mailto:cinelux10@gmail.com"
-                          className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 text-white hover:text-[#ff3b47] font-mono text-sm sm:text-base font-medium transition-all duration-300 active:scale-95 group/btn cursor-pointer"
+                          className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-[#22C55E]/10 border border-white/10 hover:border-[#22C55E]/30 text-white hover:text-green-400 font-mono text-sm sm:text-base font-medium transition-all duration-300 active:scale-95 group/btn cursor-pointer"
                         >
-                          <Mail className="w-4 h-4 text-[#E50914] group-hover/btn:scale-110 transition-transform duration-300" />
+                          <Mail className="w-4 h-4 text-[#22C55E] group-hover/btn:scale-110 transition-transform duration-300" />
                           <span>cinelux10@gmail.com</span>
                         </a>
                       </div>
@@ -604,7 +604,7 @@ export default function App() {
         {activeView === 'movies' && currentUser && (
           <div className="pt-20 pb-12 sm:pt-24 sm:pb-20 text-left max-w-7xl mx-auto px-4 md:px-8">
             <h1 className="text-3xl font-bold tracking-tight mb-2 font-sans flex items-center gap-2">
-              <Film className="w-8 h-8 text-[#E50914]" /> Feature Movies
+              <Film className="w-8 h-8 text-[#22C55E]" /> Feature Movies
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest mb-10 font-semibold">Explore box office masterclasses and cinematic blockbusters</p>
 
@@ -638,7 +638,7 @@ export default function App() {
         {activeView === 'series' && currentUser && (
           <div className="pt-20 pb-12 sm:pt-24 sm:pb-20 text-left max-w-7xl mx-auto px-4 md:px-8">
             <h1 className="text-3xl font-bold tracking-tight mb-2 font-sans flex items-center gap-2">
-              <TVIcon className="w-8 h-8 text-[#E50914]" /> Original TV Series
+              <TVIcon className="w-8 h-8 text-[#22C55E]" /> Original TV Series
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest mb-10 font-semibold">Binge-worthy premium drama seasons and epic chronicles</p>
 
@@ -673,7 +673,7 @@ export default function App() {
           <div className="pt-20 pb-12 sm:pt-24 sm:pb-20 text-left max-w-7xl mx-auto px-4 md:px-8">
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-3xl font-bold tracking-tight font-sans flex items-center gap-2">
-                <Bookmark className="w-8 h-8 text-[#E50914]" /> My Watchlist
+                <Bookmark className="w-8 h-8 text-[#22C55E]" /> My Watchlist
               </h1>
               {watchlist.length > 0 && (
                 <button
@@ -693,7 +693,7 @@ export default function App() {
                 <p className="text-xs text-gray-500">Save movies and series to watch them later.</p>
                 <button
                   onClick={() => setActiveView(currentUser ? 'home' : 'landing')}
-                  className="mt-2 px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer"
+                  className="mt-2 px-5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer"
                 >
                   Browse Catalog
                 </button>
@@ -732,7 +732,7 @@ export default function App() {
         {activeView === 'favorites' && (
           <div className="pt-20 pb-12 sm:pt-24 sm:pb-20 text-left max-w-7xl mx-auto px-4 md:px-8">
             <h1 className="text-3xl font-bold tracking-tight mb-2 font-sans flex items-center gap-2">
-              <Heart className="w-8 h-8 text-[#E50914]" /> Saved Favorites
+              <Heart className="w-8 h-8 text-[#22C55E]" /> Saved Favorites
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest mb-10 font-semibold">Your absolute top tier films and series</p>
 
@@ -743,7 +743,7 @@ export default function App() {
                 <p className="text-xs text-gray-500">Click the heart icon on any movie detail viewport to save them here.</p>
                 <button
                   onClick={() => setActiveView(currentUser ? 'home' : 'landing')}
-                  className="mt-2 px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer"
+                  className="mt-2 px-5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer"
                 >
                   Discover Content
                 </button>
@@ -862,16 +862,16 @@ export default function App() {
       </main>
 
       {/* PROFESSIONAL MULTI-COLUMN LUXURY FOOTER */}
-      <footer className="border-t border-white/5 bg-[#0a0a0a] py-16 text-xs text-gray-500 select-none text-left">
+      <footer className="border-t border-white/5 bg-[#0B1220] py-16 text-xs text-gray-500 select-none text-left">
         <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
           
           {/* Column 1: Brand pitch */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#E50914] to-red-600 flex items-center justify-center font-bold text-white text-base">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-bold text-white text-base">
                 C
               </div>
-              <span className="font-sans text-lg font-bold tracking-widest text-white">CINE<span className="text-[#E50914]">LUX</span></span>
+              <span className="font-sans text-lg font-bold tracking-widest text-white">CINE<span className="text-[#22C55E]">LUX</span></span>
             </div>
             <p className="text-gray-400 leading-relaxed text-[11px]">
               The world's premier movie discovery and ultra-high fidelity catalog platform. Elevating standard compression stream metadata to true modern art.
@@ -885,7 +885,7 @@ export default function App() {
             <button onClick={() => { if(currentUser) { setActiveView('home'); } else { setAuthModalOpen(true); } }} className="text-left text-gray-400 hover:text-white transition-colors cursor-pointer font-semibold">Classic Cinematic</button>
             <button onClick={() => { if(currentUser) { setActiveView('movies'); } else { setAuthModalOpen(true); } }} className="text-left text-gray-400 hover:text-white transition-colors cursor-pointer font-semibold">UHD Movies</button>
             <button onClick={() => { if(currentUser) { setActiveView('series'); } else { setAuthModalOpen(true); } }} className="text-left text-gray-400 hover:text-white transition-colors cursor-pointer font-semibold">Bespoke TV Series</button>
-            <button onClick={() => { if(currentUser) { setActiveView('ai-recommender'); } else { setAuthModalOpen(true); } }} className="text-left text-[#E50914] hover:text-red-400 transition-colors cursor-pointer font-bold flex items-center gap-1 font-sans">AI Recommendation Hub <Sparkles className="w-3 h-3 animate-pulse" /></button>
+            <button onClick={() => { if(currentUser) { setActiveView('ai-recommender'); } else { setAuthModalOpen(true); } }} className="text-left text-[#22C55E] hover:text-green-400 transition-colors cursor-pointer font-bold flex items-center gap-1 font-sans">AI Recommendation Hub <Sparkles className="w-3 h-3 animate-pulse" /></button>
           </div>
 
           {/* Column 3: Trust Compliance */}
@@ -910,7 +910,7 @@ export default function App() {
         {/* Legal Disclaimer Ribbon */}
         <div className="max-w-7xl mx-auto px-4 md:px-8 border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-gray-600 text-[10px] font-medium uppercase tracking-wider">
           <span>© 2026 CineLux Stream Inc. All rights reserved.</span>
-          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-[#E50914] fill-[#E50914]" /> TLS 1.3 encryption secured</span>
+          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-[#22C55E] fill-[#22C55E]" /> TLS 1.3 encryption secured</span>
         </div>
       </footer>
 
@@ -940,11 +940,11 @@ export default function App() {
               transition={{ duration: 0.3, ease: 'easeOut' }}
               className={`pointer-events-auto px-4 py-3 rounded-xl shadow-2xl border flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${
                 toast.type === 'success'
-                  ? 'bg-black/95 border-[#E50914]/40 text-white shadow-red-500/10'
+                  ? 'bg-black/95 border-[#22C55E]/40 text-white shadow-green-500/10'
                   : 'bg-black/95 border-white/10 text-gray-300'
               }`}
             >
-              <div className={`w-2 h-2 rounded-full ${toast.type === 'success' ? 'bg-[#E50914]' : 'bg-gray-400'}`} />
+              <div className={`w-2 h-2 rounded-full ${toast.type === 'success' ? 'bg-[#22C55E]' : 'bg-gray-400'}`} />
               <span>{toast.message}</span>
             </motion.div>
           ))}

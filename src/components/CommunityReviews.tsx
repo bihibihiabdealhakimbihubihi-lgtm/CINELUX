@@ -195,7 +195,7 @@ export default function CommunityReviews() {
         
         {/* Section Header */}
         <div className="text-center space-y-2">
-          <span className="px-3 py-1 rounded-full bg-[#E50914]/10 border border-[#E50914]/30 text-[#E50914] text-[10px] font-bold tracking-widest uppercase inline-flex items-center gap-1.5 backdrop-blur-sm">
+          <span className="px-3 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#22C55E] text-[10px] font-bold tracking-widest uppercase inline-flex items-center gap-1.5 backdrop-blur-sm">
             <MessageSquare className="w-3.5 h-3.5" />
             CineLux Voice
           </span>
@@ -218,7 +218,7 @@ export default function CommunityReviews() {
             onTouchEnd={handleTouchEnd}
           >
             {/* Ambient Red Glow in background */}
-            <div className="absolute -right-16 -bottom-16 w-36 h-36 rounded-full bg-[#E50914]/5 blur-2xl group-hover:bg-[#E50914]/10 transition-all duration-500 pointer-events-none" />
+            <div className="absolute -right-16 -bottom-16 w-36 h-36 rounded-full bg-[#22C55E]/5 blur-2xl group-hover:bg-[#22C55E]/10 transition-all duration-500 pointer-events-none" />
             <div className="absolute -left-16 -top-16 w-36 h-36 rounded-full bg-amber-500/5 blur-2xl pointer-events-none" />
 
             <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-6 md:gap-8">
@@ -311,7 +311,7 @@ export default function CommunityReviews() {
                     setCurrentIndex(idx);
                   }}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    idx === currentIndex ? 'w-5 bg-[#E50914]' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                    idx === currentIndex ? 'w-5 bg-[#22C55E]' : 'w-1.5 bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Go to review ${idx + 1}`}
                 />
@@ -324,7 +324,7 @@ export default function CommunityReviews() {
         {/* Leave a Review Form Section */}
         <div className="bg-[#121212]/40 rounded-[28px] border border-white/[0.04] p-6 md:p-8 max-w-3xl mx-auto space-y-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#E50914]/10 rounded-xl border border-[#E50914]/20 text-[#E50914]">
+            <div className="p-2 bg-[#22C55E]/10 rounded-xl border border-[#22C55E]/20 text-[#22C55E]">
               <Award className="w-5 h-5" />
             </div>
             <div>
@@ -356,7 +356,7 @@ export default function CommunityReviews() {
                   placeholder="Enter your name"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#E50914]/50 focus:bg-black/60 transition-all font-medium"
+                  className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#22C55E]/50 focus:bg-black/60 transition-all font-medium"
                 />
               </div>
 
@@ -396,7 +396,7 @@ export default function CommunityReviews() {
                 placeholder="Write your review about CineLux... What did you love the most?"
                 value={formComment}
                 onChange={(e) => setFormComment(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#E50914]/50 focus:bg-black/60 transition-all font-medium resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#22C55E]/50 focus:bg-black/60 transition-all font-medium resize-none"
               />
             </div>
 
@@ -404,7 +404,7 @@ export default function CommunityReviews() {
             <div className="pt-2 flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-3 rounded-xl bg-[#E50914] hover:bg-[#ff1f2d] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out transform hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_14px_rgba(229,9,20,0.3)] hover:shadow-[0_6px_20px_rgba(229,9,20,0.45)] flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-out transform hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_14px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_20px_rgba(34,197,94,0.45)] flex items-center gap-2 cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
                 Submit Review

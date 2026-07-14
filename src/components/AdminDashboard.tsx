@@ -122,21 +122,21 @@ export default function AdminDashboard({
   };
 
   return (
-    <div id="admin-dashboard-container" className="min-h-screen bg-[#070707] text-white pt-24 pb-20 select-none text-left">
+    <div id="admin-dashboard-container" className="min-h-screen bg-[#0B1220] text-white pt-24 pb-20 select-none text-left">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Row 1: Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 border-b border-white/5 pb-5">
           <div>
             <h1 className="font-sans text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-              <ShieldAlert className="w-8 h-8 text-[#E50914] animate-pulse" /> Platform Admin Operations
+              <ShieldAlert className="w-8 h-8 text-[#22C55E] animate-pulse" /> Platform Admin Operations
             </h1>
             <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">
               Live server nodes: 2 Active • Region: Europe-West2
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs bg-white/5 border border-white/5 px-4 py-2.5 rounded-xl text-gray-300 font-semibold">
-            <Calendar className="w-4 h-4 text-[#E50914]" />
+            <Calendar className="w-4 h-4 text-[#22C55E]" />
             Session Date: July 9, 2026
           </div>
         </div>
@@ -195,7 +195,7 @@ export default function AdminDashboard({
               <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400">Subscriber Growth Curve</h3>
               <p className="text-xs text-gray-500 mt-0.5">Live platform stats for Q1/Q2 2026</p>
             </div>
-            <span className="px-3 py-1 rounded bg-[#E50914]/15 border border-[#E50914]/30 text-[10px] font-bold text-[#E50914] uppercase tracking-wider">
+            <span className="px-3 py-1 rounded bg-[#22C55E]/15 border border-[#22C55E]/30 text-[10px] font-bold text-[#22C55E] uppercase tracking-wider">
               Live Feed
             </span>
           </div>
@@ -217,15 +217,15 @@ export default function AdminDashboard({
               <path
                 d="M 0 85 L 15 75 L 30 68 L 45 55 L 60 45 L 75 30 L 90 22 L 100 12"
                 fill="none"
-                stroke="#E50914"
+                stroke="#22C55E"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
 
               <defs>
                 <linearGradient id="gradient-area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#E50914" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#E50914" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#22C55E" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#22C55E" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
@@ -256,7 +256,7 @@ export default function AdminDashboard({
           <div className="p-6 rounded-3xl bg-[#111111]/80 border border-white/5 shadow-xl flex flex-col gap-5">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <UploadCloud className="w-5 h-5 text-[#E50914]" /> Media Content Uploader
+                <UploadCloud className="w-5 h-5 text-[#22C55E]" /> Media Content Uploader
               </h2>
               <p className="text-xs text-gray-500 mt-1">Publish movies or series directly to the live catalog.</p>
             </div>
@@ -277,7 +277,7 @@ export default function AdminDashboard({
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     placeholder="e.g. Oppenheimer"
-                    className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914]"
+                    className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E]"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function AdminDashboard({
                   <select
                     value={newType}
                     onChange={(e) => setNewType(e.target.value as any)}
-                    className="bg-black border border-white/5 rounded-xl px-3 py-2.5 text-xs text-white outline-none cursor-pointer focus:border-[#E50914]"
+                    className="bg-black border border-white/5 rounded-xl px-3 py-2.5 text-xs text-white outline-none cursor-pointer focus:border-[#22C55E]"
                   >
                     <option value="movie">Feature Movie</option>
                     <option value="series">TV Series</option>
@@ -302,7 +302,7 @@ export default function AdminDashboard({
                   value={newOverview}
                   onChange={(e) => setNewOverview(e.target.value)}
                   placeholder="Explain the storyline, plot pacing, and main hook..."
-                  className="bg-black border border-white/5 rounded-xl p-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#E50914] resize-none"
+                  className="bg-black border border-white/5 rounded-xl p-4 text-xs text-white placeholder-gray-600 outline-none focus:border-[#22C55E] resize-none"
                 />
               </div>
 
@@ -399,7 +399,7 @@ export default function AdminDashboard({
 
               <button
                 type="submit"
-                className="w-full py-4.5 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white text-xs font-bold uppercase tracking-widest transition-colors shadow-lg shadow-[#E50914]/15 hover:scale-[1.01] cursor-pointer"
+                className="w-full py-4.5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-widest transition-colors shadow-lg shadow-[#22C55E]/15 hover:scale-[1.01] cursor-pointer"
               >
                 Upload & Publish Media
               </button>

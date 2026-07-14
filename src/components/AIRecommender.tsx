@@ -143,16 +143,16 @@ export default function AIRecommender({
   };
 
   return (
-    <div id="ai-recommender-viewport" className="min-h-screen bg-[#070707] text-white pt-24 pb-20 select-none text-left flex flex-col justify-between">
+    <div id="ai-recommender-viewport" className="min-h-screen bg-[#0B1220] text-white pt-24 pb-20 select-none text-left flex flex-col justify-between">
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full flex-1 flex flex-col lg:flex-row gap-8">
         
         {/* Left Side: Concierge Introduction Card & Starter Prompts */}
         <div className="w-full lg:w-1/3 flex flex-col gap-6 shrink-0">
           <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#111] to-[#0a0a0a] border border-white/5 shadow-2xl text-left flex flex-col gap-5 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-tr from-[#E50914]/10 to-transparent blur-2xl rounded-full" />
+            <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-tr from-[#22C55E]/10 to-transparent blur-2xl rounded-full" />
             
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#E50914] to-red-600 flex items-center justify-center shadow-lg shadow-[#E50914]/20 animate-pulse">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center shadow-lg shadow-[#22C55E]/20 animate-pulse">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -226,7 +226,7 @@ export default function AIRecommender({
                   {/* Sender Avatar */}
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border shadow-md ${
                     isAssistant 
-                      ? 'bg-gradient-to-tr from-[#E50914]/20 to-[#E50914]/10 border-[#E50914]/30 text-[#E50914]' 
+                      ? 'bg-gradient-to-tr from-[#22C55E]/20 to-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]' 
                       : 'bg-white/5 border-white/10 text-white'
                   }`}>
                     {isAssistant ? <Bot className="w-4 h-4" /> : <User className="w-4 h-4" />}
@@ -237,7 +237,7 @@ export default function AIRecommender({
                     <div className={`p-4 rounded-2xl leading-relaxed text-xs text-left shadow-lg ${
                       isAssistant 
                         ? 'bg-[#181818] text-gray-200 border border-white/5' 
-                        : 'bg-[#E50914] text-white font-medium'
+                        : 'bg-[#22C55E] text-white font-medium'
                     }`}>
                       <p className="whitespace-pre-line">{parseMarkdown(msg.content)}</p>
                     </div>
@@ -277,7 +277,7 @@ export default function AIRecommender({
             {/* Simulated interactive assistant thinking bubble */}
             {isLoading && (
               <div className="flex gap-4 mr-auto max-w-[80%]">
-                <div className="w-9 h-9 rounded-xl bg-[#E50914]/10 border border-[#E50914]/20 text-[#E50914] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E] flex items-center justify-center shrink-0">
                   <Loader2 className="w-4 h-4 animate-spin" />
                 </div>
                 <div className="p-4 rounded-2xl bg-[#181818] border border-white/5 flex items-center gap-2 text-xs text-gray-400">
@@ -296,13 +296,13 @@ export default function AIRecommender({
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage(inputValue)}
-              className="flex-1 bg-[#181818] border border-white/5 rounded-2xl px-5 py-3 text-xs md:text-sm font-medium outline-none text-white focus:border-[#E50914] transition-colors placeholder-gray-500"
+              className="flex-1 bg-[#181818] border border-white/5 rounded-2xl px-5 py-3 text-xs md:text-sm font-medium outline-none text-white focus:border-[#22C55E] transition-colors placeholder-gray-500"
               disabled={isLoading}
             />
             <button
               onClick={() => handleSendMessage(inputValue)}
               disabled={!inputValue.trim() || isLoading}
-              className="p-3 rounded-2xl bg-[#E50914] hover:bg-[#ff1622] disabled:bg-white/5 text-white disabled:text-gray-600 transition-colors cursor-pointer active:scale-95 shrink-0"
+              className="p-3 rounded-2xl bg-[#22C55E] hover:bg-[#16A34A] disabled:bg-white/5 text-white disabled:text-gray-600 transition-colors cursor-pointer active:scale-95 shrink-0"
               title="Submit Prompt"
             >
               <Send className="w-4 h-4" />

@@ -93,7 +93,7 @@ export default function Header({
       id="header-nav"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-[#070707]/95 backdrop-blur-md border-b border-white/5 py-3 shadow-lg'
+          ? 'bg-[#0B1220]/95 backdrop-blur-md border-b border-white/5 py-3 shadow-lg'
           : 'bg-gradient-to-b from-black/80 via-black/30 to-transparent py-5'
       }`}
     >
@@ -106,11 +106,11 @@ export default function Header({
             onClick={() => setActiveTab('home')}
             className="cursor-pointer flex items-center gap-1.5 group"
           >
-            <div className="w-7 h-7 rounded-md bg-gradient-to-tr from-[#E50914] to-[#ff2b37] flex items-center justify-center font-black text-white text-xs tracking-wider shadow-md shadow-[#E50914]/20 group-hover:scale-105 transition-transform">
+            <div className="w-7 h-7 rounded-md bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-black text-white text-xs tracking-wider shadow-md shadow-[#22C55E]/20 group-hover:scale-105 transition-transform">
               C
             </div>
             <span className="font-sans text-sm font-black tracking-[0.18em] text-white">
-              CINE<span className="text-[#E50914]">LUX</span>
+              CINE<span className="text-[#22C55E]">LUX</span>
             </span>
           </div>
 
@@ -187,7 +187,7 @@ export default function Header({
                       setShowLangMenu(false);
                     }}
                     className={`w-full text-left px-4 py-2.5 text-xs font-medium transition-colors hover:bg-white/5 ${
-                      userLanguage === lang ? 'text-[#E50914] bg-white/5' : 'text-gray-300'
+                      userLanguage === lang ? 'text-[#22C55E] bg-white/5' : 'text-gray-300'
                     }`}
                   >
                     {lang}
@@ -212,7 +212,7 @@ export default function Header({
                 >
                   <Bell className="w-5 h-5" />
                   {unreadCount > 0 && (
-                    <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[#E50914] text-[9px] font-bold text-white flex items-center justify-center">
+                    <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[#22C55E] text-[9px] font-bold text-white flex items-center justify-center">
                       {unreadCount}
                     </span>
                   )}
@@ -246,7 +246,7 @@ export default function Header({
                             }`}
                           >
                             <div className="flex justify-between items-start gap-2">
-                              <span className={`text-xs font-medium ${!notif.read ? 'text-[#E50914]' : 'text-gray-300'}`}>
+                              <span className={`text-xs font-medium ${!notif.read ? 'text-[#22C55E]' : 'text-gray-300'}`}>
                                 {notif.title}
                               </span>
                               <span className="text-[10px] text-gray-500 whitespace-nowrap">{notif.date}</span>
@@ -329,7 +329,7 @@ export default function Header({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="px-5 py-2 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-[#E50914]/20 cursor-pointer"
+              className="px-5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-[#22C55E]/20 cursor-pointer"
             >
               Sign In
             </button>

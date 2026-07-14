@@ -87,7 +87,7 @@ export default function UserAccount({
   ] as const;
 
   return (
-    <div id="user-profile-account-view" className="min-h-screen bg-[#070707] text-white pt-24 pb-20 select-none text-left">
+    <div id="user-profile-account-view" className="min-h-screen bg-[#0B1220] text-white pt-24 pb-20 select-none text-left">
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         
         {/* Page title */}
@@ -114,7 +114,7 @@ export default function UserAccount({
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full text-left px-4 py-3 rounded-xl text-xs font-semibold flex items-center gap-3.5 transition-all ${
                     isActive
-                      ? 'text-white bg-[#E50914] shadow-md shadow-[#E50914]/15'
+                      ? 'text-white bg-[#22C55E] shadow-md shadow-[#22C55E]/15'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -141,7 +141,7 @@ export default function UserAccount({
               <div className="flex flex-col gap-6 text-left">
                 <div>
                   <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                    <User className="w-5 h-5 text-[#E50914]" /> Profile Management
+                    <User className="w-5 h-5 text-[#22C55E]" /> Profile Management
                   </h2>
                   <p className="text-xs text-gray-500 mt-1">Configure your personal streamer identity and system notifications.</p>
                 </div>
@@ -157,7 +157,7 @@ export default function UserAccount({
                   <div className="flex flex-col gap-2.5">
                     <label className="text-[10px] font-bold text-gray-500 uppercase">Profile Icon / Avatar</label>
                     <div className="flex items-center gap-4 flex-wrap">
-                      <img src={avatar} alt="Current" className="w-16 h-16 rounded-full object-cover border-2 border-[#E50914] shadow-md" />
+                      <img src={avatar} alt="Current" className="w-16 h-16 rounded-full object-cover border-2 border-[#22C55E] shadow-md" />
                       <div className="flex gap-2">
                         {avatarPresets.map((p, i) => (
                           <button
@@ -183,7 +183,7 @@ export default function UserAccount({
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-[#E50914]"
+                        className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-[#22C55E]"
                       />
                     </div>
 
@@ -194,7 +194,7 @@ export default function UserAccount({
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-[#E50914]"
+                        className="bg-black border border-white/5 rounded-xl px-4 py-2.5 text-xs text-white outline-none focus:border-[#22C55E]"
                       />
                     </div>
                   </div>
@@ -225,7 +225,7 @@ export default function UserAccount({
                         type="checkbox"
                         checked={notif}
                         onChange={(e) => setNotif(e.target.checked)}
-                        className="w-4.5 h-4.5 accent-[#E50914] cursor-pointer"
+                        className="w-4.5 h-4.5 accent-[#22C55E] cursor-pointer"
                       />
                     </div>
                   </div>
@@ -245,7 +245,7 @@ export default function UserAccount({
               <div className="flex flex-col gap-6 text-left">
                 <div>
                   <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                    <Activity className="w-5 h-5 text-[#E50914]" /> Theater Activity & Diagnostics
+                    <Activity className="w-5 h-5 text-[#22C55E]" /> Theater Activity & Diagnostics
                   </h2>
                   <p className="text-xs text-gray-500 mt-1">Review active viewing hours, preferred genre configurations, and high-fidelity bitrate statistics.</p>
                 </div>
@@ -264,7 +264,7 @@ export default function UserAccount({
                   </div>
                   <div className="p-4 rounded-xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/5 flex flex-col gap-1">
                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Sound Field Configuration</span>
-                    <span className="text-2xl font-black text-[#E50914] mt-1">Dolby Atmos</span>
+                    <span className="text-2xl font-black text-[#22C55E] mt-1">Dolby Atmos</span>
                     <span className="text-[9px] text-gray-400 font-semibold mt-0.5">Spatial multi-channel stream</span>
                   </div>
                 </div>
@@ -286,10 +286,10 @@ export default function UserAccount({
                     <div className="flex flex-col gap-1.5">
                       <div className="flex justify-between text-xs font-semibold">
                         <span className="text-gray-300">Cyberpunk Noir & Action Thrillers</span>
-                        <span className="text-[#E50914]">30%</span>
+                        <span className="text-[#22C55E]">30%</span>
                       </div>
                       <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#E50914] rounded-full" style={{ width: '30%' }} />
+                        <div className="h-full bg-[#22C55E] rounded-full" style={{ width: '30%' }} />
                       </div>
                     </div>
 
@@ -340,7 +340,7 @@ export default function UserAccount({
               <div className="flex flex-col gap-6 text-left">
                 <div>
                   <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                    <Smartphone className="w-5 h-5 text-[#E50914]" /> Streaming Devices ({devices.length})
+                    <Smartphone className="w-5 h-5 text-[#22C55E]" /> Streaming Devices ({devices.length})
                   </h2>
                   <p className="text-xs text-gray-500 mt-1">De-authorize and log out active device nodes to free up stream slots.</p>
                 </div>
@@ -387,7 +387,7 @@ export default function UserAccount({
               <div className="flex flex-col gap-6 text-left">
                 <div>
                   <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-[#E50914]" /> Security Protocols
+                    <Shield className="w-5 h-5 text-[#22C55E]" /> Security Protocols
                   </h2>
                   <p className="text-xs text-gray-500 mt-1">Review encryption settings, active session nodes, and privacy guidelines.</p>
                 </div>

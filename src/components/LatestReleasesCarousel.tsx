@@ -60,8 +60,8 @@ export default function LatestReleasesCarousel({
           alt={currentItem.title}
           className="w-full h-full object-cover opacity-35 scale-105 transition-all duration-1000 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-black/50 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070707] via-transparent to-[#070707] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-black/50 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1220] via-transparent to-[#0B1220] z-10" />
       </div>
 
       {/* Navigation Buttons (visible on hover) */}
@@ -85,7 +85,7 @@ export default function LatestReleasesCarousel({
       <div className="absolute inset-x-0 bottom-0 z-20 p-6 sm:p-8 md:p-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="max-w-xl text-left space-y-3 sm:space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-[#E50914] text-[9px] font-black tracking-widest uppercase text-white shadow-lg shadow-[#E50914]/20 animate-pulse">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#22C55E] text-[9px] font-black tracking-widest uppercase text-white shadow-lg shadow-[#22C55E]/20 animate-pulse">
               Latest Release
             </span>
             <div className="flex items-center gap-1 text-amber-400 text-xs font-bold">
@@ -107,7 +107,7 @@ export default function LatestReleasesCarousel({
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <button
             onClick={() => onPlay(currentItem)}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black hover:bg-[#E50914] hover:text-white font-bold text-xs uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black hover:bg-[#22C55E] hover:text-white font-bold text-xs uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <Play className="w-4 h-4 fill-current stroke-none" />
             <span>Play Now</span>
@@ -130,7 +130,7 @@ export default function LatestReleasesCarousel({
             key={idx}
             onClick={() => setCurrentIndex(idx)}
             className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-              idx === currentIndex ? 'bg-[#E50914] w-6' : 'bg-white/30 hover:bg-white/50'
+              idx === currentIndex ? 'bg-[#22C55E] w-6' : 'bg-white/30 hover:bg-white/50'
             }`}
             aria-label={`Go to slide ${idx + 1}`}
           />

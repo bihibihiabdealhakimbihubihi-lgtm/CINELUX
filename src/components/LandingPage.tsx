@@ -226,7 +226,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
   const featuredRow = featuredMovies.length >= 8 ? featuredMovies : uniqueMovies.slice(12, 20);
 
   return (
-    <div id="landing-page-root" className="min-h-screen bg-[#050505] text-white select-none text-left scroll-smooth font-sans">
+    <div id="landing-page-root" className="min-h-screen bg-[#0B1220] text-white select-none text-left scroll-smooth font-sans">
       <style>{`
         .trending-slider-container {
           --visible-items: 2;
@@ -247,22 +247,21 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
       `}</style>
       
       {/* 1. HERO SECTION */}
-      <div className="relative w-full min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4 sm:px-6 bg-black">
+      <div className="relative w-full min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4 sm:px-6 bg-[#0B1220]">
         {/* Cinematic overlay image */}
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 pointer-events-none"
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none"
           style={{ 
-            backgroundImage: `url('https://images.unsplash.com/photo-1574267431629-2e570b032d13?q=80&w=1920&auto=format&fit=crop')`
+            backgroundImage: `url('https://i.postimg.cc/XYKPtzSL/2c10a7a7ae96a94d1361096aeed22b07.jpg')`
           }}
         />
         
         {/* Dark elegant cinematic gradients for absolute legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/85 to-black/50 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-black/35 z-10 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050505] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/65 z-10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0B1220] to-transparent z-10 pointer-events-none" />
         
-        {/* Radial subtle red brand glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-[#E50914]/10 blur-[120px] pointer-events-none z-10" />
+        {/* Radial subtle premium silver/slate glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-slate-500/5 blur-[120px] pointer-events-none z-10" />
 
         <div className="max-w-4xl mx-auto text-center relative z-20 flex flex-col items-center">
           
@@ -270,7 +269,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-bold mb-6 tracking-wider backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-[#CBD5E1] font-bold mb-6 tracking-wider backdrop-blur-md"
           >
             <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
             <span>The Next Generation Cinema Hub</span>
@@ -283,7 +282,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1] max-w-4xl uppercase font-sans text-white"
           >
             Discover the World's <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E50914] via-[#ff3b47] to-[#ff7e86] drop-shadow-[0_2px_15px_rgba(229,9,20,0.45)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_2px_15px_rgba(255,255,255,0.15)]">
               Best Movies.
             </span>
           </motion.h1>
@@ -292,7 +291,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-10 leading-relaxed font-normal"
+            className="text-sm sm:text-base md:text-lg text-[#CBD5E1] max-w-2xl mb-10 leading-relaxed font-normal"
           >
             Explore thousands of movies and TV shows in stunning HD and 4K. Build your watchlist, discover new favorites, and enjoy a premium cinematic experience.
           </motion.p>
@@ -304,11 +303,11 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
             className="relative group w-full sm:w-auto flex justify-center"
           >
             {/* Elegant 3D shadow layer underneath */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#b8070f] to-[#450205] translate-y-1.5 blur-md opacity-85 transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-100" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#16A34A] to-[#047857] translate-y-1.5 blur-md opacity-80 transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-100" />
             
             <button
               onClick={onGetStarted}
-              className="relative w-full sm:w-auto px-10 py-5 rounded-full bg-gradient-to-r from-[#E50914] via-[#ff1622] to-[#E50914] text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#E50914]/40 active:translate-y-1 active:shadow-inner cursor-pointer border border-white/20 flex items-center justify-center gap-3 select-none"
+              className="relative w-full sm:w-auto px-10 py-5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/10 flex items-center justify-center gap-3 select-none shadow-[0_4px_14px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_20px_rgba(34,197,94,0.45)]"
             >
               <span>Get Started — It's Free</span>
               <Play className="w-4 h-4 fill-white stroke-none animate-pulse" />
@@ -333,7 +332,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 2. QUICK STATS */}
-      <div id="quick-stats" className="py-12 bg-[#050505] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5 relative z-20">
+      <div id="quick-stats" className="py-12 bg-[#0B1220] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5 relative z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { value: '20,000+', label: 'Movies', icon: '🎬', desc: 'Curated world blockbusters' },
@@ -345,17 +344,17 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
               key={idx}
               whileHover={{ 
                 y: -6, 
-                borderColor: 'rgba(229, 9, 20, 0.3)',
-                boxShadow: '0 12px 30px -10px rgba(229, 9, 20, 0.15)'
+                borderColor: 'rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 12px 30px -10px rgba(0, 0, 0, 0.5)'
               }}
               transition={{ duration: 0.3 }}
-              className="p-6 rounded-2xl bg-[#111111]/30 border border-white/5 flex items-center gap-5 text-left transition-all group cursor-pointer"
+              className="p-6 rounded-2xl bg-[#1F2937]/50 border border-white/[0.08] flex items-center gap-5 text-left transition-all group cursor-pointer"
             >
-              <div className="text-3xl bg-white/5 w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-[#E50914]/10 group-hover:border-[#E50914]/20 transition-all">
+              <div className="text-3xl bg-white/5 w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/5 group-hover:border-white/20 transition-all">
                 {stat.icon}
               </div>
               <div>
-                <h4 className="text-xl font-black text-white group-hover:text-[#E50914] transition-colors">{stat.value}</h4>
+                <h4 className="text-xl font-black text-white group-hover:text-slate-200 transition-colors">{stat.value}</h4>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{stat.label}</p>
                 <p className="text-[10px] text-gray-500 mt-0.5 leading-normal">{stat.desc}</p>
               </div>
@@ -367,13 +366,13 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
       {/* 3. TRENDING THIS WEEK */}
       <div 
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 border-t border-white/5 overflow-hidden"
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 border-t border-white/[0.08] overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="flex justify-between items-end mb-8">
           <div className="text-left">
-            <span className="text-xs text-[#E50914] font-black uppercase tracking-widest block mb-1">Weekly Highlights</span>
+            <span className="text-xs text-gray-400 font-black uppercase tracking-widest block mb-1">Weekly Highlights</span>
             <h2 className="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white uppercase">
               Trending This Week
             </h2>
@@ -382,14 +381,14 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           <div className="flex gap-2">
             <button
               onClick={handlePrev}
-              className="p-3 rounded-full bg-[#111111] hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
+              className="p-3 rounded-full bg-[#1F2937] hover:bg-white/10 border border-white/[0.08] hover:border-white/20 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
               aria-label="Previous Slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-3 rounded-full bg-[#111111] hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
+              className="p-3 rounded-full bg-[#1F2937] hover:bg-white/10 border border-white/[0.08] hover:border-white/20 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
               aria-label="Next Slide"
             >
               <ChevronRight className="w-5 h-5" />
@@ -424,7 +423,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 }}
               >
                 {/* Image Frame */}
-                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/5 group-hover:border-[#E50914]/50 transition-all shadow-xl bg-neutral-900">
+                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/[0.08] group-hover:border-white/30 transition-all shadow-xl bg-[#1F2937]">
                   <img 
                     src={movie.poster} 
                     alt={movie.title}
@@ -435,13 +434,13 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   
                   {/* Brand Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <span className="px-2.5 py-1 rounded-md bg-[#E50914] text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2">
+                    <span className="px-2.5 py-1 rounded-md bg-white/20 border border-white/10 backdrop-blur-md text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2">
                       Stream Now
                     </span>
                   </div>
 
                   {/* Rating Badge */}
-                  <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/70 border border-white/10 backdrop-blur-md flex items-center gap-1 text-xs font-bold">
+                  <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/70 border border-white/[0.08] backdrop-blur-md flex items-center gap-1 text-xs font-bold">
                     <Star className="w-3.5 h-3.5 fill-amber-400 stroke-none" />
                     <span className="text-amber-400">{movie.rating}</span>
                   </div>
@@ -449,10 +448,10 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
                 {/* Text Block */}
                 <div className="mt-3.5">
-                  <h4 className="text-sm font-bold text-white group-hover:text-[#E50914] transition-colors line-clamp-1">
+                  <h4 className="text-sm font-bold text-white group-hover:text-slate-200 transition-colors line-clamp-1">
                     {movie.title}
                   </h4>
-                  <p className="text-xs text-gray-500 font-medium mt-0.5">
+                  <p className="text-xs text-gray-400 font-medium mt-0.5">
                     {movie.genres[0]}
                   </p>
                 </div>
@@ -473,7 +472,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 setVirtualIndex(idx + 5);
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                idx === activeMovieIndex ? 'bg-[#E50914] w-6' : 'bg-white/30 hover:bg-white/50'
+                idx === activeMovieIndex ? 'bg-[#22C55E] w-6' : 'bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
@@ -483,10 +482,10 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 4. WHY CHOOSE CINELUX */}
-      <div className="py-24 bg-[#080808] border-t border-b border-white/5 relative z-20">
+      <div className="py-24 bg-[#111827] border-t border-b border-white/[0.08] relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-2xl mx-auto mb-16">
-            <span className="text-xs text-[#E50914] font-black uppercase tracking-widest block mb-1">Unmatched Streaming</span>
+            <span className="text-xs text-gray-400 font-black uppercase tracking-widest block mb-1">Unmatched Streaming</span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase font-sans">
               Why Choose CineLux
             </h2>
@@ -507,7 +506,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 icon: Film,
                 title: 'Premium Movie Library',
                 desc: 'Thousands of carefully selected movies and TV shows, formatted in peak bitrates.',
-                color: 'text-red-400 bg-red-500/10 border-red-500/20'
+                color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
               },
               {
                 icon: Heart,
@@ -521,12 +520,12 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 <motion.div
                   key={idx}
                   whileHover={{ y: -5 }}
-                  className="p-8 rounded-3xl bg-[#111111]/30 border border-white/5 hover:border-white/10 transition-all flex flex-col gap-5 group cursor-pointer"
+                  className="p-8 rounded-3xl bg-[#1F2937] border border-white/[0.08] hover:bg-[#2D3748] hover:border-white/20 transition-all flex flex-col gap-5 group cursor-pointer shadow-lg"
                 >
                   <div className={`p-4 rounded-2xl w-fit border ${feat.color}`}>
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-[#E50914] transition-colors">
+                  <h3 className="text-lg font-bold text-white group-hover:text-slate-200 transition-colors">
                     {feat.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">
@@ -546,7 +545,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           
           {/* Review Slider */}
           <div className="lg:col-span-7 text-left">
-            <span className="text-xs text-[#E50914] font-black uppercase tracking-widest block mb-1">Global Opinions</span>
+            <span className="text-xs text-gray-400 font-black uppercase tracking-widest block mb-1">Global Opinions</span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-8 uppercase font-sans">
               User Reviews
             </h2>
@@ -559,7 +558,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.4 }}
-                  className="bg-[#111111]/40 border border-white/5 rounded-3xl p-8 md:p-10 flex flex-col justify-between gap-6 relative shadow-2xl"
+                  className="bg-[#1F2937] border border-white/[0.08] rounded-3xl p-8 md:p-10 flex flex-col justify-between gap-6 relative shadow-2xl"
                 >
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-4">
@@ -590,7 +589,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                       <button
                         key={i}
                         onClick={() => setActiveReviewIdx(i)}
-                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeReviewIdx === i ? 'w-6 bg-[#E50914]' : 'w-1.5 bg-gray-600 hover:bg-gray-400'}`}
+                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeReviewIdx === i ? 'w-6 bg-[#22C55E]' : 'w-1.5 bg-gray-600 hover:bg-gray-400'}`}
                       />
                     ))}
                   </div>
@@ -600,7 +599,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
 
           {/* Form: Leave Your Review */}
-          <div className="lg:col-span-5 bg-[#111111]/30 border border-white/5 rounded-3xl p-8 shadow-2xl relative">
+          <div className="lg:col-span-5 bg-[#1F2937]/50 border border-white/[0.08] rounded-3xl p-8 shadow-2xl relative">
             <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider font-sans">
               Leave Your Review
             </h3>
@@ -616,7 +615,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   placeholder="e.g. Liam Sterling"
                   value={reviewName}
                   onChange={(e) => setReviewName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/5 hover:border-white/10 focus:border-[#E50914]/40 focus:outline-none text-xs font-bold transition-all placeholder:text-gray-600 text-white"
+                  className="w-full px-4 py-3 rounded-xl bg-[#0B1220] border border-white/[0.08] hover:border-white/10 focus:border-[#22C55E]/40 focus:outline-none text-xs font-bold transition-all placeholder:text-gray-600 text-white"
                 />
               </div>
 
@@ -648,13 +647,13 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   placeholder="Write your cinema critique here..."
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-black border border-white/5 hover:border-white/10 focus:border-[#E50914]/40 focus:outline-none text-xs leading-relaxed transition-all placeholder:text-gray-600 resize-none text-white"
+                  className="w-full px-4 py-3 rounded-xl bg-[#0B1220] border border-white/[0.08] hover:border-white/10 focus:border-[#22C55E]/40 focus:outline-none text-xs leading-relaxed transition-all placeholder:text-gray-600 resize-none text-white"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white text-[11px] font-extrabold uppercase tracking-widest cursor-pointer transition-all flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-[11px] font-extrabold uppercase tracking-widest cursor-pointer transition-all flex items-center justify-center gap-2 shadow-lg"
               >
                 <span>Submit Review</span>
                 <Send className="w-3.5 h-3.5" />
@@ -681,10 +680,10 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 6. FEATURED COLLECTION */}
-      <div className="py-24 bg-[#080808] border-t border-white/5 relative z-20">
+      <div className="py-24 bg-[#0B1220] border-t border-white/[0.08] relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-left mb-12">
-            <span className="text-xs text-[#E50914] font-black uppercase tracking-widest block mb-1">Our Masterpieces</span>
+            <span className="text-xs text-gray-400 font-black uppercase tracking-widest block mb-1">Our Masterpieces</span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase font-sans">
               Featured Collection
             </h2>
@@ -702,7 +701,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 className="group cursor-pointer text-left"
               >
                 {/* Poster Box */}
-                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/5 group-hover:border-[#E50914]/40 transition-all bg-neutral-900 shadow-lg">
+                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/[0.08] group-hover:border-white/30 transition-all bg-[#1F2937] shadow-lg">
                   <img 
                     src={movie.poster} 
                     alt={movie.title}
@@ -712,12 +711,12 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   />
                   {/* Visual details on image bottom */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-4">
-                    <span className="px-2.5 py-1 rounded-md bg-[#E50914] text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="px-2.5 py-1 rounded-md bg-white/20 border border-white/10 backdrop-blur-md text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       Stream
                     </span>
                   </div>
                   {/* Rating badge */}
-                  <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/75 border border-white/10 backdrop-blur-md flex items-center gap-1 text-[11px] font-bold">
+                  <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/75 border border-white/[0.08] backdrop-blur-md flex items-center gap-1 text-[11px] font-bold">
                     <Star className="w-3.5 h-3.5 fill-amber-400 stroke-none" />
                     <span className="text-amber-400">{movie.rating}</span>
                   </div>
@@ -725,7 +724,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
                 {/* Movie Titles */}
                 <div className="mt-4">
-                  <h4 className="text-sm font-bold text-white group-hover:text-[#E50914] transition-colors line-clamp-1">
+                  <h4 className="text-sm font-bold text-white group-hover:text-slate-200 transition-colors line-clamp-1">
                     {movie.title}
                   </h4>
                   <p className="text-[10px] sm:text-xs text-gray-500 font-semibold uppercase tracking-wide mt-1">
@@ -740,21 +739,21 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 6.5 SUPPORT SECTION */}
-      <div className="py-24 bg-[#050505] border-t border-white/5 relative z-20">
+      <div className="py-24 bg-[#111827] border-t border-white/[0.08] relative z-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative overflow-hidden rounded-3xl bg-[#111111]/30 border border-white/5 p-8 md:p-12 text-center shadow-2xl group hover:border-[#E50914]/30 transition-all duration-500"
+            className="relative overflow-hidden rounded-3xl bg-[#1F2937]/50 border border-white/[0.08] p-8 md:p-12 text-center shadow-2xl group hover:border-white/20 transition-all duration-500"
           >
             {/* Subtle brand glow behind the card */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-[#E50914]/5 blur-[60px] pointer-events-none" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-white/5 blur-[60px] pointer-events-none" />
 
             <div className="relative z-10 flex flex-col items-center">
               {/* Support Icon */}
-              <div className="p-4 rounded-2xl bg-[#E50914]/10 border border-[#E50914]/20 text-[#E50914] mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="p-4 rounded-2xl bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E] mb-6 group-hover:scale-110 transition-transform duration-300">
                 <HelpCircle className="w-8 h-8" />
               </div>
 
@@ -780,9 +779,9 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 </span>
                 <a
                   href="mailto:cinelux10@gmail.com"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 text-white hover:text-[#ff3b47] font-mono text-sm sm:text-base font-medium transition-all duration-300 active:scale-95 group/btn"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-[#22C55E]/10 border border-white/10 hover:border-[#22C55E]/30 text-white hover:text-[#22C55E] font-mono text-sm sm:text-base font-medium transition-all duration-300 active:scale-95 group/btn"
                 >
-                  <Mail className="w-4 h-4 text-[#E50914] group-hover/btn:scale-110 transition-transform duration-300" />
+                  <Mail className="w-4 h-4 text-[#22C55E] group-hover/btn:scale-110 transition-transform duration-300" />
                   <span>cinelux10@gmail.com</span>
                 </a>
               </div>
@@ -793,14 +792,14 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 7. FOOTER */}
-      <footer className="bg-black border-t border-white/5 pt-16 pb-8 relative z-20">
+      <footer className="bg-[#0B1220] border-t border-white/[0.08] pt-16 pb-8 relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 pb-12 border-b border-white/5 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 pb-12 border-b border-white/[0.08] text-left">
             
             {/* Logo / Brand block */}
             <div className="md:col-span-5 flex flex-col gap-4">
               <span className="text-xl font-sans font-black tracking-widest uppercase">
-                Cine<span className="text-[#E50914]">Lux</span>
+                Cine<span className="text-[#22C55E]">Lux</span>
               </span>
               <p className="text-xs text-gray-500 leading-relaxed max-w-sm">
                 An elite, ad-free streaming catalog for film lovers. Experience state-of-the-art cinematic discovery coupled with intelligent design.

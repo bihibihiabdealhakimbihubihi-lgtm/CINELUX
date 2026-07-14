@@ -300,12 +300,12 @@ export default function DetailsView({
   const stats = getRatingStats();
 
   return (
-    <div id="movie-details-view" className="min-h-screen bg-[#070707] text-white pb-20 select-none">
+    <div id="movie-details-view" className="min-h-screen bg-[#0B1220] text-white pb-20 select-none">
       
       {/* Huge Back Button Floating */}
       <button
         onClick={onClose}
-        className="fixed top-24 left-4 md:left-8 z-40 p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:border-white/30 text-white hover:text-[#E50914] transition-all shadow-xl hover:scale-105 cursor-pointer"
+        className="fixed top-24 left-4 md:left-8 z-40 p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:border-white/30 text-white hover:text-[#22C55E] transition-all shadow-xl hover:scale-105 cursor-pointer"
         title="Back to Catalog"
       >
         <ArrowLeft className="w-5 h-5" />
@@ -318,7 +318,7 @@ export default function DetailsView({
           alt={item.title}
           className="w-full h-full object-cover filter brightness-[0.4] blur-[0.5px]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/30 to-transparent" />
         <div className="absolute bottom-6 md:bottom-10 left-0 right-0">
           <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-end gap-6 md:gap-10">
             {/* Poster thumbnail */}
@@ -354,7 +354,7 @@ export default function DetailsView({
                 {item.type === 'movie' ? (
                   <button
                     onClick={() => onPlay(item)}
-                    className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white text-sm font-bold tracking-wide shadow-lg shadow-[#E50914]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                    className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-sm font-bold tracking-wide shadow-lg shadow-[#22C55E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <Play className="w-5 h-5 fill-white stroke-none" />
                     Watch Now
@@ -366,7 +366,7 @@ export default function DetailsView({
                         onPlay(item, currentSeasonData.episodes[0]);
                       }
                     }}
-                    className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white text-sm font-bold tracking-wide shadow-lg shadow-[#E50914]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                    className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-sm font-bold tracking-wide shadow-lg shadow-[#22C55E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <Play className="w-5 h-5 fill-white stroke-none" />
                     Play Season 1 Episode 1
@@ -499,7 +499,7 @@ export default function DetailsView({
             <div>
               <div className="flex justify-between items-center border-b border-white/5 pb-3 mb-6">
                 <h2 className="text-sm font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                  <TVIcon className="w-4 h-4 text-[#E50914]" /> Series Episodes List
+                  <TVIcon className="w-4 h-4 text-[#22C55E]" /> Series Episodes List
                 </h2>
 
                 {/* Season Dropdown */}
@@ -507,7 +507,7 @@ export default function DetailsView({
                   <select
                     value={selectedSeason}
                     onChange={(e) => setSelectedSeason(parseInt(e.target.value))}
-                    className="appearance-none bg-[#181818] border border-white/10 rounded-xl px-4 py-2 text-xs font-semibold text-white outline-none cursor-pointer pr-10 focus:border-[#E50914] transition-all"
+                    className="appearance-none bg-[#181818] border border-white/10 rounded-xl px-4 py-2 text-xs font-semibold text-white outline-none cursor-pointer pr-10 focus:border-[#22C55E] transition-all"
                   >
                     {item.seasons.map((s) => (
                       <option key={s.seasonNumber} value={s.seasonNumber}>
@@ -530,7 +530,7 @@ export default function DetailsView({
                     <div className="relative w-full sm:w-44 aspect-video rounded-xl overflow-hidden bg-[#181818] shrink-0">
                       <img src={ep.thumbnail} alt={ep.title} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500" />
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="w-10 h-10 rounded-full bg-[#E50914] text-white flex items-center justify-center shadow-lg">
+                        <div className="w-10 h-10 rounded-full bg-[#22C55E] text-white flex items-center justify-center shadow-lg">
                           <Play className="w-4.5 h-4.5 fill-white stroke-none ml-0.5" />
                         </div>
                       </div>
@@ -543,7 +543,7 @@ export default function DetailsView({
                       <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest block mb-0.5">
                         Episode {ep.episodeNumber}
                       </span>
-                      <h3 className="text-sm font-bold text-white group-hover:text-[#E50914] transition-colors truncate">
+                      <h3 className="text-sm font-bold text-white group-hover:text-[#22C55E] transition-colors truncate">
                         {ep.title}
                       </h3>
                       <p className="text-xs text-gray-400 mt-1 leading-relaxed line-clamp-2 sm:line-clamp-3">
@@ -582,8 +582,8 @@ export default function DetailsView({
           <div className="p-6 rounded-3xl bg-[#0a0a0a] border border-white/5 shadow-2xl text-left flex flex-col gap-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/5 pb-4 gap-4">
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-[#E50914] font-bold uppercase tracking-widest flex items-center gap-1">
-                  <Activity className="w-3.5 h-3.5 text-[#E50914] animate-pulse" /> Live Discussion Hub
+                <span className="text-[10px] text-[#22C55E] font-bold uppercase tracking-widest flex items-center gap-1">
+                  <Activity className="w-3.5 h-3.5 text-[#22C55E] animate-pulse" /> Live Discussion Hub
                 </span>
                 <h3 className="text-lg font-bold text-white tracking-tight">CineLux Fan Conversation Board</h3>
               </div>
@@ -610,7 +610,7 @@ export default function DetailsView({
                   onClick={() => setActiveDiscussionTab(tab.id as any)}
                   className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     activeDiscussionTab === tab.id
-                      ? 'bg-[#E50914] text-white shadow shadow-[#E50914]/20'
+                      ? 'bg-[#22C55E] text-white shadow shadow-[#22C55E]/20'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -640,11 +640,11 @@ export default function DetailsView({
                         placeholder="Type standard opinion or question in local chat node..."
                         value={userComment}
                         onChange={(e) => setUserComment(e.target.value)}
-                        className="flex-1 bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder-gray-500 outline-none focus:border-[#E50914] transition-all"
+                        className="flex-1 bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-xs text-white placeholder-gray-500 outline-none focus:border-[#22C55E] transition-all"
                       />
                       <button
                         type="submit"
-                        className="p-3.5 rounded-xl bg-[#E50914] hover:bg-[#ff1622] text-white transition-colors cursor-pointer"
+                        className="p-3.5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white transition-colors cursor-pointer"
                       >
                         <Send className="w-4.5 h-4.5" />
                       </button>
@@ -676,7 +676,7 @@ export default function DetailsView({
                                 <button
                                   onClick={() => handleLikeComment(comm.id)}
                                   className={`flex items-center gap-1 text-[10px] font-semibold transition-colors ${
-                                    comm.hasLiked ? 'text-[#E50914]' : 'text-gray-500 hover:text-white'
+                                    comm.hasLiked ? 'text-[#22C55E]' : 'text-gray-500 hover:text-white'
                                   }`}
                                 >
                                   <ThumbsUp className="w-3 h-3" />
@@ -743,7 +743,7 @@ export default function DetailsView({
                           placeholder="Your Name / Organization"
                           value={reviewerName}
                           onChange={(e) => setReviewerName(e.target.value)}
-                          className="bg-[#111] border border-white/5 rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-500 outline-none focus:border-[#E50914]"
+                          className="bg-[#111] border border-white/5 rounded-xl px-3.5 py-2 text-xs text-white placeholder-gray-500 outline-none focus:border-[#22C55E]"
                         />
                         <div className="flex items-center gap-2 text-xs">
                           <span className="text-gray-400">Rating:</span>
@@ -763,7 +763,7 @@ export default function DetailsView({
                         rows={3}
                         value={reviewInput}
                         onChange={(e) => setReviewInput(e.target.value)}
-                        className="bg-[#111] border border-white/5 rounded-xl p-3.5 text-xs text-white placeholder-gray-500 outline-none focus:border-[#E50914] resize-none"
+                        className="bg-[#111] border border-white/5 rounded-xl p-3.5 text-xs text-white placeholder-gray-500 outline-none focus:border-[#22C55E] resize-none"
                         required
                       />
                       <button type="submit" className="self-end px-5 py-2 rounded-xl bg-white text-black text-xs font-bold hover:bg-gray-200 cursor-pointer">
@@ -825,7 +825,7 @@ export default function DetailsView({
                     {MOVIE_NEWS_MOCK.map((news, idx) => (
                       <div key={idx} className="p-4 rounded-2xl bg-[#111] border border-white/5 text-left flex flex-col gap-2">
                         <div className="flex justify-between items-start">
-                          <h4 className="text-xs font-bold text-white leading-tight hover:text-[#E50914] transition-colors cursor-pointer flex-1 mr-4">
+                          <h4 className="text-xs font-bold text-white leading-tight hover:text-[#22C55E] transition-colors cursor-pointer flex-1 mr-4">
                             {news.title}
                           </h4>
                           <span className="text-[9px] text-amber-500 font-bold uppercase tracking-wider shrink-0 mt-0.5">{news.time}</span>
@@ -860,8 +860,8 @@ export default function DetailsView({
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-gradient-to-tr from-[#E50914]/5 to-transparent border border-[#E50914]/10 text-left">
-                      <h4 className="text-xs font-black uppercase tracking-widest text-[#E50914] flex items-center gap-1.5 mb-1">
+                    <div className="p-4 rounded-2xl bg-gradient-to-tr from-[#22C55E]/5 to-transparent border border-[#22C55E]/10 text-left">
+                      <h4 className="text-xs font-black uppercase tracking-widest text-[#22C55E] flex items-center gap-1.5 mb-1">
                         <TVIcon className="w-4 h-4" />
                         Upcoming Event: Live Co-Watch Party
                       </h4>
@@ -872,7 +872,7 @@ export default function DetailsView({
                         <span>Date: Friday, Oct 12</span>
                         <span>•</span>
                         <span>Time: 8:00 PM EST</span>
-                        <button className="px-3 py-1 rounded bg-[#E50914] text-white text-[9px] font-black uppercase tracking-widest ml-auto active:scale-95 transition-all">
+                        <button className="px-3 py-1 rounded bg-[#22C55E] text-white text-[9px] font-black uppercase tracking-widest ml-auto active:scale-95 transition-all">
                           RSVP Active
                         </button>
                       </div>
@@ -983,7 +983,7 @@ export default function DetailsView({
                     className="w-12 aspect-[2/3] object-cover rounded-lg shadow-md"
                   />
                   <div className="flex-1 min-w-0 text-left flex flex-col justify-center">
-                    <h4 className="text-xs font-bold text-white truncate group-hover:text-[#E50914] transition-colors">
+                    <h4 className="text-xs font-bold text-white truncate group-hover:text-[#22C55E] transition-colors">
                       {rec.title}
                     </h4>
                     <p className="text-[10px] text-gray-500 mt-1">

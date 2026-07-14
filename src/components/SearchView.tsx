@@ -232,7 +232,7 @@ export default function SearchView({
   };
 
   return (
-    <div id="advanced-search-viewport" className="min-h-screen bg-[#070707] text-white pt-24 pb-20 select-none text-left">
+    <div id="advanced-search-viewport" className="min-h-screen bg-[#0B1220] text-white pt-24 pb-20 select-none text-left">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Search Input HUD Header Row */}
@@ -273,7 +273,7 @@ export default function SearchView({
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`p-2.5 rounded-full border transition-all ${
-              showFilters ? 'bg-[#E50914]/15 border-[#E50914]/30 text-[#E50914]' : 'border-white/5 text-gray-400 hover:text-white'
+              showFilters ? 'bg-[#22C55E]/15 border-[#22C55E]/30 text-[#22C55E]' : 'border-white/5 text-gray-400 hover:text-white'
             }`}
             title="Toggle Advanced Filters"
           >
@@ -284,8 +284,8 @@ export default function SearchView({
         {/* VOICE SEARCH MICRO-MODAL OVERLAY */}
         {isListening && (
           <div className="fixed inset-0 bg-black/90 z-[999] flex flex-col items-center justify-center gap-6">
-            <div className="w-24 h-24 rounded-full bg-[#E50914]/10 border border-[#E50914]/30 flex items-center justify-center animate-ping absolute" />
-            <div className="w-20 h-20 rounded-full bg-[#E50914] text-white flex items-center justify-center relative shadow-2xl shadow-[#E50914]/40">
+            <div className="w-24 h-24 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 flex items-center justify-center animate-ping absolute" />
+            <div className="w-20 h-20 rounded-full bg-[#22C55E] text-white flex items-center justify-center relative shadow-2xl shadow-[#22C55E]/40">
               <Mic className="w-8 h-8" />
             </div>
             <p className="text-lg font-bold tracking-wide mt-4 text-white animate-pulse">{listeningStatus}</p>
@@ -308,7 +308,7 @@ export default function SearchView({
               <select
                 value={selectedGenre}
                 onChange={(e) => setSelectedGenre(e.target.value)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 {GENRES.map(g => (
                   <option key={g} value={g}>{g}</option>
@@ -322,7 +322,7 @@ export default function SearchView({
               <select
                 value={selectedCountry}
                 onChange={(e) => setSelectedCountry(e.target.value)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 {COUNTRIES.map(c => (
                   <option key={c} value={c}>{c}</option>
@@ -336,7 +336,7 @@ export default function SearchView({
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 <option value="All">All Languages</option>
                 {LANGUAGES.map(l => (
@@ -351,7 +351,7 @@ export default function SearchView({
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 <option value="All">All Years</option>
                 <option value="2025+">2025 & Beyond</option>
@@ -369,7 +369,7 @@ export default function SearchView({
               <select
                 value={minRating}
                 onChange={(e) => setMinRating(parseFloat(e.target.value))}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 <option value={0}>Any Score</option>
                 <option value={9}>9.0+ Excellent</option>
@@ -384,7 +384,7 @@ export default function SearchView({
               <select
                 value={qualityFilter}
                 onChange={(e) => setQualityFilter(e.target.value)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 <option value="All">All Quality</option>
                 <option value="4K">4K UHD</option>
@@ -398,7 +398,7 @@ export default function SearchView({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#E50914]"
+                className="bg-[#181818] border border-white/5 rounded-xl px-3 py-2 text-xs font-semibold outline-none cursor-pointer text-white focus:border-[#22C55E]"
               >
                 <option value="popularity">Popular Choice</option>
                 <option value="newest">Newest Added</option>
@@ -430,7 +430,7 @@ export default function SearchView({
             <div className="p-6 rounded-3xl bg-[#111111]/40 border border-white/5">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-[#E50914]" /> Recent Searches
+                  <Clock className="w-4 h-4 text-[#22C55E]" /> Recent Searches
                 </h3>
                 {recentSearches.length > 0 && (
                   <button
@@ -482,7 +482,7 @@ export default function SearchView({
                     onClick={() => handleSelectHistory(trend)}
                     className="w-full text-left py-2 px-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2 cursor-pointer"
                   >
-                    <span className="text-[#E50914] font-bold">#{idx + 1}</span>
+                    <span className="text-[#22C55E] font-bold">#{idx + 1}</span>
                     <span>{trend}</span>
                   </button>
                 ))}
