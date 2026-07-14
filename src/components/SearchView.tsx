@@ -55,10 +55,10 @@ export default function SearchView({
   const [searchResults, setSearchResults] = useState<ContentItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   
-  // History & Trends
-  const [searchHistory, setSearchHistory] = useState<string[]>(() => {
-    const saved = localStorage.getItem('cinelux_search_history');
-    return saved ? JSON.parse(saved) : ['Aetheris', 'Tokyo', 'Cyberpunk', 'Space Doc'];
+  // Recent Searches
+  const [recentSearches, setRecentSearches] = useState<string[]>(() => {
+    const saved = localStorage.getItem('cinelux_recent_searches');
+    return saved ? JSON.parse(saved) : [];
   });
   
   // Voice Search Mock
@@ -162,29 +162,45 @@ export default function SearchView({
     return () => clearTimeout(timer);
   }, [searchQuery, selectedGenre, selectedCountry, selectedLanguage, selectedYear, minRating, sortBy, qualityFilter, allContent]);
 
-  // Persist search history changes
+  // Persist recent searches changes
   useEffect(() => {
-    localStorage.setItem('cinelux_search_history', JSON.stringify(searchHistory));
-  }, [searchHistory]);
-
-  const handleSelectHistory = (term: string) => {
-    setSearchQuery(term);
-  };
-
-  const handleClearHistory = () => {
-    setSearchHistory([]);
-  };
-
-  const handleRemoveHistoryItem = (termToRemove: string) => {
-    setSearchHistory(prev => prev.filter(t => t !== termToRemove));
-  };
+    localStorage.setItem('cinelux_recent_searches', JSON.stringify(recentSearches));
+  }, [recentSearches]);
 
   const handleSearchSubmit = (term: string) => {
     if (!term.trim()) return;
-    setSearchHistory((prev) => {
-      const filtered = prev.filter((t) => t !== term);
-      return [term, ...filtered].slice(0, 8); // Keep last 8 items
+    const cleaned = term.trim();
+    setRecentSearches((prev) => {
+      const filtered = prev.filter((t) => t.toLowerCase() !== cleaned.toLowerCase());
+      return [cleaned, ...filtered].slice(0, 5); // Keep last 5 items
     });
+  };
+
+  const handleSelectHistory = (term: string) => {
+    setSearchQuery(term);
+    handleSearchSubmit(term);
+  };
+
+  const handleClearHistory = () => {
+    setRecentSearches([]);
+  };
+
+  const handleRemoveHistoryItem = (termToRemove: string) => {
+    setRecentSearches(prev => prev.filter(t => t !== termToRemove));
+  };
+
+  const handlePlayWithHistory = (item: ContentItem) => {
+    if (searchQuery.trim()) {
+      handleSearchSubmit(searchQuery);
+    }
+    onPlay(item);
+  };
+
+  const handleViewDetailsWithHistory = (item: ContentItem) => {
+    if (searchQuery.trim()) {
+      handleSearchSubmit(searchQuery);
+    }
+    onViewDetails(item);
   };
 
   // Simulate Voice Search transcribing after a few seconds
@@ -410,22 +426,24 @@ export default function SearchView({
         {/* SEARCH HISTORY & TRENDING ROWS (shown primarily when search is empty) */}
         {!searchQuery && (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
-            {/* Search History */}
-            {searchHistory.length > 0 && (
-              <div className="p-6 rounded-3xl bg-[#111111]/40 border border-white/5">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[#E50914]" /> Search History
-                  </h3>
+            {/* Recent Searches */}
+            <div className="p-6 rounded-3xl bg-[#111111]/40 border border-white/5">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
+                  <Clock className="w-4 h-4 text-[#E50914]" /> Recent Searches
+                </h3>
+                {recentSearches.length > 0 && (
                   <button
                     onClick={handleClearHistory}
-                    className="text-[10px] text-gray-500 hover:text-white transition-colors"
+                    className="text-[10px] text-gray-500 hover:text-white transition-colors cursor-pointer font-semibold"
                   >
-                    Clear History
+                    Clear All
                   </button>
-                </div>
+                )}
+              </div>
+              {recentSearches.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
-                  {searchHistory.map((term, index) => (
+                  {recentSearches.map((term, index) => (
                     <div
                       key={index}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#111111] border border-white/5 hover:border-white/20 transition-all text-xs"
@@ -438,15 +456,19 @@ export default function SearchView({
                       </button>
                       <button
                         onClick={() => handleRemoveHistoryItem(term)}
-                        className="text-gray-500 hover:text-red-400 transition-colors"
+                        className="text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
                       >
                         <X className="w-3 h-3" />
                       </button>
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="text-gray-500 text-xs py-4 italic">
+                  No recent searches. Type a query and press Enter!
+                </div>
+              )}
+            </div>
 
             {/* Trending searches */}
             <div className="p-6 rounded-3xl bg-[#111111]/40 border border-white/5">
@@ -458,7 +480,7 @@ export default function SearchView({
                   <button
                     key={idx}
                     onClick={() => handleSelectHistory(trend)}
-                    className="w-full text-left py-2 px-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2"
+                    className="w-full text-left py-2 px-3 rounded-lg hover:bg-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2 cursor-pointer"
                   >
                     <span className="text-[#E50914] font-bold">#{idx + 1}</span>
                     <span>{trend}</span>
@@ -502,8 +524,8 @@ export default function SearchView({
                     favorites={favorites}
                     onToggleWatchlist={onToggleWatchlist}
                     onToggleFavorite={onToggleFavorite}
-                    onPlay={onPlay}
-                    onViewDetails={onViewDetails}
+                    onPlay={handlePlayWithHistory}
+                    onViewDetails={handleViewDetailsWithHistory}
                   />
                 </div>
               ))}
