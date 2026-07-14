@@ -39,6 +39,15 @@ interface LandingPageProps {
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
   // Carousel ref and scroll helpers
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Infinite Autoplay Slider States for "Trending This Week"
+  const [virtualIndex, setVirtualIndex] = useState(5); // Start at index 5 (first real movie)
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
   
   // Testimonials state
   const [reviews, setReviews] = useState([
@@ -127,13 +136,67 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
     }, 4000);
   };
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (carouselRef.current) {
-      const { scrollLeft, clientWidth } = carouselRef.current;
-      const scrollAmount = direction === 'left' ? -clientWidth * 0.75 : clientWidth * 0.75;
-      carouselRef.current.scrollTo({ left: scrollLeft + scrollAmount, behavior: 'smooth' });
-    }
+  // Infinite slider controls
+  const handlePrev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setIsAnimating(true);
+    setVirtualIndex((prev) => prev - 1);
   };
+
+  const handleNext = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setIsAnimating(true);
+    setVirtualIndex((prev) => prev + 1);
+  };
+
+  const handleTransitionEnd = () => {
+    setIsAnimating(false);
+    if (virtualIndex >= 17) {
+      setVirtualIndex(5);
+    } else if (virtualIndex <= 4) {
+      setVirtualIndex(16);
+    }
+    setIsTransitioning(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diffX = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diffX) > minSwipeDistance) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  // Autoplay hook for trending slider
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4500); // Slides every 4.5 seconds
+
+    return () => clearInterval(interval);
+  }, [isHovered, isTransitioning, virtualIndex]);
 
   // Deduplicate COMPACT_MOVIES by title, poster, and release date
   const uniqueMovies: typeof COMPACT_MOVIES = [];
@@ -149,6 +212,14 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
   // Extract real trending movies (10-12) from our datasets
   const trendingMovies = uniqueMovies.slice(0, 12);
 
+  const sliderItems = [
+    ...trendingMovies.slice(-5).map((m, idx) => ({ ...m, sliderId: `prepended-${idx}-${m.id}` })),
+    ...trendingMovies.map((m) => ({ ...m, sliderId: `middle-${m.id}` })),
+    ...trendingMovies.slice(0, 5).map((m, idx) => ({ ...m, sliderId: `appended-${idx}-${m.id}` })),
+  ];
+
+  const activeMovieIndex = (virtualIndex - 5 + trendingMovies.length) % trendingMovies.length;
+
   // Extract featured movies (8) from our datasets
   const featuredMovies = uniqueMovies.filter(m => m.isFeatured).slice(0, 8);
   // Fallback to slice if featured list is short
@@ -156,6 +227,24 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
   return (
     <div id="landing-page-root" className="min-h-screen bg-[#050505] text-white select-none text-left scroll-smooth font-sans">
+      <style>{`
+        .trending-slider-container {
+          --visible-items: 2;
+          --gap: 16px;
+        }
+        @media (min-width: 768px) {
+          .trending-slider-container {
+            --visible-items: 3;
+            --gap: 24px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .trending-slider-container {
+            --visible-items: 5;
+            --gap: 24px;
+          }
+        }
+      `}</style>
       
       {/* 1. HERO SECTION */}
       <div className="relative w-full min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4 sm:px-6 bg-black">
@@ -277,7 +366,11 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 3. TRENDING THIS WEEK */}
-      <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 border-t border-white/5">
+      <div 
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 border-t border-white/5 overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className="flex justify-between items-end mb-8">
           <div className="text-left">
             <span className="text-xs text-[#E50914] font-black uppercase tracking-widest block mb-1">Weekly Highlights</span>
@@ -288,67 +381,102 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           {/* Scroll Buttons */}
           <div className="flex gap-2">
             <button
-              onClick={() => handleScroll('left')}
+              onClick={handlePrev}
               className="p-3 rounded-full bg-[#111111] hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
+              aria-label="Previous Slide"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
-              onClick={() => handleScroll('right')}
+              onClick={handleNext}
               className="p-3 rounded-full bg-[#111111] hover:bg-[#E50914]/10 border border-white/10 hover:border-[#E50914]/30 transition-all text-white active:scale-95 cursor-pointer flex items-center justify-center"
+              aria-label="Next Slide"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Scrolling Container */}
-        <div 
-          ref={carouselRef}
-          className="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {trendingMovies.map((movie) => (
-            <motion.div
-              key={movie.id}
-              onClick={onGetStarted}
-              whileHover={{ y: -8 }}
-              className="min-w-[200px] sm:min-w-[240px] flex-shrink-0 group cursor-pointer text-left"
-            >
-              {/* Image Frame */}
-              <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/5 group-hover:border-[#E50914]/50 transition-all shadow-xl bg-neutral-900">
-                <img 
-                  src={movie.poster} 
-                  alt={movie.title}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                
-                {/* Brand Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <span className="px-2.5 py-1 rounded-md bg-[#E50914] text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2">
-                    Stream Now
-                  </span>
+        {/* Sliding Carousel Track */}
+        <div className="trending-slider-container relative w-full overflow-hidden">
+          <div 
+            ref={carouselRef}
+            className="flex"
+            style={{
+              gap: 'var(--gap)',
+              transform: `translate3d(calc(-1 * ${virtualIndex} * (100% + var(--gap)) / var(--visible-items)), 0, 0)`,
+              transition: isAnimating ? 'transform 600ms cubic-bezier(0.25, 1, 0.5, 1)' : 'none',
+              width: '100%',
+            }}
+            onTransitionEnd={handleTransitionEnd}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {sliderItems.map((movie) => (
+              <motion.div
+                key={movie.sliderId}
+                onClick={onGetStarted}
+                whileHover={{ y: -8 }}
+                className="flex-shrink-0 text-left group cursor-pointer transition-all duration-300"
+                style={{
+                  width: 'calc((100% - (var(--visible-items) - 1) * var(--gap)) / var(--visible-items))',
+                }}
+              >
+                {/* Image Frame */}
+                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-white/5 group-hover:border-[#E50914]/50 transition-all shadow-xl bg-neutral-900">
+                  <img 
+                    src={movie.poster} 
+                    alt={movie.title}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Brand Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                    <span className="px-2.5 py-1 rounded-md bg-[#E50914] text-[9px] font-extrabold uppercase tracking-widest w-fit shadow-lg mb-2">
+                      Stream Now
+                    </span>
+                  </div>
+
+                  {/* Rating Badge */}
+                  <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/70 border border-white/10 backdrop-blur-md flex items-center gap-1 text-xs font-bold">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 stroke-none" />
+                    <span className="text-amber-400">{movie.rating}</span>
+                  </div>
                 </div>
 
-                {/* Rating Badge */}
-                <div className="absolute top-3 right-3 px-2 py-1 rounded-lg bg-black/70 border border-white/10 backdrop-blur-md flex items-center gap-1 text-xs font-bold">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 stroke-none" />
-                  <span className="text-amber-400">{movie.rating}</span>
+                {/* Text Block */}
+                <div className="mt-3.5">
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#E50914] transition-colors line-clamp-1">
+                    {movie.title}
+                  </h4>
+                  <p className="text-xs text-gray-500 font-medium mt-0.5">
+                    {movie.genres[0]}
+                  </p>
                 </div>
-              </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-              {/* Text Block */}
-              <div className="mt-3.5">
-                <h4 className="text-sm font-bold text-white group-hover:text-[#E50914] transition-colors line-clamp-1">
-                  {movie.title}
-                </h4>
-                <p className="text-xs text-gray-500 font-medium mt-0.5">
-                  {movie.genres[0]}
-                </p>
-              </div>
-            </motion.div>
+        {/* Small Pagination Dots below the slider */}
+        <div className="flex justify-center gap-2 mt-6">
+          {trendingMovies.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                if (isTransitioning) return;
+                setIsTransitioning(true);
+                setIsAnimating(true);
+                setVirtualIndex(idx + 5);
+              }}
+              className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                idx === activeMovieIndex ? 'bg-[#E50914] w-6' : 'bg-white/30 hover:bg-white/50'
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
           ))}
         </div>
       </div>
