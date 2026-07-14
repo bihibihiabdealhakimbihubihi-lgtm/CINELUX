@@ -345,7 +345,7 @@ export default function App() {
       case 'Popular':
         return list.filter(item => item.isPopular || item.rating >= 7.5);
       case 'Upcoming':
-        return list.filter(item => item.isComingSoon || item.year >= 2026);
+        return list.filter(item => item.isComingSoon || (typeof item.year === 'number' ? item.year >= 2026 : true));
       case 'Action':
         return list.filter(item => item.genres.includes('Action'));
       case 'Adventure':
@@ -483,17 +483,29 @@ export default function App() {
                   </div>
                 </div>
 
-                <MovieHorizontalSlider
-                  items={moviesList}
-                  watchlist={watchlist}
-                  favorites={favorites}
-                  onToggleWatchlist={handleToggleWatchlist}
-                  onToggleFavorite={handleToggleFavorite}
-                  onPlay={handlePlayContent}
-                  onViewDetails={handleViewDetails}
-                  cardClassName="w-[160px] sm:w-[200px] md:w-[230px]"
-                  isLoading={isLoading}
-                />
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
+                  {isLoading ? (
+                    Array.from({ length: 12 }).map((_, index) => (
+                      <div key={`movies-section-skeleton-${index}`} className="w-full sm:max-w-[240px]">
+                        <SkeletonMovieCard />
+                      </div>
+                    ))
+                  ) : (
+                    moviesList.map((item) => (
+                      <div key={item.id} className="w-full sm:max-w-[240px]">
+                        <MovieCard
+                          item={item}
+                          watchlist={watchlist}
+                          favorites={favorites}
+                          onToggleWatchlist={handleToggleWatchlist}
+                          onToggleFavorite={handleToggleFavorite}
+                          onPlay={handlePlayContent}
+                          onViewDetails={handleViewDetails}
+                        />
+                      </div>
+                    ))
+                  )}
+                </div>
 
                 {/* Movies CTA Button immediately below the carousel */}
                 <div className="pt-4 flex justify-center">
@@ -584,16 +596,16 @@ export default function App() {
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest mb-10 font-semibold">Explore box office masterclasses and cinematic blockbusters</p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
               {isLoading ? (
                 Array.from({ length: 12 }).map((_, index) => (
-                  <div key={`movies-skeleton-${index}`} className="w-full max-w-[240px]">
+                  <div key={`movies-skeleton-${index}`} className="w-full sm:max-w-[240px]">
                     <SkeletonMovieCard />
                   </div>
                 ))
               ) : (
                 moviesList.map((item) => (
-                  <div key={item.id} className="w-full max-w-[240px]">
+                  <div key={item.id} className="w-full sm:max-w-[240px]">
                     <MovieCard
                       item={item}
                       watchlist={watchlist}
@@ -618,16 +630,16 @@ export default function App() {
             </h1>
             <p className="text-xs text-gray-500 uppercase tracking-widest mb-10 font-semibold">Binge-worthy premium drama seasons and epic chronicles</p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
               {isLoading ? (
                 Array.from({ length: 12 }).map((_, index) => (
-                  <div key={`series-skeleton-${index}`} className="w-full max-w-[240px]">
+                  <div key={`series-skeleton-${index}`} className="w-full sm:max-w-[240px]">
                     <SkeletonMovieCard />
                   </div>
                 ))
               ) : (
                 seriesList.map((item) => (
-                  <div key={item.id} className="w-full max-w-[240px]">
+                  <div key={item.id} className="w-full sm:max-w-[240px]">
                     <MovieCard
                       item={item}
                       watchlist={watchlist}
@@ -675,10 +687,10 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
                 {isLoading ? (
                   Array.from({ length: Math.max(6, watchlist.length) }).map((_, index) => (
-                    <div key={`watchlist-skeleton-${index}`} className="w-full max-w-[240px]">
+                    <div key={`watchlist-skeleton-${index}`} className="w-full sm:max-w-[240px]">
                       <SkeletonMovieCard />
                     </div>
                   ))
@@ -686,7 +698,7 @@ export default function App() {
                   contentList
                     .filter((c) => watchlist.includes(c.id))
                     .map((item) => (
-                      <div key={item.id} className="w-full max-w-[240px]">
+                      <div key={item.id} className="w-full sm:max-w-[240px]">
                         <MovieCard
                           item={item}
                           watchlist={watchlist}
@@ -725,10 +737,10 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
                 {isLoading ? (
                   Array.from({ length: Math.max(6, favorites.length) }).map((_, index) => (
-                    <div key={`favorites-skeleton-${index}`} className="w-full max-w-[240px]">
+                    <div key={`favorites-skeleton-${index}`} className="w-full sm:max-w-[240px]">
                       <SkeletonMovieCard />
                     </div>
                   ))
@@ -736,7 +748,7 @@ export default function App() {
                   contentList
                     .filter((c) => favorites.includes(c.id))
                     .map((item) => (
-                      <div key={item.id} className="w-full max-w-[240px]">
+                      <div key={item.id} className="w-full sm:max-w-[240px]">
                         <MovieCard
                           item={item}
                           watchlist={watchlist}

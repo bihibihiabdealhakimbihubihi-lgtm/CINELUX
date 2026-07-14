@@ -334,7 +334,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                   {movie.title}
                 </h4>
                 <p className="text-xs text-gray-500 font-medium mt-0.5">
-                  {movie.year} • {movie.genres[0]}
+                  {movie.genres[0]}
                 </p>
               </div>
             </motion.div>

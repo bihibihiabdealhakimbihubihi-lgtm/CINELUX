@@ -4,7 +4,7 @@ export interface CompactMovie {
   title: string;
   originalTitle?: string;
   type?: 'movie' | 'series';
-  year: number;
+  year: number | string;
   rating: number;
   genres: string[];
   overview: string;
@@ -39,7 +39,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     isPopular: true,
     isEditorPick: true,
     isFeatured: true,
-    releaseDate: 'November 7, 2014'
+    releaseDate: 'November 5, 2014'
   },
   {
     id: 'mov-inception',
@@ -56,7 +56,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     runtime: 148,
     isPopular: true,
     isFeatured: true,
-    releaseDate: 'July 16, 2010'
+    releaseDate: 'July 15, 2010'
   },
   {
     id: 'mov-mandalorian-grogu',
@@ -74,7 +74,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     isTrending: true,
     isFeatured: true,
     isPopular: true,
-    releaseDate: 'May 22, 2026'
+    releaseDate: 'May 20, 2026'
   },
   {
     id: 'mov-avatar-fire-ash',
@@ -92,7 +92,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     isComingSoon: true,
     isTrending: true,
     isFeatured: true,
-    releaseDate: 'December 19, 2025'
+    releaseDate: 'December 17, 2025'
   },
   {
     id: 'mov-zootopia-2',
@@ -128,7 +128,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     isComingSoon: true,
     isTrending: true,
     isFeatured: true,
-    releaseDate: 'March 20, 2026'
+    releaseDate: 'March 15, 2026'
   },
   {
     id: 'mov-demon-slayer-castle',
@@ -146,13 +146,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     isComingSoon: true,
     isTrending: true,
     isFeatured: true,
-    releaseDate: 'October 10, 2025'
+    releaseDate: 'July 18, 2025'
   },
   {
     id: 'mov-supergirl',
     tmdbId: 20008,
     title: 'Supergirl',
-    year: 2026,
+    year: 2015,
     rating: 7.9,
     genres: ['Action', 'Adventure', 'Sci-Fi'],
     overview: 'Supergirl: Woman of Tomorrow follows Kara Zor-El, who is raised on a harsh remnant of Krypton, witnessing its absolute destruction before landing on Earth.',
@@ -163,7 +163,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     runtime: 125,
     isComingSoon: true,
     isFeatured: true,
-    releaseDate: 'June 26, 2026'
+    releaseDate: 'October 26, 2015'
   },
   {
     id: 'mov-shawshank',
@@ -186,8 +186,8 @@ export const COMPACT_MOVIES: CompactMovie[] = [
   {
     id: 'mov-get-out',
     tmdbId: 20010,
-    title: 'Get Out',
-    year: 2017,
+    title: 'The Get Out',
+    year: 2026,
     rating: 7.8,
     genres: ['Horror', 'Mystery', 'Thriller'],
     overview: 'A young African-American visits his white girlfriend\'s parents for the weekend, where his simmering uneasiness about their reception eventually reaches a boiling point.',
@@ -198,13 +198,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     runtime: 104,
     isPopular: true,
     isFeatured: true,
-    releaseDate: 'February 24, 2017'
+    releaseDate: 'June 18, 2026'
   },
   {
     id: 'mov-obsession',
     tmdbId: 20011,
     title: 'Obsession',
-    year: 2023,
+    year: 2026,
     rating: 7.2,
     genres: ['Thriller', 'Drama', 'Romance'],
     overview: 'A respected London surgeon embarks on an intense, secret affair with his son\'s fiancée, threatening to collapse his stable life.',
@@ -214,13 +214,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Richard Armitage', 'Charlie Murphy', 'Indira Varma'],
     runtime: 160,
     isPopular: true,
-    releaseDate: 'April 13, 2023'
+    releaseDate: 'May 13, 2026'
   },
   {
     id: 'mov-toy-story-5',
     tmdbId: 20012,
     title: 'Toy Story 5',
-    year: 2026,
+    year: 'TBA',
     rating: 8.2,
     genres: ['Animation', 'Family', 'Comedy', 'Adventure'],
     overview: 'Buzz, Woody, and the gang face an all-new threat to play: electronic devices and digital screens that are capturing modern children\'s attention.',
@@ -230,7 +230,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Tom Hanks', 'Tim Allen', 'Joan Cusack'],
     runtime: 100,
     isComingSoon: true,
-    releaseDate: 'June 19, 2026'
+    releaseDate: 'Toy Story 5'
   },
   {
     id: 'mov-disclosure-day',
@@ -246,7 +246,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jessica Chastain', 'Oscar Isaac'],
     runtime: 130,
     isComingSoon: true,
-    releaseDate: 'November 12, 2026'
+    releaseDate: 'June 10, 2026'
   },
   {
     id: 'mov-backrooms',
@@ -262,13 +262,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Kane Parsons', 'A24 Talent'],
     runtime: 95,
     isComingSoon: true,
-    releaseDate: 'January 23, 2026'
+    releaseDate: 'June 17, 2026'
   },
   {
     id: 'mov-scary-movie',
     tmdbId: 20015,
     title: 'Scary Movie',
-    year: 2000,
+    year: 2026,
     rating: 6.3,
     genres: ['Comedy', 'Horror'],
     overview: 'A group of familiar-looking teenagers find themselves being stalked by a recognizable masked killer in this hilarious genre parody.',
@@ -278,7 +278,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Anna Faris', 'Regina Hall', 'Marlon Wayans'],
     runtime: 88,
     isPopular: true,
-    releaseDate: 'July 7, 2000'
+    releaseDate: 'June 3, 2026'
   },
   {
     id: 'mov-prada-2',
@@ -294,13 +294,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Meryl Streep', 'Emily Blunt', 'Anne Hathaway'],
     runtime: 115,
     isComingSoon: true,
-    releaseDate: 'October 16, 2026'
+    releaseDate: 'April 29, 2026'
   },
   {
     id: 'mov-the-furious',
     tmdbId: 20017,
     title: 'The Furious',
-    year: 2025,
+    year: 2026,
     rating: 8.1,
     genres: ['Action', 'Thriller'],
     overview: 'A high-octane martial arts thriller where a retired operative must assemble his old crew to take down a corrupt syndicate.',
@@ -310,7 +310,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Xie Miao', 'Joe Taslim'],
     runtime: 112,
     isTrending: true,
-    releaseDate: 'September 15, 2025'
+    releaseDate: 'June 10, 2026'
   },
   {
     id: 'mov-citizen-vigilante',
@@ -326,7 +326,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Keanu Reeves', 'Laurence Fishburne'],
     runtime: 124,
     isComingSoon: true,
-    releaseDate: 'April 20, 2026'
+    releaseDate: 'June 19, 2026'
   },
   {
     id: 'mov-vixen',
@@ -358,13 +358,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Adèle Haenel', 'Noémie Merlant'],
     runtime: 110,
     isComingSoon: true,
-    releaseDate: 'February 14, 2026'
+    releaseDate: 'March 26, 2026'
   },
   {
     id: 'mov-passenger',
     tmdbId: 20021,
     title: 'Passenger',
-    year: 2016,
+    year: 2026,
     rating: 7.0,
     genres: ['Sci-Fi', 'Drama', 'Thriller'],
     overview: 'A spacecraft traveling to a distant colony planet has a sleeper pod malfunction, waking up two passengers ninety years too early.',
@@ -374,13 +374,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jennifer Lawrence', 'Chris Pratt'],
     runtime: 116,
     isPopular: true,
-    releaseDate: 'December 21, 2016'
+    releaseDate: 'May 20, 2026'
   },
   {
     id: 'mov-deep-water',
     tmdbId: 20022,
     title: 'Deep Water',
-    year: 2022,
+    year: 2026,
     rating: 5.4,
     genres: ['Thriller', 'Drama', 'Mystery'],
     overview: 'A wealthy husband who allows his wife to have affairs to avoid a divorce becomes the prime suspect in her lovers\' sudden disappearances.',
@@ -390,13 +390,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Ben Affleck', 'Ana de Armas'],
     runtime: 115,
     isPopular: true,
-    releaseDate: 'March 18, 2022'
+    releaseDate: 'April 30, 2026'
   },
   {
     id: 'mov-michael',
     tmdbId: 20023,
     title: 'Michael',
-    year: 2025,
+    year: 2026,
     rating: 8.3,
     genres: ['Drama'],
     overview: 'The definitive biographical drama tracing the complex life, creative genius, and global impact of the King of Pop, Michael Jackson.',
@@ -406,7 +406,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jaafar Jackson', 'Colman Domingo'],
     runtime: 155,
     isComingSoon: true,
-    releaseDate: 'April 18, 2025'
+    releaseDate: 'April 22, 2026'
   },
   {
     id: 'mov-minions-monsters',
@@ -422,13 +422,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Steve Carell', 'Pierre Coffin'],
     runtime: 92,
     isComingSoon: true,
-    releaseDate: 'July 3, 2026'
+    releaseDate: 'June 24, 2026'
   },
   {
     id: 'mov-mortal-kombat-2',
     tmdbId: 20025,
     title: 'Mortal Kombat II',
-    year: 2025,
+    year: 2026,
     rating: 7.8,
     genres: ['Action', 'Fantasy', 'Adventure'],
     overview: 'The global tournament continues as Earthrealm champions defend their world against the brutal magic and martial forces of Outworld.',
@@ -438,7 +438,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Karl Urban', 'Adeline Rudolph', 'Jessica McNamee'],
     runtime: 110,
     isComingSoon: true,
-    releaseDate: 'October 24, 2025'
+    releaseDate: 'May 6, 2026'
   },
   {
     id: 'mov-enola-3',
@@ -454,7 +454,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Millie Bobby Brown', 'Henry Cavill'],
     runtime: 118,
     isComingSoon: true,
-    releaseDate: 'November 20, 2026'
+    releaseDate: 'May 6, 2026'
   },
   {
     id: 'mov-damage',
@@ -486,13 +486,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Chris Pratt', 'Charlie Day', 'Anya Taylor-Joy'],
     runtime: 105,
     isComingSoon: true,
-    releaseDate: 'April 3, 2026'
+    releaseDate: 'April 1, 2026'
   },
   {
     id: 'mov-moana',
     tmdbId: 20029,
     title: 'Moana',
-    year: 2016,
+    year: 2026,
     rating: 7.6,
     genres: ['Animation', 'Family', 'Adventure', 'Comedy'],
     overview: 'An adventurous teenager sails out on a daring mission to save her people, with the help of the demigod Maui.',
@@ -502,7 +502,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Auli\'i Cravalho', 'Dwayne Johnson'],
     runtime: 107,
     isPopular: true,
-    releaseDate: 'November 23, 2016'
+    releaseDate: 'July 8, 2026'
   },
   {
     id: 'mov-flame-heart',
@@ -518,7 +518,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Myriam Mézières', 'Benoît Régent'],
     runtime: 112,
     isPopular: true,
-    releaseDate: 'September 16, 1987'
+    releaseDate: 'June 3, 1987'
   },
   {
     id: 'mov-avatar-aang',
@@ -534,7 +534,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Eric Nam', 'Dionne Quan'],
     runtime: 115,
     isComingSoon: true,
-    releaseDate: 'October 9, 2026'
+    releaseDate: 'July 25, 2026'
   },
   {
     id: 'mov-sheep-detectives',
@@ -550,7 +550,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Peter Sallis', 'Hugh Laurie'],
     runtime: 88,
     isComingSoon: true,
-    releaseDate: 'August 14, 2026'
+    releaseDate: 'April 30, 2026'
   },
   {
     id: 'mov-mummy-lee',
@@ -566,13 +566,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Lily Sullivan', 'Bruce Campbell'],
     runtime: 114,
     isComingSoon: true,
-    releaseDate: 'October 30, 2026'
+    releaseDate: 'April 15, 2026'
   },
   {
     id: 'mov-living-dead',
     tmdbId: 20034,
     title: 'Night of the Living Dead',
-    year: 1968,
+    year: 2026,
     rating: 7.8,
     genres: ['Horror', 'Thriller'],
     overview: 'A group of survivors barricade themselves inside a rural farmhouse to fend off flesh-eating ghouls in George A. Romero\'s definitive masterpiece.',
@@ -582,13 +582,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Duane Jones', 'Judith O\'Dea', 'Karl Hardman'],
     runtime: 96,
     isPopular: true,
-    releaseDate: 'October 1, 1968'
+    releaseDate: 'July 3, 2026'
   },
   {
     id: 'mov-odyssey',
     tmdbId: 20035,
     title: 'The Odyssey',
-    year: 1997,
+    year: 2026,
     rating: 7.5,
     genres: ['Adventure', 'Drama', 'Fantasy'],
     overview: 'The legendary Greek hero Odysseus undergoes a perilous decade-long journey to return home to Ithaca after the fall of Troy.',
@@ -598,13 +598,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Armand Assante', 'Greta Scacchi'],
     runtime: 176,
     isPopular: true,
-    releaseDate: 'May 18, 1997'
+    releaseDate: 'July 15, 2026'
   },
   {
     id: 'mov-satluj',
     tmdbId: 20036,
     title: 'Satluj',
-    year: 2025,
+    year: 2026,
     rating: 8.0,
     genres: ['Drama'],
     overview: 'A powerful, historically rich Indian drama following families living along the Satluj river and their generational struggles.',
@@ -614,13 +614,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Ammy Virk', 'Sargun Mehta'],
     runtime: 145,
     isTrending: true,
-    releaseDate: 'March 14, 2025'
+    releaseDate: 'July 3, 2026'
   },
   {
     id: 'mov-graphic-desires',
     tmdbId: 20037,
     title: 'Graphic Desires',
-    year: 1993,
+    year: 2023,
     rating: 5.8,
     genres: ['Thriller', 'Mystery'],
     overview: 'A retro mystery-thriller surrounding an artist who becomes involved in a deep conspiracy involving a series of elite collectors.',
@@ -630,7 +630,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Michael Nouri', 'Shannon Tweed'],
     runtime: 91,
     isPopular: true,
-    releaseDate: 'July 21, 1993'
+    releaseDate: 'August 31, 2023'
   },
   {
     id: 'mov-spiderman-brandnew',
@@ -646,13 +646,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Tom Holland', 'Zendaya'],
     runtime: 130,
     isComingSoon: true,
-    releaseDate: 'July 10, 2026'
+    releaseDate: 'July 29, 2026'
   },
   {
     id: 'mov-swapped',
     tmdbId: 20039,
     title: 'Swapped',
-    year: 2025,
+    year: 2026,
     rating: 7.4,
     genres: ['Comedy', 'Family'],
     overview: 'Two arch-rival business executives wake up to find their consciousnesses swapped on the day of their biggest career merge.',
@@ -662,13 +662,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Ryan Reynolds', 'Hugh Jackman'],
     runtime: 102,
     isTrending: true,
-    releaseDate: 'November 14, 2025'
+    releaseDate: 'May 1, 2026'
   },
   {
     id: 'mov-little-brother',
     tmdbId: 20040,
     title: 'Little Brother',
-    year: 2023,
+    year: 2026,
     rating: 7.2,
     genres: ['Drama'],
     overview: 'Two estranged half-brothers embark on an intense road trip across the American West in a story of friendship and recovery.',
@@ -678,7 +678,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Daniel Diemer', 'Philip Ettinger'],
     runtime: 95,
     isPopular: true,
-    releaseDate: 'October 21, 2023'
+    releaseDate: 'June 26, 2026'
   },
   {
     id: 'mov-hoppers',
@@ -694,7 +694,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Piper Curda', 'Bobby Moynihan', 'Jon Hamm'],
     runtime: 98,
     isComingSoon: true,
-    releaseDate: 'March 6, 2026'
+    releaseDate: 'March 4, 2026'
   },
   {
     id: 'mov-punisher-kill',
@@ -710,7 +710,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jon Bernthal', 'Deborah Ann Woll'],
     runtime: 126,
     isComingSoon: true,
-    releaseDate: 'November 13, 2026'
+    releaseDate: 'May 12, 2026'
   },
   {
     id: 'mov-dolly',
@@ -726,7 +726,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Florence Pugh', 'Drew Goddard'],
     runtime: 122,
     isComingSoon: true,
-    releaseDate: 'December 4, 2026'
+    releaseDate: 'March 6, 2026'
   },
   {
     id: 'mov-evil-dead-burn',
@@ -742,7 +742,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Lily Sullivan', 'Alyssa Sutherland'],
     runtime: 102,
     isComingSoon: true,
-    releaseDate: 'October 23, 2026'
+    releaseDate: 'July 22, 2026'
   },
   {
     id: 'mov-toy-story-4',
@@ -758,13 +758,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Tom Hanks', 'Tim Allen', 'Annie Potts'],
     runtime: 100,
     isPopular: true,
-    releaseDate: 'June 21, 2019'
+    releaseDate: 'June 19, 2019'
   },
   {
     id: 'mov-in-the-grey',
     tmdbId: 20046,
     title: 'In the Grey',
-    year: 2025,
+    year: 2026,
     rating: 8.0,
     genres: ['Action', 'Thriller'],
     overview: 'An elite tactical security team is hired to recover hundreds of millions of dollars stolen from high-profile international offshore accounts.',
@@ -774,7 +774,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jake Gyllenhaal', 'Henry Cavill', 'Eiza González'],
     runtime: 120,
     isTrending: true,
-    releaseDate: 'January 17, 2025'
+    releaseDate: 'May 13, 2026'
   },
   {
     id: 'mov-voicemails-isabelle',
@@ -790,13 +790,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Saoirse Ronan', 'Timothée Chalamet'],
     runtime: 104,
     isComingSoon: true,
-    releaseDate: 'November 27, 2026'
+    releaseDate: 'June 19, 2026'
   },
   {
     id: 'mov-we-want-now',
     tmdbId: 20048,
     title: 'We Want Now',
-    year: 2025,
+    year: 2016,
     rating: 8.1,
     genres: ['Documentary', 'Drama'],
     overview: 'An inspiring, real-world documentary highlighting the voices of community leaders fighting for structural changes in education and local welfare.',
@@ -806,13 +806,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Viola Davis', 'Mahershala Ali'],
     runtime: 118,
     isTrending: true,
-    releaseDate: 'October 15, 2025'
+    releaseDate: 'April 20, 2016'
   },
   {
     id: 'mov-madness',
     tmdbId: 20049,
     title: 'Madness',
-    year: 2025,
+    year: 1980,
     rating: 8.0,
     genres: ['Thriller', 'Horror'],
     overview: 'A high-concept thriller from Jordan Peele detailing a weekend in an isolated community that spirals into psychological chaos.',
@@ -822,13 +822,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Daniel Kaluuya', 'Keke Palmer'],
     runtime: 122,
     isTrending: true,
-    releaseDate: 'October 31, 2025'
+    releaseDate: 'March 20, 1980'
   },
   {
     id: 'mov-like-brother',
     tmdbId: 20050,
     title: 'Like a Brother',
-    year: 2024,
+    year: 'TBA',
     rating: 7.9,
     genres: ['Drama'],
     overview: 'Two neighborhood friends navigate the changing landscape of their lives while holding onto a deep, brotherly bond.',
@@ -838,7 +838,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Adèle Haenel', 'Noémie Merlant'],
     runtime: 114,
     isPopular: true,
-    releaseDate: 'June 5, 2024'
+    releaseDate: 'Like a Brother'
   },
   {
     id: 'mov-shadows-edge',
@@ -854,7 +854,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Keanu Reeves', 'Donnie Yen'],
     runtime: 131,
     isTrending: true,
-    releaseDate: 'December 12, 2025'
+    releaseDate: 'August 16, 2025'
   },
   {
     id: 'mov-toy-story',
@@ -876,7 +876,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     id: 'mov-zombies-reich',
     tmdbId: 20053,
     title: 'Zombies of the Third Reich',
-    year: 2024,
+    year: 2025,
     rating: 5.8,
     genres: ['Horror', 'Action', 'Sci-Fi'],
     overview: 'In the final days of WWII, an underground laboratory releases an army of experimental undead soldiers onto the front lines.',
@@ -886,13 +886,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Sheri Moon Zombie', 'Bill Moseley'],
     runtime: 98,
     isPopular: true,
-    releaseDate: 'October 25, 2024'
+    releaseDate: 'June 10, 2025'
   },
   {
     id: 'mov-poppea-nights',
     tmdbId: 20054,
     title: 'Poppea\'s Hot Nights',
-    year: 1969,
+    year: 2025,
     rating: 6.2,
     genres: ['Comedy'],
     overview: 'A classic Italian comedy-drama depicting the whimsical antics and romantic rivalries in ancient Rome.',
@@ -902,7 +902,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Olga Schoberová', 'Brad Harris'],
     runtime: 93,
     isPopular: true,
-    releaseDate: 'November 18, 1969'
+    releaseDate: 'June 10, 2025'
   },
   {
     id: 'ser-jack-ryan',
@@ -919,14 +919,14 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['John Krasinski', 'Wendell Pierce'],
     runtime: 60,
     isTrending: true,
-    releaseDate: 'August 18, 2026',
+    releaseDate: 'May 20, 2026',
     seasonsCount: 2
   },
   {
     id: 'mov-summerween',
     tmdbId: 20056,
     title: 'Summerween',
-    year: 2025,
+    year: 2026,
     rating: 8.5,
     genres: ['Horror', 'Comedy', 'Mystery'],
     overview: 'In a spooky small Oregon town, local teenagers must appease the Summerween Trickster before he eats them.',
@@ -936,13 +936,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jason Ritter', 'Kristen Schaal'],
     runtime: 90,
     isTrending: true,
-    releaseDate: 'June 22, 2025'
+    releaseDate: 'June 26, 2026'
   },
   {
     id: 'mov-kill-code',
     tmdbId: 20057,
     title: 'Kill Code',
-    year: 2025,
+    year: 2026,
     rating: 7.8,
     genres: ['Sci-Fi', 'Thriller'],
     overview: 'A cybernetic systems engineer uncovers a self-replicating algorithm designed to permanently disable global networks.',
@@ -952,7 +952,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Michael Fassbender', 'Noomi Rapace'],
     runtime: 119,
     isTrending: true,
-    releaseDate: 'October 10, 2025'
+    releaseDate: 'April 16, 2026'
   },
   {
     id: 'mov-kraken',
@@ -968,13 +968,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Doug Jones', 'Mia Goth'],
     runtime: 125,
     isComingSoon: true,
-    releaseDate: 'May 15, 2026'
+    releaseDate: 'February 6, 2026'
   },
   {
     id: 'mov-apex',
     tmdbId: 20059,
     title: 'Apex',
-    year: 2025,
+    year: 2026,
     rating: 8.1,
     genres: ['Action', 'Drama'],
     overview: 'A veteran F1 racing driver comes out of retirement to mentor a promising young rookie and compete for the world championship.',
@@ -984,13 +984,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Brad Pitt', 'Damson Idris'],
     runtime: 130,
     isTrending: true,
-    releaseDate: 'June 27, 2025'
+    releaseDate: 'April 24, 2026'
   },
   {
     id: 'mov-boogeyman',
     tmdbId: 20060,
     title: 'Beware the Boogeyman',
-    year: 2025,
+    year: 2024,
     rating: 7.7,
     genres: ['Horror'],
     overview: 'A suburban family is stalked by a sinister, ancient folklore entity that feeds on the fears of children sleeping in the dark.',
@@ -1000,7 +1000,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Patrick Wilson', 'Vera Farmiga'],
     runtime: 104,
     isTrending: true,
-    releaseDate: 'October 17, 2025'
+    releaseDate: 'March 5, 2024'
   },
   {
     id: 'mov-adolescent',
@@ -1016,13 +1016,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Laetitia Chauveau', 'Francis Huster'],
     runtime: 90,
     isPopular: true,
-    releaseDate: 'September 12, 1979'
+    releaseDate: 'January 24, 1979'
   },
   {
     id: 'mov-war-worlds',
     tmdbId: 20062,
     title: 'War of the Worlds',
-    year: 2005,
+    year: 2025,
     rating: 6.5,
     genres: ['Sci-Fi', 'Action', 'Adventure'],
     overview: 'An ordinary dockworker must protect his children as alien tripod war machines invade Earth and vaporize modern cities.',
@@ -1032,13 +1032,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Tom Cruise', 'Dakota Fanning'],
     runtime: 116,
     isPopular: true,
-    releaseDate: 'June 29, 2005'
+    releaseDate: 'July 29, 2025'
   },
   {
     id: 'mov-housemaid',
     tmdbId: 20063,
     title: 'The Housemaid',
-    year: 2010,
+    year: 2025,
     rating: 7.3,
     genres: ['Thriller', 'Drama'],
     overview: 'A wealthy South Korean family hires a naive housemaid, who quickly becomes entangled in a dangerous and illicit affair.',
@@ -1048,13 +1048,13 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Jeon Do-yeon', 'Lee Jung-jae', 'Youn Yuh-jung'],
     runtime: 106,
     isPopular: true,
-    releaseDate: 'May 13, 2010'
+    releaseDate: 'December 18, 2025'
   },
   {
     id: 'mov-door2-tokyo',
     tmdbId: 20064,
     title: 'Door II: Tokyo Diary',
-    year: 1989,
+    year: 1991,
     rating: 6.7,
     genres: ['Horror', 'Mystery'],
     overview: 'A highly atmospheric Japanese psychological thriller surrounding a high-end call girl who becomes stalked in her apartment building.',
@@ -1064,14 +1064,14 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     cast: ['Yoshiko Yura', 'Joe Yamana'],
     runtime: 85,
     isPopular: true,
-    releaseDate: 'November 11, 1989'
+    releaseDate: 'April 25, 1991'
   },
   {
     id: 'ser-stranger-things',
     tmdbId: 30001,
     title: 'Stranger Things',
     type: 'series',
-    year: 2024,
+    year: 2016,
     rating: 8.7,
     genres: ['Sci-Fi', 'Mystery', 'Drama'],
     overview: 'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
@@ -1090,7 +1090,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30002,
     title: 'Breaking Bad',
     type: 'series',
-    year: 2013,
+    year: 2008,
     rating: 9.5,
     genres: ['Drama', 'Crime', 'Thriller'],
     overview: 'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family\'s future.',
@@ -1109,7 +1109,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30003,
     title: 'The Last of Us',
     type: 'series',
-    year: 2025,
+    year: 2023,
     rating: 8.8,
     genres: ['Action', 'Adventure', 'Drama', 'Sci-Fi'],
     overview: 'After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl who may be humanity\'s last hope.',
@@ -1128,7 +1128,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30004,
     title: 'Wednesday',
     type: 'series',
-    year: 2025,
+    year: 2022,
     rating: 8.2,
     genres: ['Mystery', 'Comedy', 'Fantasy'],
     overview: 'An investigative, supernaturally infused mystery charting Wednesday Addams\' years as a student at Nevermore Academy.',
@@ -1147,7 +1147,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30005,
     title: 'The Boys',
     type: 'series',
-    year: 2024,
+    year: 2019,
     rating: 8.7,
     genres: ['Action', 'Sci-Fi', 'Drama'],
     overview: 'A fun and irreverent take on what happens when superheroes—who are as popular as celebrities—abuse their superpowers rather than use them for good.',
@@ -1166,7 +1166,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30006,
     title: 'House of the Dragon',
     type: 'series',
-    year: 2024,
+    year: 2022,
     rating: 8.5,
     genres: ['Action', 'Adventure', 'Drama', 'Fantasy'],
     overview: 'The story of the House Targaryen, set 200 years before the events of Game of Thrones.',
@@ -1185,7 +1185,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30007,
     title: 'Dark',
     type: 'series',
-    year: 2020,
+    year: 2017,
     rating: 8.8,
     genres: ['Sci-Fi', 'Mystery', 'Drama', 'Thriller'],
     overview: 'A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes the relationships among four families.',
@@ -1204,7 +1204,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30008,
     title: 'Peaky Blinders',
     type: 'series',
-    year: 2022,
+    year: 2013,
     rating: 8.8,
     genres: ['Drama', 'Crime'],
     overview: 'A gangster family epic set in 1919 Birmingham, England; centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby.',
@@ -1223,7 +1223,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30009,
     title: 'Squid Game',
     type: 'series',
-    year: 2025,
+    year: 2021,
     rating: 8.4,
     genres: ['Action', 'Thriller', 'Drama'],
     overview: 'Hundreds of cash-strapped players accept a strange invitation to compete in children\'s games. Inside, a tempting prize awaits with deadly high stakes.',
@@ -1242,7 +1242,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
     tmdbId: 30010,
     title: 'The Witcher',
     type: 'series',
-    year: 2024,
+    year: 2019,
     rating: 8.1,
     genres: ['Action', 'Adventure', 'Fantasy', 'Drama'],
     overview: 'Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.',

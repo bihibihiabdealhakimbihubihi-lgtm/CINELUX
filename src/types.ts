@@ -61,7 +61,7 @@ export interface ContentItem {
   voteAverage?: number;
   voteCount?: number;
   popularity?: number;
-  year: number;
+  year: number | string;
   runtime: number; // in minutes (for series, average per episode)
   genres: string[];
   quality: '4K Ultra HD' | 'HDR10+' | 'Dolby Vision' | '1080p';

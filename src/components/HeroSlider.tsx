@@ -169,8 +169,7 @@ function HeroSlider({
                     {currentItem.rating.toFixed(1)}
                   </span>
                   
-                  {/* Year & Age rating */}
-                  <span className="text-sm font-semibold text-gray-300">{currentItem.year}</span>
+                  {/* Age rating */}
                   <span className="px-1.5 py-0.5 rounded bg-white/10 text-white text-[11px] font-bold tracking-wider">
                     {currentItem.ageRating}
                   </span>

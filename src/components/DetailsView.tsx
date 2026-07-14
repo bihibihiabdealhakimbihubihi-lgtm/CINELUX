@@ -337,8 +337,6 @@ export default function DetailsView({
               </h1>
 
               <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-300 mb-6">
-                <span className="text-gray-400">{item.year}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                 <span className="px-1.5 py-0.5 rounded border border-white/20 text-[10px]">{item.ageRating}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                 <span>{item.type === 'movie' ? `${item.runtime} minutes` : `${item.seasons?.length} Seasons`}</span>
@@ -989,7 +987,7 @@ export default function DetailsView({
                       {rec.title}
                     </h4>
                     <p className="text-[10px] text-gray-500 mt-1">
-                      {rec.year} • {rec.genres.slice(0, 2).join(', ')}
+                      {rec.genres.slice(0, 2).join(', ')}
                     </p>
                   </div>
                   <div className="flex items-center text-amber-400 text-xs font-bold gap-0.5">

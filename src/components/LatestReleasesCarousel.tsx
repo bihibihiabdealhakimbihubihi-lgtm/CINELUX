@@ -92,8 +92,6 @@ export default function LatestReleasesCarousel({
               <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
               <span>{currentItem.rating.toFixed(1)}</span>
             </div>
-            <span className="text-gray-400 text-xs font-semibold">•</span>
-            <span className="text-gray-400 text-xs font-semibold">{currentItem.year}</span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">

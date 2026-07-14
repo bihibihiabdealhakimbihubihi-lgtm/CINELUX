@@ -168,7 +168,7 @@ export default function MovieHorizontalSlider({
         {isLoading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <div key={`skeleton-${index}`} className="shrink-0 snap-start">
-              <SkeletonMovieCard className={cardClassName} />
+              <SkeletonMovieCard className={cardClassName} layout="vertical" />
             </div>
           ))
         ) : (
@@ -183,6 +183,7 @@ export default function MovieHorizontalSlider({
                 onPlay={onPlay}
                 onViewDetails={onViewDetails}
                 className={cardClassName}
+                layout="vertical"
               />
             </div>
           ))

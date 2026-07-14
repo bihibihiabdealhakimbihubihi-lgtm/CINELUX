@@ -114,14 +114,14 @@ export default function SearchView({
       // Year filter
       if (selectedYear !== 'All') {
         if (selectedYear === '2025+') {
-          filtered = filtered.filter((item) => item.year >= 2025);
+          filtered = filtered.filter((item) => typeof item.year === 'number' ? item.year >= 2025 : true);
         } else if (selectedYear === '2020-2024') {
-          filtered = filtered.filter((item) => item.year >= 2020 && item.year <= 2024);
+          filtered = filtered.filter((item) => typeof item.year === 'number' && item.year >= 2020 && item.year <= 2024);
         } else if (selectedYear === 'Pre-2020') {
-          filtered = filtered.filter((item) => item.year < 2020);
+          filtered = filtered.filter((item) => typeof item.year === 'number' && item.year < 2020);
         }
       }
-
+      
       // Rating filter
       if (minRating > 0) {
         filtered = filtered.filter((item) => item.rating >= minRating);
@@ -139,7 +139,9 @@ export default function SearchView({
       // Sorting
       filtered.sort((a, b) => {
         if (sortBy === 'newest') {
-          return b.year - a.year;
+          const yearA = typeof a.year === 'number' ? a.year : 2027;
+          const yearB = typeof b.year === 'number' ? b.year : 2027;
+          return yearB - yearA;
         }
         if (sortBy === 'rating') {
           return b.rating - a.rating;
@@ -148,7 +150,9 @@ export default function SearchView({
           return a.title.localeCompare(b.title);
         }
         // popularity default
-        return (b.rating * b.year) - (a.rating * a.year);
+        const yearA = typeof a.year === 'number' ? a.year : 2027;
+        const yearB = typeof b.year === 'number' ? b.year : 2027;
+        return (b.rating * yearB) - (a.rating * yearA);
       });
 
       setSearchResults(filtered);
@@ -475,9 +479,9 @@ export default function SearchView({
           </div>
 
           {isSearching ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
               {Array.from({ length: 12 }).map((_, index) => (
-                <div key={`skeleton-${index}`} className="w-full">
+                <div key={`skeleton-${index}`} className="w-full sm:max-w-[240px]">
                   <SkeletonMovieCard />
                 </div>
               ))}
@@ -489,9 +493,9 @@ export default function SearchView({
               <p className="text-xs text-gray-500">Try loosening your active filter rules or searching for generic keywords like "Space" or "Noir".</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-8 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-4 sm:gap-y-8 gap-x-4 justify-items-center">
               {searchResults.map((item) => (
-                <div key={item.id} className="w-full">
+                <div key={item.id} className="w-full sm:max-w-[240px]">
                   <MovieCard
                     item={item}
                     watchlist={watchlist}
