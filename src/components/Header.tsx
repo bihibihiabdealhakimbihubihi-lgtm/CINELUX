@@ -262,6 +262,11 @@ export default function Header({
                 )}
               </div>
 
+              {/* Personalized Greeting */}
+              <span id="header-user-greeting" className="hidden sm:inline-block text-xs text-gray-300 font-medium tracking-wide select-none">
+                Welcome back, <span className="text-white font-semibold">{user.name}</span>
+              </span>
+
               {/* User Profile */}
               <div id="user-profile-dropdown-wrapper" className="relative">
                 <button

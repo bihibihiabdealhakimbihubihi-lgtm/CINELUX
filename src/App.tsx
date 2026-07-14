@@ -70,7 +70,19 @@ export default function App() {
 
   const [contentList, setContentList] = useState<ContentItem[]>(() => {
     const saved = localStorage.getItem('cinelux_custom_content');
-    return saved ? JSON.parse(saved) : MOCK_CONTENT;
+    const rawList: ContentItem[] = saved ? JSON.parse(saved) : MOCK_CONTENT;
+    
+    // Ensure strict deduplication by Title, Poster, and Release Date on load
+    const seen = new Set<string>();
+    const deduplicated: ContentItem[] = [];
+    for (const item of rawList) {
+      const key = `${item.title.trim().toLowerCase()}|${item.poster.trim()}|${(item.releaseDate || '').trim().toLowerCase()}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        deduplicated.push(item);
+      }
+    }
+    return deduplicated;
   });
 
   const [watchlist, setWatchlist] = useState<string[]>(() => {

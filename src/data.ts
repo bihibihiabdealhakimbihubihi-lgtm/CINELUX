@@ -147,10 +147,10 @@ function getSeriesSeasons(id: string, title: string, count: number): Season[] {
   return seasons;
 }
 
-// Remove duplicates automatically by title
+// Remove duplicates by title, poster, and release date
 const uniqueMoviesMap = new Map<string, typeof COMPACT_MOVIES[0]>();
 COMPACT_MOVIES.forEach((m) => {
-  const key = m.title.toLowerCase().trim();
+  const key = `${m.title.trim().toLowerCase()}|${m.poster.trim()}|${m.releaseDate.trim().toLowerCase()}`;
   if (!uniqueMoviesMap.has(key)) {
     uniqueMoviesMap.set(key, m);
   }

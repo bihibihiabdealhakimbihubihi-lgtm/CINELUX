@@ -135,13 +135,24 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
     }
   };
 
+  // Deduplicate COMPACT_MOVIES by title, poster, and release date
+  const uniqueMovies: typeof COMPACT_MOVIES = [];
+  const seenKeys = new Set<string>();
+  for (const m of COMPACT_MOVIES) {
+    const key = `${m.title.trim().toLowerCase()}|${m.poster.trim()}|${m.releaseDate.trim().toLowerCase()}`;
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueMovies.push(m);
+    }
+  }
+
   // Extract real trending movies (10-12) from our datasets
-  const trendingMovies = COMPACT_MOVIES.slice(0, 12);
+  const trendingMovies = uniqueMovies.slice(0, 12);
 
   // Extract featured movies (8) from our datasets
-  const featuredMovies = COMPACT_MOVIES.filter(m => m.isFeatured).slice(0, 8);
+  const featuredMovies = uniqueMovies.filter(m => m.isFeatured).slice(0, 8);
   // Fallback to slice if featured list is short
-  const featuredRow = featuredMovies.length >= 8 ? featuredMovies : COMPACT_MOVIES.slice(12, 20);
+  const featuredRow = featuredMovies.length >= 8 ? featuredMovies : uniqueMovies.slice(12, 20);
 
   return (
     <div id="landing-page-root" className="min-h-screen bg-[#050505] text-white select-none text-left scroll-smooth font-sans">

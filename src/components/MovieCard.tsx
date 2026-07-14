@@ -56,6 +56,7 @@ function MovieCard({
           className="block w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           loading="lazy"
           decoding="async"
+          referrerPolicy="no-referrer"
         />
 
         {/* Cinematic Backdrop Overlay on Hover */}
