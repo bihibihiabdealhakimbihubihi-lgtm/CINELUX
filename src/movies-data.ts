@@ -1226,7 +1226,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
       "Adventure"
     ],
     "overview": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure becomes top toy in a boy's room.",
-    "poster": "https://image.tmdb.org/t/p/w500/tFoE3hYk21Qkru7WP2EMmzvxFmY.jpg",
+    "poster": "https://image.tmdb.org/t/p/w500/uXDfjJb697XI568vQ9u6CH6gy7n.jpg",
     "backdrop": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
     "director": "John Lasseter",
     "cast": [

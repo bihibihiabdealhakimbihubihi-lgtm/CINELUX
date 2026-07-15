@@ -317,13 +317,14 @@ export default function DetailsView({
           src={item.backdrop}
           alt={item.title}
           className="w-full h-full object-cover filter brightness-[0.4] blur-[0.5px]"
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/30 to-transparent" />
         <div className="absolute bottom-6 md:bottom-10 left-0 right-0">
           <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-end gap-6 md:gap-10">
             {/* Poster thumbnail */}
             <div className="w-32 md:w-48 aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 hidden sm:block transform hover:scale-102 transition-transform">
-              <img src={item.poster} alt={item.title} className="w-full h-full object-cover" />
+              <img src={item.poster} alt={item.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
 
             {/* Title & Actions Row */}

@@ -56,6 +56,73 @@ import {
   Mail
 } from 'lucide-react';
 
+const MOVIES_POSTER_MAPPING: Record<string, string> = {
+  "Obsession": "https://i.postimg.cc/fTXDPn7w/b-Rwnj8WEKBCvmfe-UNOuk-JPw-B43K.webp",
+  "Toy Story 5": "https://i.postimg.cc/VL3P972F/sf-Qt-Vl-IHlj-To-Ow-Yjhe21KPGz-ZWK.webp",
+  "Disclosure Day": "https://i.postimg.cc/yYKb7MqG/download.jpg",
+  "Backrooms": "https://i.postimg.cc/ZqWffZ3y/rh-Gx6E3q-RNMgj3i5su2ouk-NHw-IQ.webp",
+  "Scary Movie": "https://i.postimg.cc/3J3ns2mK/bq-OKJr-ZFR9Kpq-WE607dw6KOd-KCj.webp",
+  "The Devil Wears Prada 2": "https://i.postimg.cc/gJvH500L/f-CAURTUx3Yfs-J8k9I0Uamj-SILi-R.webp",
+  "The Furious": "https://i.postimg.cc/PJXYRz9n/z-P19YO60jw-Esf-Kd5Qf1Uv-A5u-Ju8.webp",
+  "Citizen Vigilante": "https://i.postimg.cc/mgvMsGJL/6Lm-JD3Wohe0g4U62wgi7Ry-Jqf-E4.webp",
+  "Vixen!": "https://i.postimg.cc/TYhW5wXn/9KMZWDA3x-Trlgr-Scqd-Mis-INQmsh.webp",
+  "Your Heart Will Be Broken": "https://i.postimg.cc/zXLVXcnF/7w-IBf-Bl2gejt6x-Hx-NSK0re-VIm7E.webp",
+  "Passenger": "https://i.postimg.cc/L4W873rn/2s-OEJzh-Pzj-Tk-ZSl-Pb-Gx-OJ7xg-Iy-S.webp",
+  "Deep Water": "https://i.postimg.cc/XvnjFHyK/kjcu-S7xa-Ryq-Rj-Va-Vc-H4t0q-Hshu-X.webp",
+  "Michael": "https://i.postimg.cc/MZnQvHw7/zm0KAb-Ojlt9e-R5y7v-Di-L2d-EOw-Ml.webp",
+  "Project Hail Mary": "https://i.postimg.cc/QtHH942Z/yihd-Xom-Yb5k-Te-Sivt-Fnd-My5i-Dmf.webp",
+  "The Shawshank Redemption": "https://i.postimg.cc/qv4qXvfV/9cq-Nxx0Gx-F0bfl-Zme-SMu-L5tn-Gzr.webp",
+  "The Get Out": "https://i.postimg.cc/MH1ZVht3/zlke-H0s7d-Dxcnu-Pc-HBq-Ay-XFUxq-N.webp",
+  "Minions & Monsters": "https://i.postimg.cc/8cgNpZDv/nz7i42yh-LIJ4ve9JKg-M6Ntho-LHO.webp",
+  "Mortal Kombat II": "https://i.postimg.cc/zXJYxbff/hw-Rd-DFIha-Emp-Rgoki805Yvyyj-Zf.webp",
+  "Enola Holmes 3": "https://i.postimg.cc/Zn42s2JY/7k-RYHH9H9Pj-BFwz1Fprb-HB2AAj-I.webp",
+  "Damage": "https://i.postimg.cc/HxChjRcj/alf3JOPP7EYP0i-O24gwe5Yf-Rnqo.webp",
+  "The Super Mario Galaxy Movie": "https://i.postimg.cc/DZFx7GHY/e-JGWx219Zc-EMVQJh-Ag-Miqo8t-YY.webp",
+  "Moana": "https://i.postimg.cc/90kPww8d/z-KVgiv5q-HCv-CLT4A2ym-Ji5Qe-XDH.webp",
+  "A Flame in My Heart": "https://i.postimg.cc/LsVzBbQL/q-I2c-Tls7mso-XF4w-Iqju7klqi-Z6Y.webp",
+  "Avatar Aang: The Last Airbender": "https://i.postimg.cc/t4QW0jL9/3sgn-Sf-NT27Bx5O5ukr7B26mh-EQq.webp",
+  "The Sheep Detectives": "https://i.postimg.cc/qq6hYbwh/TEa-Sqm-I6TZQVim-ULYbing-DId-XT.webp",
+  "Lee Cronin's The Mummy": "https://i.postimg.cc/vZshrfHM/1q308iixue-CU4p-Ft-SYug-NOevt-Nx.webp",
+  "Avatar: Fire and Ash": "https://i.postimg.cc/L5Pkf6cq/aabw-WZWx6z1a-YP4PX2ADvb-DKktd.webp",
+  "Night of the Living Dead": "https://i.postimg.cc/JzxNjF2K/5l0kl-Dtj2v4FMFOGGCEH23AQb30.webp",
+  "The Odyssey": "https://i.postimg.cc/XN59sqP0/5rh-TDKUh-PYvpd-QIij-FIs5Vo-Ws-ON.webp",
+  "Satluj": "https://i.postimg.cc/BvtKHnFg/cx-Fo7L82d-W3Vg8x0280BVPp-LNXf.webp",
+  "Graphic Desires": "https://i.postimg.cc/4yv7s7CV/3Bj-Ld-TWRi-Hc1ISIZMFv-To-Omgh-OM.webp",
+  "The Mandalorian and Grogu": "https://i.postimg.cc/bvGZdFcf/5Vi8d-Sau-Vw-H1HOsi-Zce-DMb-Rr1Ca.webp",
+  "Spider-Man: Brand New Day": "https://i.postimg.cc/jdZ2crRr/yy-B2VJEW3an2x-Cdc-YCPQhn9QERR.webp",
+  "Supergirl": "https://i.postimg.cc/76kqDBqs/c-FO65xb0xi-XKqk5Bmg-Haw-CXB1i0.webp",
+  "Swapped": "https://i.postimg.cc/y6n74Xtv/t-Hhx-Wxge06go-XU6ZQH1hj7v-K8Hd.webp",
+  "Little Brother": "https://i.postimg.cc/LszMyzj5/h-IJp-Xb7Xaje2meb-N9yls-S7bl-Qz-P.webp",
+  "Hoppers": "https://i.postimg.cc/qM9Y9NJ2/xjt-WQ2CL1mpm-MNwu-U5He-S4Iuwuu.webp",
+  "Demon Slayer: Kimetsu no Yaiba Infinity Castle": "https://i.postimg.cc/V6DpT4vB/f-WVSwgjp-T2D78VUh6X8UBd2ror-W.webp",
+  "The Punisher: One Last Kill": "https://i.postimg.cc/6qFjJPXX/q-Qcl-Tg-LMDv-GBu-UBFGHRipxk-Ew-WR.webp",
+  "Dolly": "https://i.postimg.cc/vZFq0ChN/s-TPUg3Xtdc-KRAS5Vwsi1GYPFh-NZ.webp",
+  "Evil Dead Burn": "https://i.postimg.cc/B66M83Zs/ztad-Kz-IIR0ERYqp-Htea-PFtk7in-P.webp",
+  "Toy Story 4": "https://i.postimg.cc/fW3Qpn7s/w9k-R8qbm-Q01Hwnv-K4alvn-Q2ca0L.webp",
+  "In the Grey": "https://i.postimg.cc/Jz8wssfs/d-Qg-Ic-W6Th08k-MRf2HBo-YWo-FE6OD.webp",
+  "Voicemails for Isabelle": "https://i.postimg.cc/FR88Nzy6/can-ZTWSx-ACSn-Aluir3d-Ct-Mx-Kp-A1.webp",
+  "We Want Now": "https://i.postimg.cc/vZhKD3LF/m-Q95TSIl1Qq-NWCMQs1l-TRg-ZUWT8.webp",
+  "Madness": "https://i.postimg.cc/J0j68q4n/g-V0J0Fqw2m-YMt-Qbzb0ruxv9MAe-Z.webp",
+  "Like a Brother": "https://i.postimg.cc/3wWtN7xY/ti-AKYNJEp-Mn-S8L1n-Kq-EYC5yjm0C.webp",
+  "Interstellar": "https://i.postimg.cc/gjyDQ2N4/y-Qv-Gr-Moipb-Rodd-T0ZR8t-Po-R7Nf-X.webp",
+  "The Shadow's Edge": "https://i.postimg.cc/mggwpRMN/c-HKo3m8N1fwv-Ey2ZEr0x-Gmm-MODV.webp",
+  "Toy Story": "https://i.postimg.cc/VL3P972F/sf-Qt-Vl-IHlj-To-Ow-Yjhe21KPGz-ZWK.webp",
+  "Zootopia 2": "https://i.postimg.cc/tCXt7yrC/o-J7g2Cifqp-Stmo-YQya-LQg-EU32q-O.webp",
+  "Zombies of the Third Reich": "https://i.postimg.cc/YCTWNwx4/hjrg-OWoruk9ea0t-Xa-N8l2gtmke-H.webp",
+  "Poppea's Hot Nights": "https://i.postimg.cc/rshdD6mq/g1k-B4f7a-ZBJn-U2XZILZ8Tsy-DVVM.webp",
+  "Tom Clancy's Jack Ryan: Ghost War": "https://i.postimg.cc/13Vg3jZS/8eh-Yx-Uh5MWE41Ae-E9gk-HE8DKzv-B.webp",
+  "Summerween": "https://i.postimg.cc/PJFxtm3J/o-Csyamu5ixofd3yy-K9g-D7p-Gf-Ci-F.webp",
+  "Kill Code": "https://i.postimg.cc/8zv5SfhS/7yy4c-Vr9ob-HOZC9lj3uct4Dw-DEn.webp",
+  "Kraken": "https://i.postimg.cc/j2CxkDxL/xd-Z8k5s8DTw-Wy-PBMIcflr-YLgc-AK.webp",
+  "Apex": "https://i.postimg.cc/43ZJRLfb/e-Tp7g-SPk-SF3Aw79m-Nx1Nk-BP1PZT.webp",
+  "Beware the Boogeyman": "https://i.postimg.cc/KcVx8vcD/2Hm5IP9l-PW9Dfw-NSGkgh-CEMe-UBK.webp",
+  "The Adolescent": "https://i.postimg.cc/Gpc154zn/v7y-CEz-F9BCF82lbp42X5ZLj-Iieo.webp",
+  "War of the Worlds": "https://i.postimg.cc/PJ8GwYfv/yvir-UYrva23Iud-ARHn3m-MGVx-Wq-M.webp",
+  "Inception": "https://i.postimg.cc/SNCR0zLR/xla-Y2zyz-Mfkhk0HSC5VUwzo-ZPU1.webp",
+  "The Housemaid": "https://i.postimg.cc/DZSfxWfH/c-Ws-Bsc-Zzwu5brg9Yj-Nk-Gew-RUv-JX.webp",
+  "Door II: Tokyo Diary": "https://i.postimg.cc/8PQkbz8Q/lsk-J34j4VKwb-Mwcv-FSQe-NYEdt8g.webp"
+};
+
 type ViewState = 'landing' | 'home' | 'movies' | 'series' | 'watchlist' | 'favorites' | 'details' | 'search' | 'account' | 'admin' | 'player' | 'ai-recommender';
 
 export default function App() {
@@ -503,19 +570,23 @@ export default function App() {
                       </div>
                     ))
                   ) : (
-                    moviesList.map((item) => (
-                      <div key={item.id} className="w-full sm:max-w-[240px]">
-                        <MovieCard
-                          item={item}
-                          watchlist={watchlist}
-                          favorites={favorites}
-                          onToggleWatchlist={handleToggleWatchlist}
-                          onToggleFavorite={handleToggleFavorite}
-                          onPlay={handlePlayContent}
-                          onViewDetails={handleViewDetails}
-                        />
-                      </div>
-                    ))
+                    moviesList.map((item) => {
+                      const mappedPoster = MOVIES_POSTER_MAPPING[item.title.trim()];
+                      const itemWithPoster = mappedPoster ? { ...item, poster: mappedPoster } : item;
+                      return (
+                        <div key={item.id} className="w-full sm:max-w-[240px]">
+                          <MovieCard
+                            item={itemWithPoster}
+                            watchlist={watchlist}
+                            favorites={favorites}
+                            onToggleWatchlist={handleToggleWatchlist}
+                            onToggleFavorite={handleToggleFavorite}
+                            onPlay={handlePlayContent}
+                            onViewDetails={handleViewDetails}
+                          />
+                        </div>
+                      );
+                    })
                   )}
                 </div>
 
@@ -616,19 +687,23 @@ export default function App() {
                   </div>
                 ))
               ) : (
-                moviesList.map((item) => (
-                  <div key={item.id} className="w-full sm:max-w-[240px]">
-                    <MovieCard
-                      item={item}
-                      watchlist={watchlist}
-                      favorites={favorites}
-                      onToggleWatchlist={handleToggleWatchlist}
-                      onToggleFavorite={handleToggleFavorite}
-                      onPlay={handlePlayContent}
-                      onViewDetails={handleViewDetails}
-                    />
-                  </div>
-                ))
+                moviesList.map((item) => {
+                  const mappedPoster = MOVIES_POSTER_MAPPING[item.title.trim()];
+                  const itemWithPoster = mappedPoster ? { ...item, poster: mappedPoster } : item;
+                  return (
+                    <div key={item.id} className="w-full sm:max-w-[240px]">
+                      <MovieCard
+                        item={itemWithPoster}
+                        watchlist={watchlist}
+                        favorites={favorites}
+                        onToggleWatchlist={handleToggleWatchlist}
+                        onToggleFavorite={handleToggleFavorite}
+                        onPlay={handlePlayContent}
+                        onViewDetails={handleViewDetails}
+                      />
+                    </div>
+                  );
+                })
               )}
             </div>
           </div>

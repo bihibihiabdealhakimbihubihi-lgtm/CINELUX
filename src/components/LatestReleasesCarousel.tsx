@@ -59,6 +59,7 @@ export default function LatestReleasesCarousel({
           src={currentItem.backdrop || currentItem.poster}
           alt={currentItem.title}
           className="w-full h-full object-cover opacity-35 scale-105 transition-all duration-1000 ease-out"
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-black/50 to-transparent z-10" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1220] via-transparent to-[#0B1220] z-10" />
