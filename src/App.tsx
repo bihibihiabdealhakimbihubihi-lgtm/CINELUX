@@ -72,7 +72,8 @@ const MOVIES_POSTER_MAPPING: Record<string, string> = {
   "Michael": "https://i.postimg.cc/MZnQvHw7/zm0KAb-Ojlt9e-R5y7v-Di-L2d-EOw-Ml.webp",
   "Project Hail Mary": "https://i.postimg.cc/QtHH942Z/yihd-Xom-Yb5k-Te-Sivt-Fnd-My5i-Dmf.webp",
   "The Shawshank Redemption": "https://i.postimg.cc/qv4qXvfV/9cq-Nxx0Gx-F0bfl-Zme-SMu-L5tn-Gzr.webp",
-  "The Get Out": "https://i.postimg.cc/MH1ZVht3/zlke-H0s7d-Dxcnu-Pc-HBq-Ay-XFUxq-N.webp",
+  "The Get Out": "https://i.postimg.cc/VNxMBczy/t-FXc-Ecc-SQMf3lfhf-XKSU9i-RBpa3.webp",
+  "Get Out": "https://i.postimg.cc/VNxMBczy/t-FXc-Ecc-SQMf3lfhf-XKSU9i-RBpa3.webp",
   "Minions & Monsters": "https://i.postimg.cc/8cgNpZDv/nz7i42yh-LIJ4ve9JKg-M6Ntho-LHO.webp",
   "Mortal Kombat II": "https://i.postimg.cc/zXJYxbff/hw-Rd-DFIha-Emp-Rgoki805Yvyyj-Zf.webp",
   "Enola Holmes 3": "https://i.postimg.cc/Zn42s2JY/7k-RYHH9H9Pj-BFwz1Fprb-HB2AAj-I.webp",
@@ -149,7 +150,19 @@ export default function App() {
         deduplicated.push(item);
       }
     }
-    return deduplicated;
+
+    // Map correct poster URLs to all movie content globally on load
+    const mapped = deduplicated.map(item => {
+      if (item.type === 'movie') {
+        const mappedPoster = MOVIES_POSTER_MAPPING[item.title.trim()];
+        if (mappedPoster) {
+          return { ...item, poster: mappedPoster };
+        }
+      }
+      return item;
+    });
+
+    return mapped;
   });
 
   const [watchlist, setWatchlist] = useState<string[]>(() => {
@@ -190,6 +203,61 @@ export default function App() {
       setIsLoading(false);
     }
   }, [activeView, currentUser]);
+
+  // Fetch and apply cached movie artwork mappings on mount
+  useEffect(() => {
+    async function loadArtworkCache() {
+      try {
+        const res = await fetch('/artwork/cache.json');
+        if (res.ok) {
+          const cache = await res.json();
+          if (cache && cache.mappings) {
+            setContentList(prevList => {
+              const updated = prevList.map(item => {
+                const titleKey = item.title.trim();
+                const cached = cache.mappings[titleKey];
+                if (cached) {
+                  return {
+                    ...item,
+                    poster: cached.poster || item.poster,
+                    backdrop: cached.backdrop || item.backdrop
+                  };
+                }
+                return item;
+              });
+
+              // Also sync back to localStorage if saved
+              const saved = localStorage.getItem('cinelux_custom_content');
+              if (saved) {
+                try {
+                  const parsed = JSON.parse(saved);
+                  const updatedSaved = parsed.map((item: any) => {
+                    const cached = cache.mappings[item.title.trim()];
+                    if (cached) {
+                      return {
+                        ...item,
+                        poster: cached.poster || item.poster,
+                        backdrop: cached.backdrop || item.backdrop
+                      };
+                    }
+                    return item;
+                  });
+                  localStorage.setItem('cinelux_custom_content', JSON.stringify(updatedSaved));
+                } catch (err) {
+                  console.error('Failed to update localStorage with cached artwork:', err);
+                }
+              }
+
+              return updated;
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load artwork cache:', err);
+      }
+    }
+    loadArtworkCache();
+  }, []);
   
   // Track the last non-details/non-player view to return to
   const [lastListView, setLastListView] = useState<ViewState>('home');
@@ -856,7 +924,10 @@ export default function App() {
         {/* VIEW G: MOVIE / TV SHOW DETAILS PORTAL */}
         {activeView === 'details' && selectedItem && (
           <DetailsView
-            item={selectedItem}
+            item={{
+              ...selectedItem,
+              poster: selectedItem.type === 'movie' ? (MOVIES_POSTER_MAPPING[selectedItem.title.trim()] || selectedItem.poster) : selectedItem.poster
+            }}
             allContent={contentList}
             watchlist={watchlist}
             favorites={favorites}
@@ -943,8 +1014,13 @@ export default function App() {
           {/* Column 1: Brand pitch */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#22C55E] to-emerald-600 flex items-center justify-center font-bold text-white text-base">
-                C
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#22C55E] to-emerald-600 overflow-hidden">
+                <img 
+                  src="/logo.jpg" 
+                  alt="CineLux Logo" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <span className="font-sans text-lg font-bold tracking-widest text-white">CINE<span className="text-[#22C55E]">LUX</span></span>
             </div>

@@ -1,0 +1,77 @@
+{
+  "mappings": {
+    "Interstellar": {
+      "title": "Interstellar",
+      "poster": "/artwork/posters/interstellar.jpg",
+      "backdrop": "/artwork/backdrops/interstellar.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/2ssWTSVklAEc98frZUQhgtGHx7s.jpg"
+    },
+    "Inception": {
+      "title": "Inception",
+      "poster": "/artwork/posters/inception.jpg",
+      "backdrop": "/artwork/backdrops/inception.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg"
+    },
+    "The Mandalorian and Grogu": {
+      "title": "The Mandalorian and Grogu",
+      "poster": "/artwork/posters/the_mandalorian_and_grogu.jpg",
+      "backdrop": "/artwork/backdrops/the_mandalorian_and_grogu.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/5Vi8dSauVwH1HOsiZceDMbRr1Ca.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/6zg7A9ICOthNR2TSXlT51KvXrsA.jpg"
+    },
+    "Avatar: Fire and Ash": {
+      "title": "Avatar: Fire and Ash",
+      "poster": "/artwork/posters/avatar_fire_and_ash.jpg",
+      "backdrop": "/artwork/backdrops/avatar_fire_and_ash.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/u8DU5fkLoM5tTRukzPC31oGPxaQ.jpg"
+    },
+    "Zootopia 2": {
+      "title": "Zootopia 2",
+      "poster": "/artwork/posters/zootopia_2.jpg",
+      "backdrop": "/artwork/backdrops/zootopia_2.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/lgotja3xMoJZbynwHfcQcJAEMWH.jpg"
+    },
+    "Project Hail Mary": {
+      "title": "Project Hail Mary",
+      "poster": "/artwork/posters/project_hail_mary.jpg",
+      "backdrop": "/artwork/backdrops/project_hail_mary.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/yihdXomYb5kTeSivtFndMy5iDmf.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/8Tfys3mDZVp4tNoH2ktm06a0Tau.jpg"
+    },
+    "Demon Slayer: Kimetsu no Yaiba Infinity Castle": {
+      "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+      "poster": "/artwork/posters/demon_slayer_kimetsu_no_yaiba_infinity_castle.jpg",
+      "backdrop": "/artwork/backdrops/demon_slayer_kimetsu_no_yaiba_infinity_castle.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/1RgPyOhN4DRs225BGTlHJqCudII.jpg"
+    },
+    "Supergirl": {
+      "title": "Supergirl",
+      "poster": "/artwork/posters/supergirl.jpg",
+      "backdrop": "/artwork/backdrops/supergirl.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/moejGxR2haap29d9NQ7qe8x4eGj.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/8CIgg0gCHIYz0jrx5IcZEOy047J.jpg"
+    },
+    "The Shawshank Redemption": {
+      "title": "The Shawshank Redemption",
+      "poster": "/artwork/posters/the_shawshank_redemption.jpg",
+      "backdrop": "/artwork/backdrops/the_shawshank_redemption.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg"
+    },
+    "The Get Out": {
+      "title": "The Get Out",
+      "poster": "/artwork/posters/the_get_out.jpg",
+      "backdrop": "/artwork/backdrops/the_get_out.jpg",
+      "originalPoster": "https://media.themoviedb.org/t/p/w780/zlkeH0s7dDxcnuPcHBqAyXFUxqN.jpg",
+      "originalBackdrop": "https://media.themoviedb.org/t/p/w1280/mVHyU4pnu9b2LWByPGGM0GGCA1v.jpg"
+    }
+  },
+  "syncStatus": "syncing",
+  "processedCount": 10,
+  "totalCount": 74
+}

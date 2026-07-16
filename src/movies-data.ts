@@ -265,7 +265,7 @@ export const COMPACT_MOVIES: CompactMovie[] = [
       "Thriller"
     ],
     "overview": "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception eventually reaches a boiling point.",
-    "poster": "https://image.tmdb.org/t/p/w500/zlkeH0s7dDxcnuPcHBqAyXFUxqN.jpg",
+    "poster": "https://i.postimg.cc/VNxMBczy/t-FXc-Ecc-SQMf3lfhf-XKSU9i-RBpa3.webp",
     "backdrop": "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=1200&auto=format&fit=crop",
     "director": "Jordan Peele",
     "cast": [

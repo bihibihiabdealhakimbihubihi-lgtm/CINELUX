@@ -8,6 +8,7 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
+import { getArtworkCache, syncArtwork } from './src/artworkService';
 
 // Load environment variables
 dotenv.config();
@@ -19,9 +20,42 @@ async function startServer() {
   // JSON parsing middleware
   app.use(express.json());
 
+  // Serve static public/artwork folder before other middlewares
+  app.use('/artwork', express.static(path.join(process.cwd(), 'public/artwork')));
+
   // API Routes go FIRST
   app.get('/api/health', (req, res) => {
     res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+  });
+
+  // Get current artwork cache mappings and sync status
+  app.get('/api/artwork/cache', (req, res) => {
+    try {
+      res.json(getArtworkCache());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // Diagnostics endpoint for testing API key presence
+  app.get('/api/test-key', (req, res) => {
+    const key = process.env.GEMINI_API_KEY;
+    const isOk = key && key !== 'MY_GEMINI_API_KEY' && key.trim() !== '';
+    res.json({
+      exists: !!key,
+      isPlaceholder: key === 'MY_GEMINI_API_KEY',
+      isValid: isOk,
+      prefix: key ? key.substring(0, 4) + '...' : 'none'
+    });
+  });
+
+  // Trigger manual sync
+  app.post('/api/artwork/trigger-sync', (req, res) => {
+    const force = req.body.force === true;
+    syncArtwork(force).catch(err => {
+      console.error('[Server] Manual artwork sync background error:', err);
+    });
+    res.json({ message: 'Sync started in background', status: 'syncing' });
   });
 
   // Lazy initialize Gemini client safely
@@ -208,6 +242,14 @@ Guidelines:
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`CineLux streaming server running at http://localhost:${PORT}`);
+    
+    // Automatically trigger artwork sync in background on boot
+    setTimeout(() => {
+      console.log('[Server] Starting automatic background artwork sync...');
+      syncArtwork().catch(err => {
+        console.error('[Server] Startup artwork sync failed:', err);
+      });
+    }, 2000);
   });
 }
 

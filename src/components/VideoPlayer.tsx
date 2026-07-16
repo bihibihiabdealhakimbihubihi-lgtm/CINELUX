@@ -370,18 +370,38 @@ export default function VideoPlayer({
     return 'bg-black/60 px-4 py-1.5';
   };
 
+  const rawItem = item as any;
+  const posterUrl = rawItem.poster || rawItem.image || rawItem.imageUrl || rawItem.thumbnail || rawItem.cover || rawItem.posterUrl || item.backdrop;
+
   return (
     <div
       ref={containerRef}
       id="custom-cinematic-video-player"
       className="fixed inset-0 w-full h-full bg-[#030303] z-[9999] flex items-center justify-center select-none overflow-hidden"
     >
+      {/* Blurred Poster Background Cover */}
+      <div 
+        className="absolute inset-0 transition-all duration-1000 scale-110 pointer-events-none"
+        style={{ 
+          backgroundImage: `url(${posterUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(24px)',
+          opacity: 0.9,
+        }}
+      />
+      {/* Black transparent overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ backgroundColor: 'rgba(0,0,0,0.55)' }}
+      />
+
       {/* HTML5 video element */}
       {!hasError ? (
         <video
           ref={videoRef}
           src={videoSource}
-          className="w-full h-full max-h-screen object-contain"
+          className="w-full h-full max-h-screen object-contain relative z-10"
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onClick={togglePlay}
@@ -392,18 +412,18 @@ export default function VideoPlayer({
         /* Immersive Simulated Theater Experience */
         <div 
           onClick={togglePlay}
-          className="absolute inset-0 w-full h-full flex flex-col items-center justify-center relative cursor-pointer"
+          className="absolute inset-0 w-full h-full flex flex-col items-center justify-center relative cursor-pointer z-10"
         >
           {/* Blurred Background Ambient Light */}
           <div 
             className="absolute inset-0 bg-cover bg-center transition-all duration-1000 scale-105 pointer-events-none opacity-20 filter blur-2xl"
-            style={{ backgroundImage: `url(${item.backdrop})` }}
+            style={{ backgroundImage: `url(${posterUrl})` }}
           />
           
           {/* High-quality movie backdrop in center with dramatic vignette */}
           <div className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.85)] flex items-center justify-center">
             <img 
-              src={item.backdrop} 
+              src={posterUrl} 
               alt={item.title} 
               className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
               referrerPolicy="no-referrer"

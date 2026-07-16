@@ -331,32 +331,105 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
       </div>
 
 
-      {/* 2. QUICK STATS */}
-      <div id="quick-stats" className="py-12 bg-[#0B1220] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5 relative z-20">
+      {/* 2. QUICK STATS / FEATURES SECTION */}
+      <div id="quick-stats" className="py-16 bg-[#0B0F19] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/[0.04] relative z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { value: '20,000+', label: 'Movies', icon: '🎬', desc: 'Curated world blockbusters' },
-            { value: '5,000+', label: 'TV Shows', icon: '📺', desc: 'Full premium series' },
-            { value: 'Updated Daily', label: 'Fresh Content', icon: '⭐', desc: 'Synced with new releases' },
-            { value: 'HD & 4K Streaming', label: 'Max Fidelity', icon: '💎', desc: 'Dolby Atmos immersive audio' },
+            { 
+              value: '20,000+', 
+              label: 'Massive Library', 
+              image: '/3d_clapperboard_reel.jpg', 
+              desc: 'Curated blockbuster movies in peak bitrates.',
+              glowBg: 'bg-emerald-500/10',
+              borderHover: 'hover:border-emerald-500/25 hover:shadow-emerald-500/5',
+              accent: 'text-emerald-400'
+            },
+            { 
+              value: '5,000+', 
+              label: 'TV Shows', 
+              image: '/3d_oled_smart_tv.jpg', 
+              desc: 'Full premium high-fidelity series & seasons.',
+              glowBg: 'bg-blue-500/15',
+              borderHover: 'hover:border-blue-500/25 hover:shadow-blue-500/5',
+              accent: 'text-blue-400'
+            },
+            { 
+              value: 'Updated Daily', 
+              label: 'Fresh Content', 
+              image: '/3d_golden_star.jpg', 
+              desc: 'New cinema titles synchronized every hour.',
+              glowBg: 'bg-amber-500/15',
+              borderHover: 'hover:border-amber-500/25 hover:shadow-amber-500/5',
+              accent: 'text-amber-400'
+            },
+            { 
+              value: 'HD & 4K Streaming', 
+              label: 'Max Fidelity', 
+              image: '/3d_blue_diamond.jpg', 
+              desc: 'Spatial Dolby Atmos & raw video streaming.',
+              glowBg: 'bg-cyan-500/15',
+              borderHover: 'hover:border-cyan-500/25 hover:shadow-cyan-500/5',
+              accent: 'text-cyan-400'
+            },
           ].map((stat, idx) => (
             <motion.div
               key={idx}
               whileHover={{ 
-                y: -6, 
-                borderColor: 'rgba(255, 255, 255, 0.2)',
-                boxShadow: '0 12px 30px -10px rgba(0, 0, 0, 0.5)'
+                y: -8, 
+                scale: 1.02,
+                transition: { duration: 0.3, ease: 'easeOut' }
               }}
-              transition={{ duration: 0.3 }}
-              className="p-6 rounded-2xl bg-[#1F2937]/50 border border-white/[0.08] flex items-center gap-5 text-left transition-all group cursor-pointer"
+              className={`relative overflow-hidden p-6 rounded-[20px] bg-gradient-to-br from-[#121829]/70 to-[#0B0F19]/90 backdrop-blur-xl border border-white/[0.05] flex items-center gap-5 text-left transition-all duration-300 group cursor-pointer shadow-[0_8px_30px_rgb(0,0,0,0.6)] ${stat.borderHover}`}
             >
-              <div className="text-3xl bg-white/5 w-14 h-14 rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/5 group-hover:border-white/20 transition-all">
-                {stat.icon}
+              {/* Radial glow in the background of each card */}
+              <div className={`absolute -right-10 -bottom-10 w-28 h-28 rounded-full blur-[35px] pointer-events-none transition-all duration-500 opacity-20 group-hover:opacity-45 ${stat.glowBg}`} />
+              
+              {/* Diagonal shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.015] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+              {/* Extra Sparkles / particles overlay for Card 3 (Updated Daily) */}
+              {idx === 2 && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[20px]">
+                  <div className="absolute top-3 left-1/4 w-1 h-1 rounded-full bg-amber-400 animate-ping opacity-40" style={{ animationDuration: '2.5s' }} />
+                  <div className="absolute bottom-3 right-1/4 w-1 h-1 rounded-full bg-yellow-300 animate-pulse opacity-60" style={{ animationDuration: '1.8s' }} />
+                  <div className="absolute top-1/2 right-3 w-0.5 h-0.5 rounded-full bg-amber-200 animate-ping opacity-50" style={{ animationDuration: '3.2s' }} />
+                </div>
+              )}
+
+              {/* Card 4 subtle light beams */}
+              {idx === 3 && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[20px]">
+                  <div className="absolute -left-10 top-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent rotate-[35deg] group-hover:translate-y-20 transition-all duration-700" />
+                </div>
+              )}
+
+              {/* 3D Asset container */}
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[16px] overflow-hidden flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-white/[0.02] to-white/[0.08] border border-white/[0.1] shadow-[inset_0_1.5px_1.5px_rgba(255,255,255,0.15)] group-hover:scale-110 group-hover:border-white/[0.25] transition-all duration-500 ease-out">
+                <img 
+                  src={stat.image} 
+                  alt={stat.value} 
+                  className="w-full h-full object-cover select-none pointer-events-none" 
+                  referrerPolicy="no-referrer"
+                />
+                
+                {/* Specific subtle mix-blend lights */}
+                {idx === 0 && <div className="absolute inset-0 bg-emerald-500/10 mix-blend-screen pointer-events-none" />}
+                {idx === 1 && <div className="absolute inset-0 bg-blue-500/15 mix-blend-screen pointer-events-none" />}
+                {idx === 2 && <div className="absolute inset-0 bg-amber-500/10 mix-blend-screen pointer-events-none" />}
+                {idx === 3 && <div className="absolute inset-0 bg-cyan-500/15 mix-blend-screen pointer-events-none" />}
               </div>
-              <div>
-                <h4 className="text-xl font-black text-white group-hover:text-slate-200 transition-colors">{stat.value}</h4>
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{stat.label}</p>
-                <p className="text-[10px] text-gray-500 mt-0.5 leading-normal">{stat.desc}</p>
+
+              {/* Text metadata */}
+              <div className="flex-1 min-w-0">
+                <h4 className="text-base sm:text-lg font-black text-white group-hover:text-[#22C55E] tracking-tight transition-colors truncate">
+                  {stat.value}
+                </h4>
+                <p className="text-xs text-gray-300 font-extrabold uppercase tracking-widest mt-0.5">
+                  {stat.label}
+                </p>
+                <p className="text-[11px] text-gray-500 font-medium mt-1 leading-normal line-clamp-2">
+                  {stat.desc}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -482,7 +555,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* 4. WHY CHOOSE CINELUX */}
-      <div className="py-24 bg-[#111827] border-t border-b border-white/[0.08] relative z-20">
+      <div className="py-24 bg-[#0B0F19] border-t border-b border-white/[0.04] relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-2xl mx-auto mb-16">
             <span className="text-xs text-gray-400 font-black uppercase tracking-widest block mb-1">Unmatched Streaming</span>
@@ -497,40 +570,66 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             {[
               {
-                icon: Zap,
-                title: 'Lightning Fast Streaming',
-                desc: 'Enjoy smooth and high-quality playback with optimized global CDN delivery.',
-                color: 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+                image: '/3d_lightning_bolt.jpg',
+                title: 'Ultra-Fast Streaming',
+                desc: 'Stream instantly with global high-speed servers and ultra-low latency.',
+                glowBg: 'bg-amber-500/15',
+                borderHover: 'hover:border-amber-500/30 hover:shadow-amber-500/5',
+                blendColor: 'bg-amber-500/10'
               },
               {
-                icon: Film,
+                image: '/3d_clapperboard_reel.jpg',
                 title: 'Premium Movie Library',
-                desc: 'Thousands of carefully selected movies and TV shows, formatted in peak bitrates.',
-                color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+                desc: 'Discover thousands of trending movies and TV shows updated every day.',
+                glowBg: 'bg-emerald-500/15',
+                borderHover: 'hover:border-emerald-500/30 hover:shadow-emerald-500/5',
+                blendColor: 'bg-emerald-500/10'
               },
               {
-                icon: Heart,
-                title: 'Build Your Watchlist',
-                desc: 'Save your favorite movies and continue watching anytime with dynamic storage.',
-                color: 'text-pink-400 bg-pink-500/10 border-pink-500/20'
+                image: '/3d_bookmark_favorites.jpg',
+                title: 'Personal Watchlist',
+                desc: 'Save your favorite movies and continue watching across all your devices.',
+                glowBg: 'bg-blue-500/15',
+                borderHover: 'hover:border-blue-500/30 hover:shadow-blue-500/5',
+                blendColor: 'bg-blue-500/10'
               }
             ].map((feat, idx) => {
-              const Icon = feat.icon;
               return (
                 <motion.div
                   key={idx}
-                  whileHover={{ y: -5 }}
-                  className="p-8 rounded-3xl bg-[#1F2937] border border-white/[0.08] hover:bg-[#2D3748] hover:border-white/20 transition-all flex flex-col gap-5 group cursor-pointer shadow-lg"
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: 'easeOut' }
+                  }}
+                  className={`relative overflow-hidden p-8 rounded-[24px] bg-gradient-to-br from-[#121829]/70 to-[#0B0F19]/90 backdrop-blur-xl border border-white/[0.05] flex flex-col gap-6 transition-all duration-300 group cursor-pointer shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${feat.borderHover}`}
                 >
-                  <div className={`p-4 rounded-2xl w-fit border ${feat.color}`}>
-                    <Icon className="w-6 h-6" />
+                  {/* Radial neon glow background */}
+                  <div className={`absolute -right-12 -bottom-12 w-32 h-32 rounded-full blur-[40px] pointer-events-none transition-all duration-500 opacity-20 group-hover:opacity-45 ${feat.glowBg}`} />
+
+                  {/* Diagonal premium shine sheen */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.015] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+                  {/* 3D Render container */}
+                  <div className="relative w-20 h-20 rounded-[18px] overflow-hidden flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-white/[0.02] to-white/[0.08] border border-white/[0.1] shadow-[inset_0_1.5px_1.5px_rgba(255,255,255,0.15)] group-hover:scale-110 group-hover:border-white/[0.25] transition-all duration-500 ease-out">
+                    <img 
+                      src={feat.image} 
+                      alt={feat.title} 
+                      className="w-full h-full object-cover select-none pointer-events-none" 
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className={`absolute inset-0 ${feat.blendColor} mix-blend-screen pointer-events-none`} />
                   </div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-slate-200 transition-colors">
-                    {feat.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">
-                    {feat.desc}
-                  </p>
+
+                  {/* Card Content */}
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#22C55E] transition-colors tracking-tight">
+                      {feat.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">
+                      {feat.desc}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
