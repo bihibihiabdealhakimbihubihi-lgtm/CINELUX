@@ -37,62 +37,6 @@ interface LandingPageProps {
 }
 
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
-  // Deduplicate COMPACT_MOVIES by title, poster, and release date
-  const uniqueMovies: typeof COMPACT_MOVIES = [];
-  const seenKeys = new Set<string>();
-  for (const m of COMPACT_MOVIES) {
-    const key = `${m.title.trim().toLowerCase()}|${m.poster.trim()}|${m.releaseDate.trim().toLowerCase()}`;
-    if (!seenKeys.has(key)) {
-      seenKeys.add(key);
-      uniqueMovies.push(m);
-    }
-  }
-
-  // Extract featured movies (8) from our datasets
-  const featuredMovies = uniqueMovies.filter(m => m.isFeatured).slice(0, 8);
-
-  // Hero section carousel states
-  const [heroActiveIndex, setHeroActiveIndex] = useState(0);
-  const [isHeroHovered, setIsHeroHovered] = useState(false);
-  const heroTouchStartX = useRef<number | null>(null);
-  const heroTouchEndX = useRef<number | null>(null);
-
-  const handleHeroTouchStart = (e: React.TouchEvent) => {
-    heroTouchStartX.current = e.touches[0].clientX;
-    heroTouchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleHeroTouchMove = (e: React.TouchEvent) => {
-    heroTouchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleHeroTouchEnd = () => {
-    if (heroTouchStartX.current === null || heroTouchEndX.current === null) return;
-    const diffX = heroTouchStartX.current - heroTouchEndX.current;
-    const minSwipeDistance = 40;
-
-    if (Math.abs(diffX) > minSwipeDistance) {
-      if (diffX > 0) {
-        // swipe left -> next slide
-        setHeroActiveIndex((prev) => (prev + 1) % featuredMovies.length);
-      } else {
-        // swipe right -> prev slide
-        setHeroActiveIndex((prev) => (prev - 1 + featuredMovies.length) % featuredMovies.length);
-      }
-    }
-    heroTouchStartX.current = null;
-    heroTouchEndX.current = null;
-  };
-
-  // Auto rotate hero slides every 6.5 seconds
-  useEffect(() => {
-    if (isHeroHovered) return;
-    const interval = setInterval(() => {
-      setHeroActiveIndex((prev) => (prev + 1) % featuredMovies.length);
-    }, 6500);
-    return () => clearInterval(interval);
-  }, [isHeroHovered, featuredMovies.length]);
-
   // Carousel ref and scroll helpers
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -254,6 +198,17 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
     return () => clearInterval(interval);
   }, [isHovered, isTransitioning, virtualIndex]);
 
+  // Deduplicate COMPACT_MOVIES by title, poster, and release date
+  const uniqueMovies: typeof COMPACT_MOVIES = [];
+  const seenKeys = new Set<string>();
+  for (const m of COMPACT_MOVIES) {
+    const key = `${m.title.trim().toLowerCase()}|${m.poster.trim()}|${m.releaseDate.trim().toLowerCase()}`;
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueMovies.push(m);
+    }
+  }
+
   // Extract real trending movies (10-12) from our datasets
   const trendingMovies = uniqueMovies.slice(0, 12);
 
@@ -265,6 +220,8 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
   const activeMovieIndex = (virtualIndex - 5 + trendingMovies.length) % trendingMovies.length;
 
+  // Extract featured movies (8) from our datasets
+  const featuredMovies = uniqueMovies.filter(m => m.isFeatured).slice(0, 8);
   // Fallback to slice if featured list is short
   const featuredRow = featuredMovies.length >= 8 ? featuredMovies : uniqueMovies.slice(12, 20);
 
@@ -290,190 +247,87 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
       `}</style>
       
       {/* 1. HERO SECTION */}
-      <div 
-        className="relative w-full min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-[#0B0F19] rounded-b-[24px] md:rounded-b-[40px] border-b border-white/[0.04] shadow-[0_15px_45px_rgba(0,0,0,0.7)]"
-        onMouseEnter={() => setIsHeroHovered(true)}
-        onMouseLeave={() => setIsHeroHovered(false)}
-        onTouchStart={handleHeroTouchStart}
-        onTouchMove={handleHeroTouchMove}
-        onTouchEnd={handleHeroTouchEnd}
-      >
-        {/* Large movie backdrop with a dark gradient overlay for better text readability */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={heroActiveIndex}
-              initial={{ opacity: 0, scale: 1.04 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
-              style={{ 
-                backgroundImage: `url('${featuredMovies[heroActiveIndex]?.backdrop || "https://i.postimg.cc/XYKPtzSL/2c10a7a7ae96a94d1361096aeed22b07.jpg"}')`
-              }}
-            />
-          </AnimatePresence>
+      <div className="relative w-full min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 px-4 sm:px-6 bg-[#0B1220]">
+        {/* Cinematic overlay image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-100 pointer-events-none"
+          style={{ 
+            backgroundImage: `url('https://i.postimg.cc/XYKPtzSL/2c10a7a7ae96a94d1361096aeed22b07.jpg')`
+          }}
+        />
+        
+        {/* Dark elegant cinematic gradients for absolute legibility */}
+        <div className="absolute inset-0 bg-black/65 z-10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0B1220] to-transparent z-10 pointer-events-none" />
+        
+        {/* Radial subtle premium silver/slate glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-slate-500/5 blur-[120px] pointer-events-none z-10" />
+
+        <div className="max-w-4xl mx-auto text-center relative z-20 flex flex-col items-center">
           
-          {/* Cinema darkness vignette layers */}
-          <div className="absolute inset-0 bg-black/55 z-10 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/60 to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-r from-[#0B0F19]/90 via-[#0B0F19]/40 to-transparent z-10 pointer-events-none hidden md:block" />
-        </div>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-[#CBD5E1] font-bold mb-6 tracking-wider backdrop-blur-md"
+          >
+            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span>The Next Generation Cinema Hub</span>
+          </motion.div>
 
-        {/* Floating cinematic light source */}
-        <div className="absolute top-0 left-1/4 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none z-10" />
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1] max-w-4xl uppercase font-sans text-white"
+          >
+            Discover the World's <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 drop-shadow-[0_2px_15px_rgba(255,255,255,0.15)]">
+              Best Movies.
+            </span>
+          </motion.h1>
 
-        <div className="w-full max-w-7xl mx-auto relative z-20 py-8 md:py-16">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={heroActiveIndex}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center"
-            >
-              {/* Left Column: Content metadata & title */}
-              <div className="col-span-1 md:col-span-7 flex flex-col justify-center text-left">
-                
-                {/* Custom Sparkles Pill / Rating Category Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-wider text-[#CBD5E1] backdrop-blur-md w-fit mb-4 select-none">
-                  <Sparkles className="w-3 h-3 text-[#22C55E] animate-pulse" />
-                  <span>Featured Premiere — CineLux Exclusive</span>
-                </div>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-sm sm:text-base md:text-lg text-[#CBD5E1] max-w-2xl mb-10 leading-relaxed font-normal"
+          >
+            Explore thousands of movies and TV shows in stunning HD and 4K. Build your watchlist, discover new favorites, and enjoy a premium cinematic experience.
+          </motion.p>
 
-                {/* Main Movie Title using Clamp Sizing */}
-                <h1 className="font-extrabold uppercase tracking-tight text-white mb-4 leading-[1.1] text-[clamp(1.75rem,4.5vw,3.5rem)] font-sans drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
-                  {featuredMovies[heroActiveIndex]?.title}
-                </h1>
-
-                {/* Metadata badges row */}
-                <div className="flex flex-wrap items-center gap-2.5 mb-6 text-gray-300">
-                  {/* IMDb Rating Badge */}
-                  <span className="inline-flex items-center gap-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-xs font-black">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 stroke-none" />
-                    <span>{featuredMovies[heroActiveIndex]?.rating || '8.5'} Rating</span>
-                  </span>
-
-                  {/* Year */}
-                  <span className="text-xs font-extrabold bg-white/5 border border-white/10 px-2 py-0.5 rounded">{featuredMovies[heroActiveIndex]?.year}</span>
-
-                  {/* Runtime */}
-                  <span className="text-xs font-semibold bg-white/5 border border-white/10 px-2 py-0.5 rounded">
-                    {featuredMovies[heroActiveIndex]?.runtime ? `${Math.floor(featuredMovies[heroActiveIndex].runtime / 60)}h ${featuredMovies[heroActiveIndex].runtime % 60}m` : '2h 15m'}
-                  </span>
-
-                  {/* Quality Badges */}
-                  <span className="text-[10px] font-black tracking-widest text-white px-1.5 py-0.5 rounded border border-white/20 bg-black/40 shadow-sm">4K</span>
-                  <span className="text-[10px] font-black tracking-widest text-white px-1.5 py-0.5 rounded border border-white/20 bg-black/40 shadow-sm">HDR</span>
-                  <span className="text-[10px] font-black tracking-widest text-[#22C55E] px-1.5 py-0.5 rounded border border-[#22C55E]/30 bg-black/40 shadow-sm">Dolby Vision</span>
-                </div>
-
-                {/* Genre badges list */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {featuredMovies[heroActiveIndex]?.genres?.map((genre, gIdx) => (
-                    <span key={gIdx} className="text-[10px] font-bold tracking-wider uppercase text-gray-300 px-2.5 py-1 rounded-full bg-white/5 border border-white/5 backdrop-blur-md">
-                      {genre}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Floating card for Mobile (Shows Movie Poster) */}
-                <div className="block md:hidden mb-6">
-                  <div className="w-28 sm:w-36 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/10 relative z-20">
-                    <img 
-                      src={featuredMovies[heroActiveIndex]?.poster} 
-                      alt={featuredMovies[heroActiveIndex]?.title} 
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[#E2E8F0] max-w-xl mb-8 leading-relaxed font-normal line-clamp-3 sm:line-clamp-4 drop-shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
-                  {featuredMovies[heroActiveIndex]?.overview || 'Explore stunning catalog items updated continuously.'}
-                </p>
-
-                {/* Actions with touch targets minimum 48px (using h-12 or h-14) */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-                  {/* Primary "Watch Now" Button (touch target is 52px: h-13) */}
-                  <div className="relative group/btn w-full sm:w-auto">
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#16A34A] to-[#047857] translate-y-1 blur-md opacity-80 transition-all duration-300 group-hover/btn:translate-y-1.5 group-hover/btn:opacity-100" />
-                    <button
-                      onClick={onGetStarted}
-                      className="relative w-full sm:w-auto h-13 px-8 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/10 flex items-center justify-center gap-3 select-none"
-                    >
-                      <Play className="w-4 h-4 fill-white stroke-none" />
-                      <span>Watch Now</span>
-                    </button>
-                  </div>
-
-                  {/* Secondary "More Info" Button (touch target is 52px: h-13) */}
-                  <button
-                    onClick={onGetStarted}
-                    className="h-13 px-8 rounded-xl bg-white/5 hover:bg-white/10 backdrop-blur-md text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/10 flex items-center justify-center gap-2 select-none shadow-[0_4px_12px_rgba(0,0,0,0.25)] hover:border-white/20"
-                  >
-                    <span>More Info</span>
-                  </button>
-                </div>
-
-              </div>
-
-              {/* Right Column: Floating 3D poster card (Desktop Only) */}
-              <div className="col-span-1 md:col-span-5 hidden md:flex justify-center items-center">
-                <motion.div 
-                  initial={{ rotateY: 10, scale: 0.95 }}
-                  whileHover={{ rotateY: 0, scale: 1.02 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="relative group/poster w-64 lg:w-72 aspect-[2/3] rounded-2xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.85)] border border-white/10 hover:border-white/25 hover:shadow-[#22C55E]/10 transition-all duration-500 ease-out flex-shrink-0"
-                >
-                  <img 
-                    src={featuredMovies[heroActiveIndex]?.poster} 
-                    alt={featuredMovies[heroActiveIndex]?.title} 
-                    className="w-full h-full object-cover select-none pointer-events-none"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                  {/* Subtle diagonal glossy gleam effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover/poster:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
-                </motion.div>
-              </div>
-
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Carousel indicator dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-30">
-          {featuredMovies.map((_, idx) => (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="relative group w-full sm:w-auto flex justify-center"
+          >
+            {/* Elegant 3D shadow layer underneath */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#16A34A] to-[#047857] translate-y-1.5 blur-md opacity-80 transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-100" />
+            
             <button
-              key={idx}
-              onClick={() => setHeroActiveIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-300 ${idx === heroActiveIndex ? 'w-8 bg-[#22C55E]' : 'w-2 bg-white/25 hover:bg-white/50'}`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
+              onClick={onGetStarted}
+              className="relative w-full sm:w-auto px-10 py-5 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs sm:text-sm font-black uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/10 flex items-center justify-center gap-3 select-none shadow-[0_4px_14px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_20px_rgba(34,197,94,0.45)]"
+            >
+              <span>Get Started — It's Free</span>
+              <Play className="w-4 h-4 fill-white stroke-none animate-pulse" />
+            </button>
+          </motion.div>
         </div>
 
-        {/* Left Arrow Navigation (Desktop Only) */}
-        <button
-          onClick={() => setHeroActiveIndex((prev) => (prev - 1 + featuredMovies.length) % featuredMovies.length)}
-          className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 border border-white/10 hover:border-white/25 flex items-center justify-center text-white/70 hover:text-white transition-all z-30 opacity-0 md:opacity-100 hover:scale-110 active:scale-95 cursor-pointer"
-          aria-label="Previous slide"
+        {/* Subtle Scroll-Down Indicator */}
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer text-gray-500 hover:text-white transition-colors z-20"
+          onClick={() => {
+            const nextSec = document.getElementById('quick-stats');
+            if (nextSec) nextSec.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        {/* Right Arrow Navigation (Desktop Only) */}
-        <button
-          onClick={() => setHeroActiveIndex((prev) => (prev + 1) % featuredMovies.length)}
-          className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 border border-white/10 hover:border-white/25 flex items-center justify-center text-white/70 hover:text-white transition-all z-30 opacity-0 md:opacity-100 hover:scale-110 active:scale-95 cursor-pointer"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+          <span className="text-[9px] tracking-widest uppercase font-bold text-gray-500">Scroll Down</span>
+          <ChevronDown className="w-4 h-4 text-gray-500" />
+        </motion.div>
       </div>
 
 
