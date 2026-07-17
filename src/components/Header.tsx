@@ -106,11 +106,11 @@ export default function Header({
             onClick={() => setActiveTab('home')}
             className="cursor-pointer flex items-center gap-1.5 group"
           >
-            <div className="w-7 h-7 rounded-md bg-gradient-to-tr from-[#22C55E] to-emerald-600 shadow-md shadow-[#22C55E]/20 group-hover:scale-105 transition-transform overflow-hidden">
+            <div className="w-7 h-7 rounded-[12px] bg-transparent shadow-lg shadow-black/40 border border-white/5 group-hover:scale-105 transition-transform overflow-hidden flex items-center justify-center">
               <img 
-                src="/logo.jpg" 
+                src="https://i.postimg.cc/zXtmmyFf/images.jpg" 
                 alt="CineLux Logo" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover mix-blend-multiply"
                 referrerPolicy="no-referrer"
               />
             </div>
