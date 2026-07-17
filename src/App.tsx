@@ -1014,11 +1014,11 @@ export default function App() {
           {/* Column 1: Brand pitch */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#22C55E] to-emerald-600 overflow-hidden">
+              <div className="w-10 h-10 rounded-[10px] bg-transparent shadow-lg shadow-black/40 border border-white/5 overflow-hidden flex items-center justify-center">
                 <img 
-                  src="/logo.jpg" 
+                  src="https://i.postimg.cc/zXtmmyFf/images.jpg" 
                   alt="CineLux Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>

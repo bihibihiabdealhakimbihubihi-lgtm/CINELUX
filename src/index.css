@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  background-color: #0B1220;
+  background-color: #090909;
   color: #ffffff;
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -33,13 +33,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B1220;
+  background: #090909;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #1F2937;
   border-radius: 999px;
-  border: 2px solid #0B1220;
+  border: 2px solid #090909;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -162,5 +162,288 @@ body {
 
 .animate-shimmer {
   animation: shimmer 1.8s infinite;
+}
+
+/* Custom Cinematic 3D Background System */
+#cinelux-master-application,
+div.bg-\[\#0B1220\],
+main.bg-\[\#0B1220\],
+section.bg-\[\#0B1220\] {
+  background-color: transparent !important;
+}
+
+.cinematic-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at top, #121212 0%, #090909 100%);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -50;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.spiderweb-canvas-el {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -10;
+}
+
+/* Volumetric Ambient Glow Blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.glow-blue {
+  top: -10vh;
+  left: 10vw;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(29, 78, 216, 0.1) 70%, transparent 100%);
+  animation: glow-float-1 35s infinite alternate ease-in-out;
+}
+
+.glow-emerald {
+  bottom: -15vh;
+  right: 5vw;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(4, 120, 87, 0.08) 70%, transparent 100%);
+  animation: glow-float-2 42s infinite alternate ease-in-out;
+}
+
+.glow-center {
+  top: 35vh;
+  left: 30vw;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 80%);
+  animation: glow-float-3 48s infinite alternate ease-in-out;
+}
+
+/* Volumetric Light Beams */
+.light-beam {
+  position: absolute;
+  top: -30vh;
+  width: 30vw;
+  height: 160vh;
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.02) 0%, rgba(16, 185, 129, 0.01) 50%, transparent 100%);
+  transform: rotate(-12deg);
+  filter: blur(55px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform-origin: top center;
+}
+
+.beam-1 {
+  left: 5vw;
+  animation: beam-sway-1 25s infinite ease-in-out alternate;
+}
+
+.beam-2 {
+  right: 10vw;
+  background: linear-gradient(to bottom, rgba(16, 185, 129, 0.015) 0%, rgba(59, 130, 246, 0.008) 60%, transparent 100%);
+  animation: beam-sway-2 30s infinite ease-in-out alternate;
+}
+
+/* Infinite Seamless Floating Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particles-small {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 
+    4vw 8vh rgba(255, 255, 255, 0.07), 15vw 82vh rgba(52, 211, 153, 0.09), 19vw 30vh rgba(255, 255, 255, 0.05), 25vw 52vh rgba(59, 130, 246, 0.11),
+    32vw 68vh rgba(255, 255, 255, 0.07), 39vw 12vh rgba(52, 211, 153, 0.05), 43vw 88vh rgba(255, 255, 255, 0.04), 50vw 40vh rgba(59, 130, 246, 0.07),
+    54vw 64vh rgba(255, 255, 255, 0.07), 62vw 18vh rgba(52, 211, 153, 0.09), 69vw 77vh rgba(255, 255, 255, 0.05), 75vw 35vh rgba(59, 130, 246, 0.09),
+    83vw 54vh rgba(255, 255, 255, 0.07), 90vw 8vh rgba(52, 211, 153, 0.07), 96vw 72vh rgba(255, 255, 255, 0.05), 99vw 23vh rgba(59, 130, 246, 0.07),
+    8vw 45vh rgba(255, 255, 255, 0.06), 17vw 59vh rgba(52, 211, 153, 0.05), 23vw 15vh rgba(255, 255, 255, 0.07), 30vw 81vh rgba(59, 130, 246, 0.09),
+    36vw 33vh rgba(255, 255, 255, 0.04), 47vw 48vh rgba(52, 211, 153, 0.07), 52vw 10vh rgba(255, 255, 255, 0.05), 59vw 85vh rgba(59, 130, 246, 0.11),
+    65vw 37vh rgba(255, 255, 255, 0.07), 72vw 69vh rgba(52, 211, 153, 0.05), 79vw 21vh rgba(255, 255, 255, 0.07), 87vw 58vh rgba(59, 130, 246, 0.07),
+    92vw 44vh rgba(255, 255, 255, 0.06), 95vw 90vh rgba(52, 211, 153, 0.07), 3vw 76vh rgba(255, 255, 255, 0.04), 81vw 2vh rgba(59, 130, 246, 0.11),
+    4vw 108vh rgba(255, 255, 255, 0.07), 15vw 182vh rgba(52, 211, 153, 0.09), 19vw 130vh rgba(255, 255, 255, 0.05), 25vw 152vh rgba(59, 130, 246, 0.11),
+    32vw 168vh rgba(255, 255, 255, 0.07), 39vw 112vh rgba(52, 211, 153, 0.05), 43vw 188vh rgba(255, 255, 255, 0.04), 50vw 140vh rgba(59, 130, 246, 0.07),
+    54vw 164vh rgba(255, 255, 255, 0.07), 62vw 118vh rgba(52, 211, 153, 0.09), 69vw 177vh rgba(255, 255, 255, 0.05), 75vw 135vh rgba(59, 130, 246, 0.09),
+    83vw 154vh rgba(255, 255, 255, 0.07), 90vw 108vh rgba(52, 211, 153, 0.07), 96vw 172vh rgba(255, 255, 255, 0.05), 99vw 123vh rgba(59, 130, 246, 0.07),
+    8vw 145vh rgba(255, 255, 255, 0.06), 17vw 159vh rgba(52, 211, 153, 0.05), 23vw 115vh rgba(255, 255, 255, 0.07), 30vw 181vh rgba(59, 130, 246, 0.09),
+    36vw 133vh rgba(255, 255, 255, 0.04), 47vw 148vh rgba(52, 211, 153, 0.07), 52vw 110vh rgba(255, 255, 255, 0.05), 59vw 185vh rgba(59, 130, 246, 0.11),
+    65vw 137vh rgba(255, 255, 255, 0.07), 72vw 169vh rgba(52, 211, 153, 0.05), 79vw 121vh rgba(255, 255, 255, 0.07), 87vw 158vh rgba(59, 130, 246, 0.07),
+    92vw 144vh rgba(255, 255, 255, 0.06), 95vw 190vh rgba(52, 211, 153, 0.07), 3vw 176vh rgba(255, 255, 255, 0.04), 81vw 102vh rgba(59, 130, 246, 0.11);
+  animation: float-particles-vertical 110s linear infinite;
+}
+
+.particles-medium {
+  width: 1.5px;
+  height: 1.5px;
+  background: transparent;
+  box-shadow: 
+    11vw 42vh rgba(52, 211, 153, 0.10), 23vw 12vh rgba(59, 130, 246, 0.12), 36vw 76vh rgba(255, 255, 255, 0.06), 49vw 22vh rgba(52, 211, 153, 0.10),
+    56vw 57vh rgba(255, 255, 255, 0.05), 68vw 85vh rgba(59, 130, 246, 0.08), 79vw 12vh rgba(255, 255, 255, 0.06), 86vw 47vh rgba(52, 211, 153, 0.12),
+    93vw 78vh rgba(59, 130, 246, 0.10), 6vw 71vh rgba(255, 255, 255, 0.05), 19vw 57vh rgba(52, 211, 153, 0.10), 30vw 27vh rgba(59, 130, 246, 0.08),
+    43vw 90vh rgba(255, 255, 255, 0.06), 62vw 8vh rgba(52, 211, 153, 0.10), 74vw 37vh rgba(59, 130, 246, 0.12), 89vw 66vh rgba(255, 255, 255, 0.05),
+    11vw 142vh rgba(52, 211, 153, 0.10), 23vw 112vh rgba(59, 130, 246, 0.12), 36vw 176vh rgba(255, 255, 255, 0.06), 49vw 122vh rgba(52, 211, 153, 0.10),
+    56vw 157vh rgba(255, 255, 255, 0.05), 68vw 185vh rgba(59, 130, 246, 0.08), 79vw 112vh rgba(255, 255, 255, 0.06), 86vw 147vh rgba(52, 211, 153, 0.12),
+    93vw 178vh rgba(59, 130, 246, 0.10), 6vw 171vh rgba(255, 255, 255, 0.05), 19vw 157vh rgba(52, 211, 153, 0.10), 30vw 127vh rgba(59, 130, 246, 0.08),
+    43vw 190vh rgba(255, 255, 255, 0.06), 62vw 108vh rgba(52, 211, 153, 0.10), 74vw 137vh rgba(59, 130, 246, 0.12), 89vw 166vh rgba(255, 255, 255, 0.05);
+  animation: float-particles-vertical 75s linear infinite;
+}
+
+.particles-large {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 
+    16vw 32vh rgba(59, 130, 246, 0.14), 31vw 71vh rgba(52, 211, 153, 0.12), 51vw 12vh rgba(255, 255, 255, 0.10), 71vw 81vh rgba(59, 130, 246, 0.12),
+    86vw 37vh rgba(52, 211, 153, 0.14), 96vw 8vh rgba(255, 255, 255, 0.08), 6vw 86vh rgba(59, 130, 246, 0.12), 41vw 57vh rgba(52, 211, 153, 0.12),
+    16vw 132vh rgba(59, 130, 246, 0.14), 31vw 171vh rgba(52, 211, 153, 0.12), 51vw 112vh rgba(255, 255, 255, 0.10), 71vw 181vh rgba(59, 130, 246, 0.12),
+    86vw 137vh rgba(52, 211, 153, 0.14), 96vw 108vh rgba(255, 255, 255, 0.08), 6vw 186vh rgba(59, 130, 246, 0.12), 41vw 157vh rgba(52, 211, 153, 0.12);
+  animation: float-particles-vertical 48s linear infinite;
+  filter: blur(0.5px);
+}
+
+/* Drifting Cinematic Fog */
+.cinematic-fog {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(9, 9, 9, 0) 20%, rgba(9, 9, 9, 0.35) 100%),
+              radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.015) 0%, transparent 50%),
+              radial-gradient(circle at 90% 20%, rgba(59, 130, 246, 0.015) 0%, transparent 50%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Elegant Abstract 3D Glass Corner Panels */
+.glass-shape {
+  position: fixed;
+  border-radius: 48px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.002) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  pointer-events: none;
+  z-index: -8;
+  transform-style: preserve-3d;
+}
+
+.glass-top-left {
+  top: -120px;
+  left: -120px;
+  width: 380px;
+  height: 380px;
+  transform: rotate(18deg) translateZ(10px);
+  animation: glass-float-3d-1 35s infinite ease-in-out alternate;
+}
+
+.glass-top-right {
+  top: -60px;
+  right: -160px;
+  width: 420px;
+  height: 320px;
+  transform: rotate(-22deg) translateZ(5px);
+  animation: glass-float-3d-2 42s infinite ease-in-out alternate;
+}
+
+.glass-bottom-left {
+  bottom: -160px;
+  left: -90px;
+  width: 340px;
+  height: 370px;
+  transform: rotate(40deg) translateZ(15px);
+  animation: glass-float-3d-3 38s infinite ease-in-out alternate;
+}
+
+.glass-bottom-right {
+  bottom: -130px;
+  right: -110px;
+  width: 400px;
+  height: 400px;
+  transform: rotate(-12deg) translateZ(20px);
+  animation: glass-float-3d-4 46s infinite ease-in-out alternate;
+}
+
+/* Keyframe Animations */
+@keyframes glow-float-1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5vw, -8vh, 0) scale(1.1); }
+  100% { transform: translate3d(-3vw, 4vh, 0) scale(0.95); }
+}
+
+@keyframes glow-float-2 {
+  0% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-6vw, 6vh, 0) scale(0.9); }
+  100% { transform: translate3d(4vw, -5vh, 0) scale(1.15); }
+}
+
+@keyframes glow-float-3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.12; }
+  50% { transform: translate3d(3vw, 3vh, 0) scale(1.05); opacity: 0.18; }
+  100% { transform: translate3d(-3vw, -3vh, 0) scale(0.95); opacity: 0.12; }
+}
+
+@keyframes beam-sway-1 {
+  0% { transform: rotate(-14deg) scaleX(1); }
+  100% { transform: rotate(-10deg) scaleX(1.15); }
+}
+
+@keyframes beam-sway-2 {
+  0% { transform: rotate(10deg) scaleX(1.1); }
+  100% { transform: rotate(14deg) scaleX(0.9); }
+}
+
+@keyframes float-particles-vertical {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -100vh, 0); }
+}
+
+@keyframes glass-float-3d-1 {
+  0% { transform: rotate(18deg) translate3d(0, 0, 10px); }
+  100% { transform: rotate(20deg) translate3d(15px, 10px, 30px); }
+}
+
+@keyframes glass-float-3d-2 {
+  0% { transform: rotate(-22deg) translate3d(0, 0, 5px); }
+  100% { transform: rotate(-24deg) translate3d(-10px, 15px, 20px); }
+}
+
+@keyframes glass-float-3d-3 {
+  0% { transform: rotate(40deg) translate3d(0, 0, 15px); }
+  100% { transform: rotate(38deg) translate3d(-15px, -10px, 35px); }
+}
+
+@keyframes glass-float-3d-4 {
+  0% { transform: rotate(-12deg) translate3d(0, 0, 20px); }
+  100% { transform: rotate(-14deg) translate3d(10px, -15px, 40px); }
+}
+
+/* Accessibility settings for reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .glow-blob,
+  .light-beam,
+  .particles,
+  .glass-shape {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 

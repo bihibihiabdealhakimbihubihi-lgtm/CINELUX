@@ -376,11 +376,11 @@ export default function AuthModal({
           <div className="absolute inset-0 bg-[#0B1220]/98 z-50 flex flex-col items-center justify-center gap-4 p-8">
             <div className="relative flex items-center justify-center">
               <div className="w-16 h-16 rounded-full border-2 border-white/5 border-t-2 border-t-[#22C55E] animate-spin" />
-              <div className="w-10 h-10 rounded-full bg-[#101010] absolute flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-[10px] bg-[#101010] absolute flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/logo.jpg" 
+                  src="https://i.postimg.cc/zXtmmyFf/images.jpg" 
                   alt="CineLux Logo" 
-                  className="w-full h-full object-cover animate-pulse"
+                  className="w-full h-full object-contain animate-pulse"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -394,11 +394,11 @@ export default function AuthModal({
         {phase === 'login' && (
           <div>
             <div className="text-center mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 shadow-xl shadow-[#22C55E]/25 mb-4 border border-white/10 overflow-hidden mx-auto">
+              <div className="w-10 h-10 rounded-[10px] bg-transparent shadow-lg shadow-black/40 border border-white/5 mb-4 overflow-hidden mx-auto flex items-center justify-center">
                 <img 
-                  src="/logo.jpg" 
+                  src="https://i.postimg.cc/zXtmmyFf/images.jpg" 
                   alt="CineLux Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -516,11 +516,11 @@ export default function AuthModal({
         {phase === 'register' && (
           <div>
             <div className="text-center mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#22C55E] to-emerald-600 shadow-xl shadow-[#22C55E]/25 mb-4 border border-white/10 overflow-hidden mx-auto">
+              <div className="w-10 h-10 rounded-[10px] bg-transparent shadow-lg shadow-black/40 border border-white/5 mb-4 overflow-hidden mx-auto flex items-center justify-center">
                 <img 
-                  src="/logo.jpg" 
+                  src="https://i.postimg.cc/zXtmmyFf/images.jpg" 
                   alt="CineLux Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>

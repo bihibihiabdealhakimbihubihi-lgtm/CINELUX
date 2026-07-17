@@ -336,37 +336,37 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { 
-              value: '20,000+', 
-              label: 'Massive Library', 
-              image: '/3d_clapperboard_reel.jpg', 
-              desc: 'Curated blockbuster movies in peak bitrates.',
+              value: 'Ultra-Fast', 
+              label: 'Streaming Speed', 
+              image: '/3d_streaming_server.jpg', 
+              desc: 'Blazing fast load times with global CDN servers.',
               glowBg: 'bg-emerald-500/10',
               borderHover: 'hover:border-emerald-500/25 hover:shadow-emerald-500/5',
               accent: 'text-emerald-400'
             },
             { 
-              value: '5,000+', 
-              label: 'TV Shows', 
-              image: '/3d_oled_smart_tv.jpg', 
-              desc: 'Full premium high-fidelity series & seasons.',
+              value: '20,000+', 
+              label: 'Premium Library', 
+              image: '/3d_movie_library.jpg', 
+              desc: 'Luxurious curated collection of global blockbusters.',
               glowBg: 'bg-blue-500/15',
               borderHover: 'hover:border-blue-500/25 hover:shadow-blue-500/5',
               accent: 'text-blue-400'
             },
             { 
-              value: 'Updated Daily', 
-              label: 'Fresh Content', 
-              image: '/3d_golden_star.jpg', 
-              desc: 'New cinema titles synchronized every hour.',
+              value: 'Smart Sync', 
+              label: 'Personal Watchlist', 
+              image: '/3d_watchlist_devices.jpg', 
+              desc: 'Floating personalized lists synced on all devices.',
               glowBg: 'bg-amber-500/15',
               borderHover: 'hover:border-amber-500/25 hover:shadow-amber-500/5',
               accent: 'text-amber-400'
             },
             { 
-              value: 'HD & 4K Streaming', 
+              value: 'HD & 4K HDR', 
               label: 'Max Fidelity', 
-              image: '/3d_blue_diamond.jpg', 
-              desc: 'Spatial Dolby Atmos & raw video streaming.',
+              image: '/3d_oled_4k_tv.jpg', 
+              desc: 'Immersive home theater video and audio streaming.',
               glowBg: 'bg-cyan-500/15',
               borderHover: 'hover:border-cyan-500/25 hover:shadow-cyan-500/5',
               accent: 'text-cyan-400'
@@ -889,58 +889,6 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </div>
 
-
-      {/* 7. FOOTER */}
-      <footer className="bg-[#0B1220] border-t border-white/[0.08] pt-16 pb-8 relative z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 pb-12 border-b border-white/[0.08] text-left">
-            
-            {/* Logo / Brand block */}
-            <div className="md:col-span-5 flex flex-col gap-4">
-              <span className="text-xl font-sans font-black tracking-widest uppercase">
-                Cine<span className="text-[#22C55E]">Lux</span>
-              </span>
-              <p className="text-xs text-gray-500 leading-relaxed max-w-sm">
-                An elite, ad-free streaming catalog for film lovers. Experience state-of-the-art cinematic discovery coupled with intelligent design.
-              </p>
-            </div>
-
-            {/* Quick Links Blocks */}
-            <div className="md:col-span-2 flex flex-col gap-3">
-              <h5 className="text-[11px] font-black uppercase tracking-widest text-gray-400">Navigation</h5>
-              <button onClick={onGetStarted} className="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer text-left">Home</button>
-              <button onClick={onGetStarted} className="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer text-left">Movies</button>
-              <button onClick={onGetStarted} className="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer text-left">Series</button>
-            </div>
-
-            <div className="md:col-span-2 flex flex-col gap-3">
-              <h5 className="text-[11px] font-black uppercase tracking-widest text-gray-400">Legal</h5>
-              <a href="#privacy" className="text-xs text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#terms" className="text-xs text-gray-500 hover:text-white transition-colors">Terms of Service</a>
-              <a href="#about" className="text-xs text-gray-500 hover:text-white transition-colors">About</a>
-            </div>
-
-            <div className="md:col-span-3 flex flex-col gap-3">
-              <h5 className="text-[11px] font-black uppercase tracking-widest text-gray-400">Support</h5>
-              <a href="#contact" className="text-xs text-gray-500 hover:text-white transition-colors">Contact</a>
-              <a href="#help" className="text-xs text-gray-500 hover:text-white transition-colors">Support Center</a>
-              <span className="text-xs text-gray-600 font-mono">Service Status: Live</span>
-            </div>
-
-          </div>
-
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-600 font-medium">
-            <span>© 2026 CineLux. All Rights Reserved.</span>
-            <div className="flex gap-6">
-              <span className="hover:text-white transition-colors cursor-pointer">About</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Contact</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Support</span>
-            </div>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );
