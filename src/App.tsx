@@ -219,8 +219,8 @@ export default function App() {
                 if (cached) {
                   return {
                     ...item,
-                    poster: cached.poster || item.poster,
-                    backdrop: cached.backdrop || item.backdrop
+                    poster: cached.originalPoster || cached.poster || item.poster,
+                    backdrop: cached.originalBackdrop || cached.backdrop || item.backdrop
                   };
                 }
                 return item;
@@ -236,8 +236,8 @@ export default function App() {
                     if (cached) {
                       return {
                         ...item,
-                        poster: cached.poster || item.poster,
-                        backdrop: cached.backdrop || item.backdrop
+                        poster: cached.originalPoster || cached.poster || item.poster,
+                        backdrop: cached.originalBackdrop || cached.backdrop || item.backdrop
                       };
                     }
                     return item;
