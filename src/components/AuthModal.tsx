@@ -135,7 +135,6 @@ export default function AuthModal({
   const renderError = () => {
     if (!error) return null;
     
-    const isUnauthorizedDomain = error.includes('auth/unauthorized-domain') || error.includes('unauthorized-domain');
     const isPopupBlocked = error.includes('auth/popup-blocked') || error.includes('popup-blocked') || error.includes('popup-closed-by-user');
     
     if (isPopupBlocked) {
@@ -148,34 +147,6 @@ export default function AuthModal({
           <p>
             Google Sign-In requires a browser pop-up. If the window did not open, please ensure pop-ups are allowed for this domain in your browser settings, or open the website in a new tab.
           </p>
-        </div>
-      );
-    }
-    
-    if (isUnauthorizedDomain) {
-      const currentDomain = window.location.hostname;
-      return (
-        <div className="mb-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium text-left leading-relaxed animate-fade-in flex flex-col gap-3">
-          <div className="font-bold text-sm text-amber-400 flex items-center gap-1.5">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-            <span>تنبيه هام: نطاق الموقع غير مصرح به</span>
-          </div>
-          <p>
-            لتفعيل تسجيل الدخول بـ Google، يجب إضافة هذا النطاق لقائمة النطاقات المصرح بها (Authorized Domains) في لوحة تحكم مشروع Firebase الخاص بك <strong>(cinelux-3c79a)</strong>.
-          </p>
-          <div className="p-2.5 rounded bg-black/40 font-mono text-[11px] text-amber-200/90 break-all border border-amber-500/10 flex flex-col gap-1">
-            <div className="text-gray-400">النطاق الحالي (انسخه):</div>
-            <div className="font-bold select-all bg-amber-500/10 px-1.5 py-0.5 rounded text-amber-100">{currentDomain}</div>
-            <div className="mt-1.5 text-[10px] text-gray-500">نطاقات أخرى مقترحة:</div>
-            <div className="font-bold select-all text-gray-400">ais-dev-7owdbpkkt6f5tlrdv5lutm-440021274543.europe-west1.run.app</div>
-            <div className="font-bold select-all text-gray-400">ais-pre-7owdbpkkt6f5tlrdv5lutm-440021274543.europe-west1.run.app</div>
-          </div>
-          <div className="text-[11px] space-y-1 text-gray-300">
-            <div className="font-semibold text-gray-200">الخطوات اللازمة:</div>
-            <div>1. افتح لوحة تحكم Firebase: <a href="https://console.firebase.google.com/project/cinelux-3c79a/authentication/providers" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline hover:text-amber-300 font-bold">لوحة تحكم Firebase</a></div>
-            <div>2. اذهب إلى قائمة <b>Authentication</b> ثم تبويب <b>Settings</b>.</div>
-            <div>3. في أسفل الصفحة ستجد قسم <b>Authorized domains</b>، اضغط على <b>Add domain</b> وأضف النطاقات المذكورة أعلاه.</div>
-          </div>
         </div>
       );
     }
