@@ -20,9 +20,19 @@ import {
   EyeOff,
   ShieldCheck,
   KeyRound,
-  RefreshCw
+  RefreshCw,
+  AlertCircle
 } from 'lucide-react';
 import { UserProfile } from '../types';
+import { auth, getUserProfile, saveUserProfile } from '../lib/firebase';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 
 interface Premium3DButtonProps {
   onClick: () => void;
@@ -196,6 +206,7 @@ export default function AuthModal({
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState('');
+  const [error, setError] = useState('');
   
   // Verification Code States
   const [verificationCode, setVerificationCode] = useState(['', '', '', '', '', '']);
@@ -203,6 +214,51 @@ export default function AuthModal({
 
   // Recovery email state
   const [recoverySent, setRecoverySent] = useState(false);
+
+  const renderError = () => {
+    if (!error) return null;
+    
+    const isUnauthorizedDomain = error.includes('auth/unauthorized-domain') || error.includes('unauthorized-domain');
+    
+    if (isUnauthorizedDomain) {
+      const currentDomain = window.location.hostname;
+      return (
+        <div className="mb-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium text-left leading-relaxed animate-fade-in flex flex-col gap-3">
+          <div className="font-bold text-sm text-amber-400 flex items-center gap-1.5">
+            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>تنبيه هام: نطاق الموقع غير مصرح به</span>
+          </div>
+          <p>
+            لتفعيل تسجيل الدخول بـ Google، يجب إضافة هذا النطاق لقائمة النطاقات المصرح بها (Authorized Domains) في لوحة تحكم مشروع Firebase الخاص بك <strong>(cinelux-3c79a)</strong>.
+          </p>
+          <div className="p-2.5 rounded bg-black/40 font-mono text-[11px] text-amber-200/90 break-all border border-amber-500/10 flex flex-col gap-1">
+            <div className="text-gray-400">النطاق الحالي (انسخه):</div>
+            <div className="font-bold select-all bg-amber-500/10 px-1.5 py-0.5 rounded text-amber-100">{currentDomain}</div>
+            <div className="mt-1.5 text-[10px] text-gray-500">نطاقات أخرى مقترحة:</div>
+            <div className="font-bold select-all text-gray-400">ais-dev-7owdbpkkt6f5tlrdv5lutm-440021274543.europe-west1.run.app</div>
+            <div className="font-bold select-all text-gray-400">ais-pre-7owdbpkkt6f5tlrdv5lutm-440021274543.europe-west1.run.app</div>
+          </div>
+          <div className="text-[11px] space-y-1 text-gray-300">
+            <div className="font-semibold text-gray-200">الخطوات اللازمة:</div>
+            <div>1. افتح لوحة تحكم Firebase: <a href="https://console.firebase.google.com/project/cinelux-3c79a/authentication/providers" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline hover:text-amber-300 font-bold">لوحة تحكم Firebase</a></div>
+            <div>2. اذهب إلى قائمة <b>Authentication</b> ثم تبويب <b>Settings</b>.</div>
+            <div>3. في أسفل الصفحة ستجد قسم <b>Authorized domains</b>، اضغط على <b>Add domain</b> وأضف النطاقات المذكورة أعلاه.</div>
+          </div>
+        </div>
+      );
+    }
+    
+    return (
+      <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold text-center leading-normal animate-fade-in">
+        {error}
+      </div>
+    );
+  };
+
+  // Clear errors on phase transition
+  useEffect(() => {
+    setError('');
+  }, [phase]);
 
   // Auto decrement verification timer
   useEffect(() => {
@@ -217,6 +273,54 @@ export default function AuthModal({
 
   if (!isOpen) return null;
 
+  const validateEmail = (val: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    setLoadingMsg('Initiating Google Secure Handshake...');
+    setError('');
+
+    try {
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      const firebaseUser = userCredential.user;
+
+      setLoadingMsg('Retrieving or constructing user profile index...');
+
+      let userProfile = await getUserProfile(firebaseUser.uid) as UserProfile | null;
+      if (!userProfile) {
+        userProfile = {
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName || 'Cinema Enthusiast',
+          email: firebaseUser.email || 'user@cinelux.stream',
+          avatar: firebaseUser.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
+          subscription: 'VIP Cinematic',
+          subscriptionExpiry: 'Unlimited Stream Access',
+          language: 'English',
+          watchlist: [],
+          favorites: [],
+          history: [],
+          devices: [
+            { id: 'dev-google', name: 'Google Authenticated Node', type: 'Desktop', lastActive: 'Active now', location: 'Primary Network' }
+          ],
+          notificationsEnabled: true,
+          theme: 'dark',
+        };
+        await saveUserProfile(firebaseUser.uid, userProfile);
+      }
+
+      setIsLoading(false);
+      onSuccess(userProfile);
+      onClose();
+    } catch (err: any) {
+      setIsLoading(false);
+      console.error("Google Sign-In error:", err);
+      setError(err.message || 'Failed to authenticate with Google. Please try again.');
+    }
+  };
+
   const handleSimulatedSSO = (provider: 'Google' | 'Apple' | 'Facebook') => {
     setIsLoading(true);
     setLoadingMsg(`Handshaking with ${provider} secure servers...`);
@@ -227,7 +331,7 @@ export default function AuthModal({
 
     setTimeout(() => {
       const mockUser: UserProfile = {
-        id: `usr-${Date.now()}`,
+        id: `usr-sso-${provider.toLowerCase()}`,
         name: provider === 'Google' ? 'Adrian Vance' : provider === 'Apple' ? 'Marcus Stirling' : 'Vance Social Streamer',
         email: email || 'user@cinelux.stream',
         avatar: provider === 'Google' 
@@ -251,49 +355,124 @@ export default function AuthModal({
     }, 2400);
   };
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     if (!email || !password) return;
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
 
     setIsLoading(true);
     setLoadingMsg('Verifying secure TLS credentials...');
 
-    setTimeout(() => {
-      const mockUser: UserProfile = {
-        id: `usr-${Date.now()}`,
-        name: 'Adrian Vance',
-        email: email,
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const firebaseUser = userCredential.user;
+      
+      let userProfile = await getUserProfile(firebaseUser.uid);
+      if (!userProfile) {
+        userProfile = {
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName || 'Cinema Enthusiast',
+          email: firebaseUser.email || email,
+          avatar: firebaseUser.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
+          subscription: 'Premium 4K',
+          subscriptionExpiry: 'August 18, 2026',
+          language: 'English',
+          watchlist: [],
+          favorites: [],
+          history: [],
+          devices: [
+            { id: 'dev-email', name: 'Macbook Pro 16"', type: 'Macbook Pro', lastActive: 'Active now', location: 'Primary Network' }
+          ],
+          notificationsEnabled: true,
+          theme: 'dark',
+        };
+        await saveUserProfile(firebaseUser.uid, userProfile);
+      }
+      
+      setIsLoading(false);
+      onSuccess(userProfile as UserProfile);
+      onClose();
+    } catch (err: any) {
+      setIsLoading(false);
+      console.error("Login error:", err);
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
+        setError('Incorrect email or password. Please try again.');
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Please enter a valid email address.');
+      } else {
+        setError(err.message || 'An error occurred during authentication.');
+      }
+    }
+  };
+
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    if (!email || !password || !name) return;
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
+
+    setIsLoading(true);
+    setLoadingMsg('Constructing secure credentials index...');
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const firebaseUser = userCredential.user;
+
+      await updateProfile(firebaseUser, {
+        displayName: name,
+        photoURL: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'
+      });
+
+      const userProfile: UserProfile = {
+        id: firebaseUser.uid,
+        name: name,
+        email: firebaseUser.email || email,
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
-        subscription: 'Premium 4K',
-        subscriptionExpiry: 'August 18, 2026',
+        subscription: 'VIP Cinematic',
+        subscriptionExpiry: 'Unlimited Stream Access',
         language: 'English',
         watchlist: [],
         favorites: [],
         history: [],
         devices: [
-          { id: 'dev-email', name: 'Macbook Pro 16"', type: 'Macbook Pro', lastActive: 'Active now', location: 'Primary Network' }
+          { id: 'dev-new', name: 'Primary Device Node', type: 'Desktop', lastActive: 'Active now', location: 'Home Network' }
         ],
         notificationsEnabled: true,
         theme: 'dark',
       };
+
+      await saveUserProfile(firebaseUser.uid, userProfile);
+
       setIsLoading(false);
-      onSuccess(mockUser);
+      onSuccess(userProfile);
       onClose();
-    }, 1800);
-  };
-
-  const handleRegisterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !password || !name) return;
-
-    setIsLoading(true);
-    setLoadingMsg('Constructing decentralized credentials index...');
-
-    setTimeout(() => {
+    } catch (err: any) {
       setIsLoading(false);
-      setPhase('verify');
-      setTimer(59);
-    }, 1500);
+      console.error("Registration error:", err);
+      if (err.code === 'auth/email-already-in-use') {
+        setError('This email address is already registered.');
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Please enter a valid email address.');
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password must be at least 8 characters long.');
+      } else {
+        setError(err.message || 'An error occurred during registration.');
+      }
+    }
   };
 
   const handleVerifySubmit = (e: React.FormEvent) => {
@@ -341,17 +520,34 @@ export default function AuthModal({
     }
   };
 
-  const handleRecoverySubmit = (e: React.FormEvent) => {
+  const handleRecoverySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     if (!email) return;
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
 
     setIsLoading(true);
     setLoadingMsg('Locating accounts matching cipher email...');
 
-    setTimeout(() => {
+    try {
+      await sendPasswordResetEmail(auth, email);
       setIsLoading(false);
       setRecoverySent(true);
-    }, 1500);
+    } catch (err: any) {
+      setIsLoading(false);
+      console.error("Password recovery error:", err);
+      if (err.code === 'auth/user-not-found') {
+        setError('No user found with this email address.');
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Please enter a valid email address.');
+      } else {
+        setError(err.message || 'An error occurred. Please try again.');
+      }
+    }
   };
 
   return (
@@ -409,6 +605,8 @@ export default function AuthModal({
                 Unlock peerless 4K HDR streams and director narratives.
               </p>
             </div>
+
+            {renderError()}
 
             <form onSubmit={handleLoginSubmit} className="flex flex-col gap-4.5 text-left">
               <div className="flex flex-col gap-1.5">
@@ -488,7 +686,7 @@ export default function AuthModal({
             <div className="grid grid-cols-3 gap-3">
               <Premium3DButton
                 brand="Google"
-                onClick={() => handleSimulatedSSO('Google')}
+                onClick={() => handleGoogleSignIn()}
               />
               <Premium3DButton
                 brand="Apple"
@@ -531,6 +729,8 @@ export default function AuthModal({
                 Create your global cinema access credential.
               </p>
             </div>
+
+            {renderError()}
 
             <form onSubmit={handleRegisterSubmit} className="flex flex-col gap-4.5 text-left">
               <div className="flex flex-col gap-1.5">
@@ -624,6 +824,8 @@ export default function AuthModal({
                 Request a decryption token sent directly to your security email address.
               </p>
             </div>
+
+            {renderError()}
 
             {recoverySent ? (
               <div className="flex flex-col gap-5 text-center py-4">

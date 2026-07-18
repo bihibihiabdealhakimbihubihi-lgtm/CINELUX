@@ -10,6 +10,8 @@ import {
   MOCK_USER
 } from './data';
 import { ContentItem, UserProfile, Episode } from './types';
+import { auth, getUserProfile, saveUserProfile } from './lib/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 // Component Imports
 import LandingPage from './components/LandingPage';
@@ -356,6 +358,7 @@ export default function App() {
         };
         setCurrentUser(updated);
         localStorage.setItem('cinelux_current_user', JSON.stringify(updated));
+        saveUserProfile(currentUser.id, updated);
       }
     } else {
       localStorage.setItem('cinelux_guest_watchlist', JSON.stringify(watchlist));
@@ -367,16 +370,84 @@ export default function App() {
     setCurrentUser(user);
     setWatchlist(user.watchlist || []);
     setFavorites(user.favorites || []);
+    localStorage.setItem('cinelux_current_user', JSON.stringify(user));
+    saveUserProfile(user.id, user);
     setActiveView('home');
   };
 
   const handleLogout = () => {
-    setCurrentUser(null);
-    setWatchlist([]);
-    setFavorites([]);
-    setActiveView('landing');
-    localStorage.removeItem('cinelux_current_user');
+    signOut(auth).then(() => {
+      setCurrentUser(null);
+      setWatchlist([]);
+      setFavorites([]);
+      setActiveView('landing');
+      localStorage.removeItem('cinelux_current_user');
+    }).catch((err) => {
+      console.error("Error signing out:", err);
+    });
   };
+
+  // Automatically restore session and sync with Firebase Authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        // Try fetching user profile from Firestore first for the ultimate source of truth
+        let profile = await getUserProfile(firebaseUser.uid) as UserProfile | null;
+
+        if (!profile) {
+          // Fallback to localStorage if Firestore hasn't synced yet, or create a default one
+          const saved = localStorage.getItem('cinelux_current_user');
+          if (saved) {
+            try {
+              const parsed = JSON.parse(saved);
+              if (parsed && parsed.id === firebaseUser.uid) {
+                profile = parsed;
+              }
+            } catch (e) {
+              console.error("Error parsing saved profile:", e);
+            }
+          }
+        }
+
+        if (!profile) {
+          profile = {
+            id: firebaseUser.uid,
+            name: firebaseUser.displayName || 'Cinema Enthusiast',
+            email: firebaseUser.email || '',
+            avatar: firebaseUser.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop',
+            subscription: 'Premium 4K',
+            subscriptionExpiry: 'August 18, 2026',
+            language: 'English',
+            watchlist: [],
+            favorites: [],
+            history: [],
+            devices: [
+              { id: 'dev-email', name: 'Macbook Pro 16"', type: 'Macbook Pro', lastActive: 'Active now', location: 'Primary Network' }
+            ],
+            notificationsEnabled: true,
+            theme: 'dark',
+          };
+          await saveUserProfile(firebaseUser.uid, profile);
+        }
+
+        setCurrentUser(profile);
+        setWatchlist(profile.watchlist || []);
+        setFavorites(profile.favorites || []);
+        localStorage.setItem('cinelux_current_user', JSON.stringify(profile));
+        
+        // Prevent staying on landing page if logged in
+        setActiveView(prev => prev === 'landing' ? 'home' : prev);
+      } else {
+        setCurrentUser(null);
+        setWatchlist([]);
+        setFavorites([]);
+        localStorage.removeItem('cinelux_current_user');
+        setActiveView('landing');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleToggleWatchlist = useCallback((itemId: string) => {
     const item = contentList.find(c => c.id === itemId);
@@ -447,6 +518,7 @@ export default function App() {
       };
       
       localStorage.setItem('cinelux_current_user', JSON.stringify(updatedUser));
+      saveUserProfile(updatedUser.id, updatedUser);
       return updatedUser;
     });
   }, []);
@@ -960,7 +1032,11 @@ export default function App() {
         {activeView === 'account' && currentUser && (
           <UserAccount
             user={currentUser}
-            onUpdateUser={(up) => setCurrentUser(up)}
+            onUpdateUser={(up) => {
+              setCurrentUser(up);
+              localStorage.setItem('cinelux_current_user', JSON.stringify(up));
+              saveUserProfile(up.id, up);
+            }}
             onLogout={handleLogout}
           />
         )}
