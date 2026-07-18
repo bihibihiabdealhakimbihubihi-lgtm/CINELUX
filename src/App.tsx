@@ -438,11 +438,14 @@ export default function App() {
         // Prevent staying on landing page if logged in
         setActiveView(prev => prev === 'landing' ? 'home' : prev);
       } else {
-        setCurrentUser(null);
-        setWatchlist([]);
-        setFavorites([]);
-        localStorage.removeItem('cinelux_current_user');
-        setActiveView('landing');
+        // Only clear if there is no saved local user session to prevent automatic logout on page load/refresh/restart
+        const saved = localStorage.getItem('cinelux_current_user');
+        if (!saved) {
+          setCurrentUser(null);
+          setWatchlist([]);
+          setFavorites([]);
+          setActiveView('landing');
+        }
       }
     });
 

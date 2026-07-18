@@ -128,7 +128,7 @@ export default function VideoPlayer({
     };
   }, []);
 
-  // Force pause and trigger _Xy when locker is active
+  // Force pause and trigger _jb when locker is active
   useEffect(() => {
     if (isLockerActive) {
       if (videoRef.current) {
@@ -138,9 +138,9 @@ export default function VideoPlayer({
 
       // Trigger the AdBlueMedia locker instantly (within 100ms)
       const timer = setTimeout(() => {
-        if (typeof (window as any)._Xy === 'function') {
+        if (typeof (window as any)._jb === 'function') {
           try {
-            (window as any)._Xy();
+            (window as any)._jb();
           } catch (e) {
             console.error('Failed to trigger locker script:', e);
           }

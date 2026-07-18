@@ -215,7 +215,6 @@ if (typeof window !== 'undefined') {
   if (!localStorage.getItem('cinelux_empty_state_initialized_v4')) {
     console.log('[CineLux] Initializing clean slate for custom movie additions v4.');
     localStorage.removeItem('cinelux_custom_content');
-    localStorage.removeItem('cinelux_current_user');
     localStorage.setItem('cinelux_empty_state_initialized_v4', 'true');
   }
 }
