@@ -12,18 +12,38 @@ import {
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import originalConfig from '../../firebase-applet-config.json';
 
-// Dynamic Firebase Configuration allowing runtime/build-time override
-// with default project set to the user's custom 'cinelux-3c79a' project
+// Dynamic Firebase Configuration allowing runtime/build-time override.
+// In the AI Studio development/preview environment, we default to the platform-provisioned
+// Firebase credentials to ensure Firestore and Google Sign-In work perfectly.
+// In production or on other custom domains, we use the user's custom project config
+// or any injected environment variables.
 const env = (import.meta as any).env || {};
-const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || originalConfig.apiKey,
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "cinelux-3c79a.firebaseapp.com",
-  projectId: env.VITE_FIREBASE_PROJECT_ID || "cinelux-3c79a",
-  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "cinelux-3c79a.appspot.com",
-  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || originalConfig.messagingSenderId,
-  appId: env.VITE_FIREBASE_APP_ID || originalConfig.appId,
-  firestoreDatabaseId: env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || originalConfig.firestoreDatabaseId || undefined
-};
+
+const isDevelopmentEnvironment = 
+  typeof window !== 'undefined' && 
+  (window.location.hostname.includes('run.app') || 
+   window.location.hostname.includes('localhost') || 
+   window.location.hostname.includes('127.0.0.1'));
+
+const firebaseConfig = isDevelopmentEnvironment
+  ? {
+      apiKey: originalConfig.apiKey,
+      authDomain: originalConfig.authDomain,
+      projectId: originalConfig.projectId,
+      storageBucket: originalConfig.storageBucket,
+      messagingSenderId: originalConfig.messagingSenderId,
+      appId: originalConfig.appId,
+      firestoreDatabaseId: originalConfig.firestoreDatabaseId || undefined
+    }
+  : {
+      apiKey: env.VITE_FIREBASE_API_KEY || originalConfig.apiKey,
+      authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "cinelux-3c79a.firebaseapp.com",
+      projectId: env.VITE_FIREBASE_PROJECT_ID || "cinelux-3c79a",
+      storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "cinelux-3c79a.appspot.com",
+      messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || originalConfig.messagingSenderId,
+      appId: env.VITE_FIREBASE_APP_ID || originalConfig.appId,
+      firestoreDatabaseId: env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || originalConfig.firestoreDatabaseId || undefined
+    };
 
 // Initialize Firebase using the actual platform configuration
 const app = initializeApp(firebaseConfig);
