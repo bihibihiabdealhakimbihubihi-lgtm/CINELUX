@@ -427,7 +427,7 @@ export default function App() {
             notificationsEnabled: true,
             theme: 'dark',
           };
-          await saveUserProfile(firebaseUser.uid, profile);
+          saveUserProfile(firebaseUser.uid, profile);
         }
 
         setCurrentUser(profile);

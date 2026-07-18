@@ -308,7 +308,7 @@ export default function AuthModal({
           notificationsEnabled: true,
           theme: 'dark',
         };
-        await saveUserProfile(firebaseUser.uid, userProfile);
+        saveUserProfile(firebaseUser.uid, userProfile);
       }
 
       setIsLoading(false);
@@ -391,7 +391,7 @@ export default function AuthModal({
           notificationsEnabled: true,
           theme: 'dark',
         };
-        await saveUserProfile(firebaseUser.uid, userProfile);
+        saveUserProfile(firebaseUser.uid, userProfile);
       }
       
       setIsLoading(false);
@@ -455,7 +455,7 @@ export default function AuthModal({
         theme: 'dark',
       };
 
-      await saveUserProfile(firebaseUser.uid, userProfile);
+      saveUserProfile(firebaseUser.uid, userProfile);
 
       setIsLoading(false);
       onSuccess(userProfile);
