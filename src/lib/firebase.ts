@@ -10,18 +10,9 @@ import {
   browserLocalPersistence 
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import firebaseConfig from '../../firebase-applet-config.json';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDCdbyXIdFWkPSF7TM5Z468J-s5et3HW-s",
-  authDomain: "cinelux-3c79a.firebaseapp.com",
-  projectId: "cinelux-3c79a",
-  storageBucket: "cinelux-3c79a.firebasestorage.app",
-  messagingSenderId: "269782341687",
-  appId: "1:269782341687:web:8791a3649b6648870707b2",
-  measurementId: "G-TS0PYTV0QB"
-};
-
-// Initialize Firebase
+// Initialize Firebase using the actual platform configuration
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Auth with local persistence so session is restored automatically
@@ -30,8 +21,8 @@ setPersistence(auth, browserLocalPersistence).catch((err) => {
   console.error("Error setting persistence:", err);
 });
 
-// Initialize Firestore (uses the default database of the cinelux-3c79a project)
-const db = getFirestore(app);
+// Initialize Firestore with the dynamic database ID from the platform configuration
+const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 
 // Helper function to execute any promise with a timeout and safe fallback
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, fallbackValue: T): Promise<T> {
@@ -68,11 +59,32 @@ export async function getUserProfile(uid: string) {
   return withTimeout(fetchPromise(), 1200, null);
 }
 
+// Helper function to recursively remove undefined fields for Firestore safety
+function removeUndefinedFields(obj: any): any {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(removeUndefinedFields);
+  }
+  const cleaned: any = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const val = obj[key];
+      if (val !== undefined) {
+        cleaned[key] = removeUndefinedFields(val);
+      }
+    }
+  }
+  return cleaned;
+}
+
 // Helper function to save the user's profile to Firestore
 export async function saveUserProfile(uid: string, profile: any) {
+  const sanitizedProfile = removeUndefinedFields(profile);
   const savePromise = async () => {
     const docRef = doc(db, "users", uid);
-    await setDoc(docRef, profile, { merge: true });
+    await setDoc(docRef, sanitizedProfile, { merge: true });
     return true;
   };
   

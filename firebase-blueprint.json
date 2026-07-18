@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing subscription info, favorites, watchlist, and history.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string"
+        },
+        "subscriptionExpiry": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "watchlist": {
+          "type": "array"
+        },
+        "favorites": {
+          "type": "array"
+        },
+        "history": {
+          "type": "array"
+        },
+        "devices": {
+          "type": "array"
+        },
+        "notificationsEnabled": {
+          "type": "boolean"
+        },
+        "theme": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "email"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Store user profiles"
+    }
+  }
+}

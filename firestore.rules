@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net (Pillar 1)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidUserProfile(data) {
+      return data.id is string 
+        && data.email is string
+        && (!('watchlist' in data) || data.watchlist is list)
+        && (!('favorites' in data) || data.favorites is list)
+        && (!('history' in data) || data.history is list)
+        && (!('devices' in data) || data.devices is list);
+    }
+
+    // Users Collection Rules
+    match /users/{userId} {
+      allow read: if isOwner(userId) && isValidId(userId);
+      allow create, update: if isOwner(userId) && isValidId(userId) && isValidUserProfile(request.resource.data);
+      allow delete: if false; // Users cannot delete profiles directly via client
+    }
+  }
+}

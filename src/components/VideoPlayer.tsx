@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Play, 
   Pause, 
@@ -85,6 +86,72 @@ export default function VideoPlayer({
   const [hasError, setHasError] = useState(false);
 
   const controlsTimeoutRef = useRef<number | null>(null);
+
+  // Locker & Verification States
+  const [isVerified, setIsVerified] = useState(() => {
+    return sessionStorage.getItem('cinelux_locker_verified') === 'true';
+  });
+  const [isLockerActive, setIsLockerActive] = useState(false);
+
+  // Register AdBlueMedia / CPABuild complete callback
+  useEffect(() => {
+    const handleUnlock = () => {
+      console.log('Handshake unlocked successfully!');
+      sessionStorage.setItem('cinelux_locker_verified', 'true');
+      setIsVerified(true);
+      setIsLockerActive(false);
+
+      // Auto-resume video playback from exact paused position
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.play().then(() => {
+            setIsPlaying(true);
+          }).catch((err) => {
+            console.warn('Auto play failed after unlock, setting state only:', err);
+            setHasError(true);
+            setIsPlaying(true);
+          });
+        } else {
+          setIsPlaying(true);
+        }
+      }, 100);
+    };
+
+    (window as any).CPABuildComplete = handleUnlock;
+    (window as any).onCPABuildComplete = handleUnlock;
+    (window as any).AdBlueMediaComplete = handleUnlock;
+
+    return () => {
+      (window as any).CPABuildComplete = undefined;
+      (window as any).onCPABuildComplete = undefined;
+      (window as any).AdBlueMediaComplete = undefined;
+    };
+  }, []);
+
+  // Force pause and trigger _Xy when locker is active
+  useEffect(() => {
+    if (isLockerActive) {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      setIsPlaying(false);
+
+      // Trigger the AdBlueMedia locker instantly (within 100ms)
+      const timer = setTimeout(() => {
+        if (typeof (window as any)._Xy === 'function') {
+          try {
+            (window as any)._Xy();
+          } catch (e) {
+            console.error('Failed to trigger locker script:', e);
+          }
+        }
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLockerActive]);
+
+
 
   const title = episode ? `${item.title} - S1:E${episode.episodeNumber} "${episode.title}"` : item.title;
   const videoSource = episode ? episode.videoUrl : item.videoUrl;
@@ -184,6 +251,16 @@ export default function VideoPlayer({
 
   // Playback state synchronization
   const togglePlay = () => {
+    if (!isVerified) {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      setIsPlaying(false);
+      setIsLockerActive(true);
+      resetControlsTimeout();
+      return;
+    }
+
     if (hasError) {
       setIsPlaying(!isPlaying);
       resetControlsTimeout();
@@ -235,6 +312,14 @@ export default function VideoPlayer({
   const handleLoadedMetadata = () => {
     if (!videoRef.current) return;
     setDuration(videoRef.current.duration);
+    
+    if (!isVerified) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+      setIsLockerActive(true);
+      return;
+    }
+
     // Start playback automatically if permitted
     videoRef.current.play().then(() => {
       setIsPlaying(true);
@@ -477,7 +562,7 @@ export default function VideoPlayer({
       )}
 
       {/* Skip Intro Button */}
-      {showSkipIntroButton && (
+      {showSkipIntroButton && !isLockerActive && (
         <button
           onClick={handleSkipIntro}
           className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 hover:border-[#22C55E] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
@@ -488,7 +573,7 @@ export default function VideoPlayer({
       )}
 
       {/* Skip Credits / Next Episode Button */}
-      {showSkipCreditsButton && (
+      {showSkipCreditsButton && !isLockerActive && (
         <button
           onClick={handleSkipCredits}
           className="absolute bottom-28 right-8 z-40 flex items-center gap-2 px-5 py-3 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-bold uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl"
@@ -499,11 +584,12 @@ export default function VideoPlayer({
       )}
 
       {/* Control Bar & HUD Header */}
-      <div
-        className={`absolute inset-0 flex flex-col justify-between p-4 md:p-6 bg-gradient-to-t from-black/80 via-transparent to-black/80 z-30 transition-opacity duration-500 pointer-events-none ${
-          showControls ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
+      {!isLockerActive && (
+        <div
+          className={`absolute inset-0 flex flex-col justify-between p-4 md:p-6 bg-gradient-to-t from-black/80 via-transparent to-black/80 z-30 transition-opacity duration-500 pointer-events-none ${
+            showControls ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
         {/* TOP HUD: Header & Close */}
         <div className="flex items-center justify-between w-full pointer-events-auto">
           <div className="flex flex-col text-left">
@@ -684,9 +770,10 @@ export default function VideoPlayer({
           </div>
         </div>
       </div>
+      )}
 
       {/* Quality & Audio Selection Dropdown Menu */}
-      {showSettings && (
+      {showSettings && !isLockerActive && (
         <div className="absolute bottom-24 right-6 bg-[#111111]/95 backdrop-blur-md border border-white/10 p-5 rounded-2xl w-64 text-left z-50 shadow-2xl flex flex-col gap-4">
           <div>
             <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2.5">Streaming Quality</h4>
@@ -753,7 +840,7 @@ export default function VideoPlayer({
       )}
 
       {/* Subtitle Customizer Dropdown Menu */}
-      {showSubSettings && (
+      {showSubSettings && !isLockerActive && (
         <div className="absolute bottom-24 right-6 bg-[#111111]/95 backdrop-blur-md border border-white/10 p-5 rounded-2xl w-64 text-left z-50 shadow-2xl flex flex-col gap-4">
           <div>
             <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Text Scale</h4>
@@ -815,7 +902,7 @@ export default function VideoPlayer({
       )}
 
       {/* Keyboard Shortcuts Help Overlay */}
-      {showShortcutsHelp && (
+      {showShortcutsHelp && !isLockerActive && (
         <div className="absolute inset-0 bg-black/95 z-50 flex items-center justify-center p-6">
           <div className="bg-[#111111] border border-white/10 p-6 md:p-8 rounded-3xl max-w-md w-full relative">
             <button
