@@ -10,7 +10,20 @@ import {
   browserLocalPersistence 
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import firebaseConfig from '../../firebase-applet-config.json';
+import originalConfig from '../../firebase-applet-config.json';
+
+// Dynamic Firebase Configuration allowing runtime/build-time override
+// with default project set to the user's custom 'cinelux-3c79a' project
+const env = (import.meta as any).env || {};
+const firebaseConfig = {
+  apiKey: env.VITE_FIREBASE_API_KEY || originalConfig.apiKey,
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "cinelux-3c79a.firebaseapp.com",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || "cinelux-3c79a",
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "cinelux-3c79a.appspot.com",
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || originalConfig.messagingSenderId,
+  appId: env.VITE_FIREBASE_APP_ID || originalConfig.appId,
+  firestoreDatabaseId: env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || originalConfig.firestoreDatabaseId || undefined
+};
 
 // Initialize Firebase using the actual platform configuration
 const app = initializeApp(firebaseConfig);
@@ -22,7 +35,9 @@ setPersistence(auth, browserLocalPersistence).catch((err) => {
 });
 
 // Initialize Firestore with the dynamic database ID from the platform configuration
-const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+const db = firebaseConfig.firestoreDatabaseId 
+  ? getFirestore(app, firebaseConfig.firestoreDatabaseId)
+  : getFirestore(app);
 
 // Helper function to execute any promise with a timeout and safe fallback
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, fallbackValue: T): Promise<T> {
